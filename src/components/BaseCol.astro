@@ -1,0 +1,9 @@
+---
+import cn from "../lib/class-names"
+
+let { className, style } = Astro.props
+---
+
+<div class={cn("flex flex-col", className)} style={style}>
+  <slot />
+</div>

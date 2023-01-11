@@ -1,0 +1,25 @@
+---
+import PostsPage from "../components/pages/posts-page"
+import ContentLayout from "../layouts/ContentLayout.astro"
+import { getAuthorMap } from "../lib/api/author"
+import { getAllPostsAndReviews } from "../lib/api/post"
+import markdownHtml from "../lib/markdown-html"
+import { getPageCount, getPagePosts } from "../lib/paginate"
+
+const allPosts = await Promise.all(
+  getAllPostsAndReviews(getAuthorMap()).map(async post => {
+    return {
+      ...post,
+      excerpt: await markdownHtml(post.frontmatter.rawExcerpt || ""),
+      //html : await markdownHtml(post.frontmatter.rawContent || ''),
+    }
+  })
+)
+
+const posts = getPagePosts(allPosts)
+const pages = getPageCount(allPosts)
+---
+
+<ContentLayout title="Blog" showTitle={false}>
+  <PostsPage posts={posts} page={0} pages={pages} slot="main" />
+</ContentLayout>

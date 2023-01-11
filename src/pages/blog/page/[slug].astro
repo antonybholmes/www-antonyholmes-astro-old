@@ -1,0 +1,29 @@
+---
+import PostsPage from "../../../components/pages/posts-page"
+import ContentLayout from "../../../layouts/ContentLayout.astro"
+import { getAuthorMap } from "../../../lib/api/author"
+import { getAllPosts } from "../../../lib/api/post"
+import markdownHtml from "../../../lib/markdown-html"
+import { paginate } from "../../../lib/paginate"
+
+export async function getStaticPaths() {
+  const allPosts = await Promise.all(
+    getAllPosts(getAuthorMap()).map(async post => {
+      return {
+        ...post,
+        excerpt: await markdownHtml(post.frontmatter.rawExcerpt || ""),
+      }
+    })
+  )
+
+  const paths = paginate(allPosts, "")
+
+  return paths
+}
+
+const { page, pages, data } = Astro.props
+---
+
+<ContentLayout title="Blog" tab="Blog">
+  <PostsPage posts={data} page={page} pages={pages} slot="main" />
+</ContentLayout>

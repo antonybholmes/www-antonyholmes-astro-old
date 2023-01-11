@@ -1,0 +1,96 @@
+---
+import PostsPage from "../../../components/pages/posts-page"
+import ContentLayout from "../../../layouts/ContentLayout.astro"
+import { getAuthorMap } from "../../../lib/api/author"
+import { getAllPostsAndReviews } from "../../../lib/api/post"
+import markdownHtml from "../../../lib/markdown-html"
+import { paginate } from "../../../lib/paginate"
+import { getUrlFriendlyTag } from "../../../lib/tags"
+import {
+  getCategoryBaseUrl,
+  getSectionBaseUrl,
+  getSectionRelativeUrl,
+} from "../../../lib/urls"
+
+export async function getStaticPaths() {
+  let paths: any[] = []
+
+  const allPosts = await Promise.all(
+    getAllPostsAndReviews(getAuthorMap()).map(async post => {
+      return {
+        ...post,
+        excerpt: await markdownHtml(post.frontmatter.rawExcerpt || ""),
+      }
+    })
+  )
+
+  const categories = new Set<string>()
+  const catPaths = new Set<string>()
+
+  allPosts.forEach(post => {
+    post.frontmatter.categories.forEach((category: string) => {
+      categories.add(category.split("/")[0])
+      catPaths.add(category)
+    })
+  })
+
+  Array.from(categories).forEach(category => {
+    // we only look at the root category so need to extract this before
+    // filtering the posts
+    const posts = allPosts.filter(post =>
+      post.frontmatter.categories
+        .map(category => category.split("/")[0])
+        .includes(category)
+    )
+
+    paths = paths.concat(
+      paginate(posts, getUrlFriendlyTag(category), {
+        title: category,
+        showTitle: true,
+        superTitle: "Category",
+        root: getCategoryBaseUrl(category),
+      })
+    )
+  })
+
+  // sections
+
+  Array.from(catPaths).forEach(catPath => {
+    const path = catPath.split("/")
+    const category = path[0]
+    const section = path.length > 1 ? path[1] : "All"
+
+    if (section !== "All") {
+      // we only look at the root category so need to extract this before
+      // filtering the posts
+      const posts = allPosts.filter(post =>
+        post.frontmatter.categories.includes(catPath)
+      )
+
+      paths = paths.concat(
+        paginate(posts, getSectionRelativeUrl(category, section), {
+          title: section,
+          showTitle: true,
+          superTitle: "Section",
+          root: getSectionBaseUrl(category, section),
+        })
+      )
+    }
+  })
+
+  return paths
+}
+
+const { slug } = Astro.params
+
+const { title, superTitle, showTitle, page, root, pages, data } = Astro.props
+---
+
+<ContentLayout
+  title={title}
+  superTitle={superTitle}
+  showTitle={showTitle}
+  tab="Blog"
+>
+  <PostsPage posts={data} page={page} pages={pages} root={root} slot="main" />
+</ContentLayout>

@@ -1,0 +1,19 @@
+---
+import IClassProps from "../interfaces/class-props"
+import cn from "../lib/class-names"
+
+export interface Props extends IClassProps {}
+
+let { className } = Astro.props
+---
+
+<div
+  class={cn(
+    "grid grid-cols-1 gap-x-0 lg:grid-cols-12 lg:gap-x-8 2xl:gap-x-16",
+    className
+  )}
+>
+  <section class="col-span-1 hidden lg:block"><slot name="left" /></section>
+  <article class="col-span-11 xl:col-span-8"><slot name="main" /></article>
+  <section class="col-span-3 hidden xl:block"><slot name="right" /></section>
+</div>

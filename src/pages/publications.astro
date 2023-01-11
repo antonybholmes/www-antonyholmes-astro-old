@@ -1,0 +1,11 @@
+---
+import PublicationsPage from "../components/publication/publications-page"
+import BaseLayout from "../layouts/BaseLayout.astro"
+import { getSelectedPublications } from "../lib/api"
+
+const publications = getSelectedPublications("antony-holmes")
+---
+
+<BaseLayout title="Publications">
+  <PublicationsPage publications={publications} client:load />
+</BaseLayout>

@@ -1,0 +1,88 @@
+---
+import AuthorPage from "../../components/pages/author-page"
+import ContentLayout from "../../layouts/ContentLayout.astro"
+import { getAllAuthors, getAuthorMap } from "../../lib/api/author"
+import { getAllPosts } from "../../lib/api/post"
+import markdownHtml from "../../lib/markdown-html"
+import { paginate } from "../../lib/paginate"
+
+export async function getStaticPaths() {
+  const allAuthors = await Promise.all(
+    getAllAuthors().map(async author => {
+      return {
+        ...author,
+        html: await markdownHtml(author.frontmatter.rawContent || ""),
+      }
+    })
+  )
+
+  const allPosts = await Promise.all(
+    getAllPosts(getAuthorMap(allAuthors)).map(async post => {
+      return {
+        ...post,
+        excerpt: await markdownHtml(post.frontmatter.rawExcerpt || ""),
+      }
+    })
+  )
+
+  let paths: any[] = []
+
+  allAuthors.forEach(author => {
+    const authorPosts = allPosts.filter(post => {
+      return post.frontmatter.authors.includes(author.frontmatter.name)
+    })
+
+    paths = paths.concat(paginate(authorPosts, author.slug, { author }))
+
+    // const pages = Math.floor(
+    //   (authorPosts.length + RECORDS_PER_PAGE - 1) / RECORDS_PER_PAGE
+    // )
+
+    // paths.push({
+    //   params: {
+    //     slug: author.slug,
+    //   },
+    //   props: {
+    //     author,
+    //     currentPage: 1,
+    //     pages,
+    //     posts: authorPosts.slice(0, RECORDS_PER_PAGE)
+    //   }
+    // })
+
+    // let start = 0
+
+    // for (let i = 0; i < pages; ++i) {
+    //   const currentPage = i + 1
+
+    //   paths.push({
+    //     params: {
+    //       slug: `${author.slug}/page/${currentPage.toString()}`,
+    //     },
+    //     props: {
+    //       author,
+    //       currentPage,
+    //       pages,
+    //       posts: authorPosts.slice(start, start + RECORDS_PER_PAGE)
+    //     }
+    //   })
+
+    //   start += RECORDS_PER_PAGE
+    // }
+  })
+
+  return paths
+}
+
+const { author, currentPage, pages, data } = Astro.props
+---
+
+<ContentLayout title={author.frontmatter.name}>
+  <AuthorPage
+    author={author}
+    posts={data}
+    currentPage={currentPage}
+    pages={pages}
+    slot="main"
+  />
+</ContentLayout>

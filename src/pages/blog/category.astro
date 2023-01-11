@@ -1,0 +1,36 @@
+---
+import BlueLink from "../../components/link/blue-link"
+import ContentLayout from "../../layouts/ContentLayout.astro"
+import { getAuthorMap } from "../../lib/api/author"
+import { getAllPosts } from "../../lib/api/post"
+import { getCategoryBaseUrl } from "../../lib/urls"
+
+const allPosts = getAllPosts(getAuthorMap())
+
+const categories = new Set<string>()
+
+allPosts.forEach(post => {
+  post.frontmatter.categories.forEach(category => {
+    categories.add(category.split("/")[0])
+  })
+})
+
+const sortedCategories = Array.from(categories).sort()
+---
+
+<ContentLayout title="Categories" showTitle={true} tab="Blog">
+  <ul slot="main" class="flex list-inside list-disc flex-col gap-y-2">
+    {
+      sortedCategories.map(category => (
+        <li>
+          <BlueLink
+            href={getCategoryBaseUrl(category)}
+            ariaLabel={`View ${category} posts`}
+          >
+            {category}
+          </BlueLink>
+        </li>
+      ))
+    }
+  </ul>
+</ContentLayout>

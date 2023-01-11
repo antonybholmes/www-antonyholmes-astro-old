@@ -1,0 +1,18 @@
+---
+import BaseRow from "../components/base-row"
+import IClassProps from "../interfaces/class-props"
+import cn from "../lib/class-names"
+
+export interface Props extends IClassProps {}
+
+let { className } = Astro.props
+---
+
+<BaseRow className={cn("gap-x-16", className)}>
+  <article class="w-full lg:w-70/100">
+    <slot name="main" />
+  </article>
+  <div class="relative hidden w-30/100 lg:block">
+    <slot name="side" />
+  </div>
+</BaseRow>

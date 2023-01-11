@@ -1,0 +1,23 @@
+---
+import HCenterRow from "../components/h-center-row"
+import BlueIndexLink from "../components/link/blue-index-link"
+import PageTitle from "../components/page-title"
+import ContentLayout from "../layouts/ContentLayout.astro"
+---
+
+<ContentLayout title="Page Not Found" showCrumbs={false}>
+  <div slot="main" class="mt-16">
+    <HCenterRow>
+      <PageTitle title="The page you're looking for can't be found." />
+    </HCenterRow>
+    <HCenterRow>
+      <BlueIndexLink
+        href="/sitemap"
+        ariaLabel="Click to view site map"
+        className="mt-16"
+        text="See our site map"
+        client:idle
+      />
+    </HCenterRow>
+  </div>
+</ContentLayout>

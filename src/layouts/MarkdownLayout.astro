@@ -1,0 +1,10 @@
+---
+import MarkdownDiv from "../components/MarkdownDiv.astro"
+import ThreeQuarterLayout from "./ThreeQuarterLayout.astro"
+
+const { content } = Astro.props
+---
+
+<ThreeQuarterLayout title={content.title} subTitle={content.subtitle}>
+  <MarkdownDiv slot="main" className="mt-8"><slot /></MarkdownDiv>
+</ThreeQuarterLayout>

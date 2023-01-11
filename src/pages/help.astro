@@ -1,0 +1,115 @@
+---
+import BaseCol from "../components/base-col"
+import BaseRow from "../components/base-row"
+
+import BlueLink from "../components/link/blue-link"
+import LogoIcon from "../icons/logo-icon-com"
+import { SITE_NAME, UPDATED, VERSION, YEAR } from "../constants"
+import ThreeQuarterLayout from "../layouts/ThreeQuarterLayout.astro"
+
+const CLS = "block rounded-lg px-4 py-2 bg-blue-100 font-bold"
+---
+
+<ThreeQuarterLayout title="Help">
+  <div slot="main">
+    <BaseCol className="gap-y-4 rounded-xl bg-apple-gray p-6 text-sm">
+      <BaseRow><LogoIcon /></BaseRow>
+
+      <div>
+        <p>{`Version ${VERSION}`}</p>
+        <p>{`Updated ${UPDATED}`}</p>
+      </div>
+
+      <p>
+        Copyright &copy; {YEAR}
+        {SITE_NAME}. All rights reserved.
+      </p>
+    </BaseCol>
+
+    <div class="mt-16">
+      <p>
+        This website is made possible by open source software and other
+        services:
+      </p>
+
+      <ul class="mt-4 flex flex-row flex-wrap gap-2 text-sm">
+        <li class={CLS}>
+          <BlueLink
+            href="https://astro.build/"
+            ariaLabel="View tool"
+            underline={true}
+          >
+            Astro
+          </BlueLink>
+        </li>
+        <li class={CLS}>
+          <BlueLink
+            href="https://preactjs.com/"
+            ariaLabel="View tool"
+            underline={true}
+          >
+            Preact
+          </BlueLink>
+        </li>
+        <li class={CLS}>
+          <BlueLink
+            href="https://tailwindcss.com/"
+            ariaLabel="View tool"
+            underline={true}
+          >
+            Tailwind
+          </BlueLink>
+        </li>
+        {
+          /* <li class={CLS}>
+            <BlueLink href="https://www.w3.org/html" ariaLabel="View tool">
+              HTML5
+            </BlueLink>
+          </li> */
+        }
+        <li class={CLS}>
+          <BlueLink
+            href="https://www.npmjs.com"
+            ariaLabel="View tool"
+            underline={true}
+          >
+            NPM
+          </BlueLink>
+        </li>
+        <li class={CLS}>
+          <BlueLink
+            href="https://nodejs.org/"
+            ariaLabel="View tool"
+            underline={true}
+          >
+            Node.js
+          </BlueLink>
+        </li>
+        <li class={CLS}>
+          <BlueLink
+            href="https://github.com"
+            ariaLabel="View tool"
+            underline={true}
+          >
+            GitHub
+          </BlueLink>
+        </li>
+        <li class={CLS}>
+          <BlueLink
+            href="https://code.visualstudio.com"
+            ariaLabel="View tool"
+            underline={true}
+          >
+            Visual Studio Code
+          </BlueLink>
+        </li>
+
+        {
+          /* <li class={CLS}>
+            <BlueLink href="https://www.cloudflare.com/">Cloudflare</BlueLink>
+          </li> */
+        }
+      </ul>
+    </div>
+  </div>
+</ThreeQuarterLayout>

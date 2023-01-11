@@ -1,0 +1,45 @@
+---
+import cn from "../lib/class-names"
+
+const hiddenSizes = (size: string) => {
+  switch (size) {
+    case "lg":
+      return "lg:hidden"
+    case "xl":
+      return "xl:hidden"
+    case "2xl":
+      return "2xl:hidden"
+    default:
+      return "sm:hidden"
+  }
+}
+
+const blockSizes = (size: string) => {
+  switch (size) {
+    case "lg":
+      return "lg:block"
+    case "xl":
+      return "xl:block"
+    case "2xl":
+      return "2xl:block"
+    default:
+      return "sm:block"
+  }
+}
+
+const { sizes, className, style } = Astro.props
+
+const classes: string[] = []
+
+classes.push(cn(`block`, hiddenSizes(sizes[0])))
+classes.push(cn(`hidden`, blockSizes(sizes[0])))
+---
+
+<div class={className} style={style}>
+  <div class={classes[0]}>
+    <slot name="s1" />
+  </div>
+  <div class={classes[1]}>
+    <slot name="s2" />
+  </div>
+</div>

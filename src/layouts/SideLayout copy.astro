@@ -1,0 +1,33 @@
+---
+import { ITitleLayoutProps } from "../interfaces/title-layout-props"
+import ContentLayout from "./ContentLayout.astro"
+import SeventyLayout from "./SeventyLayout.astro"
+
+export interface Props extends ITitleLayoutProps {
+  mainBg?: string
+  headerClassName?: string
+}
+
+let {
+  title,
+  tab,
+  showTitle = true,
+  isIndexed = true,
+  crumbs,
+  className,
+} = Astro.props
+---
+
+<ContentLayout
+  title={title}
+  tab={tab}
+  showTitle={showTitle}
+  isIndexed={isIndexed}
+  crumbs={crumbs}
+  className={className}
+>
+  <SeventyLayout slot="main">
+    <slot name="main" slot="main" />
+    <slot name="side" slot="side" />
+  </SeventyLayout>
+</ContentLayout>

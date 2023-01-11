@@ -1,0 +1,62 @@
+---
+import type ICrumbProps from "../interfaces/crumb-props"
+import type ILayoutProps from "../interfaces/layout-props"
+import cn from "../lib/class-names"
+import createCrumbs from "../lib/create-crumbs"
+import ContentLayout from "./ContentLayout.astro"
+import LayoutTitles from "./layout-titles"
+
+export interface Props extends ILayoutProps, ICrumbProps {
+  isRight?: boolean
+}
+
+let {
+  title,
+  showTitle = false,
+  showCrumbs = true,
+  superTitle,
+  subTitle,
+  tab,
+  crumbs,
+  isRight = true,
+  className,
+} = Astro.props
+
+if (!crumbs) {
+  crumbs = createCrumbs(Astro.url.pathname)
+}
+---
+
+<ContentLayout title={title} tab={tab} showTitle={false} showCrumbs={false}>
+  <div
+    class={cn("grid grid-cols-1 xl:grid-cols-4 xl:gap-x-16", className)}
+    slot="main"
+  >
+    {
+      !isRight && (
+        <div class="relative col-span-1 hidden xl:block">
+          <slot name="side" />
+        </div>
+      )
+    }
+    <article class="relative col-span-3">
+      <LayoutTitles
+        title={title}
+        superTitle={superTitle}
+        subTitle={subTitle}
+        crumbs={crumbs}
+        showTitle={showTitle}
+        showCrumbs={showCrumbs}
+      />
+
+      <slot name="main" />
+    </article>
+    {
+      isRight && (
+        <div class="relative col-span-1 hidden xl:block">
+          <slot name="side" />
+        </div>
+      )
+    }
+  </div>
+</ContentLayout>

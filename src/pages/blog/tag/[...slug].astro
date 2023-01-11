@@ -1,0 +1,63 @@
+---
+import PostsPage from "../../../components/pages/posts-page"
+import ContentLayout from "../../../layouts/ContentLayout.astro"
+import { getAuthorMap } from "../../../lib/api/author"
+import { getAllPosts } from "../../../lib/api/post"
+import markdownHtml from "../../../lib/markdown-html"
+import { paginate } from "../../../lib/paginate"
+import { getUrlFriendlyTag } from "../../../lib/tags"
+import { getTagBaseUrl } from "../../../lib/urls"
+
+export async function getStaticPaths() {
+  let paths: any[] = []
+
+  const allPosts = await Promise.all(
+    getAllPosts(getAuthorMap()).map(async post => {
+      return {
+        ...post,
+        excerpt: await markdownHtml(post.frontmatter.rawExcerpt || ""),
+      }
+    })
+  )
+
+  const tags = new Set<string>()
+
+  allPosts.forEach(post => {
+    post.frontmatter.tags.forEach((tag: string) => {
+      tags.add(tag)
+    })
+  })
+
+  Array.from(tags).forEach(tag => {
+    const posts = allPosts.filter(post => post.frontmatter.tags.includes(tag))
+
+    paths = paths.concat(
+      paginate(posts, getUrlFriendlyTag(tag), {
+        title: tag,
+        showTitle: true,
+        superTitle: "Tag",
+        root: getTagBaseUrl(tag),
+      })
+    )
+  })
+
+  paths = paths.concat(
+    paginate(allPosts, "", { title: "Blog", showTitle: false })
+  )
+
+  return paths
+}
+
+const { slug } = Astro.params
+
+const { title, superTitle, showTitle, page, root, pages, data } = Astro.props
+---
+
+<ContentLayout
+  title={title}
+  superTitle={superTitle}
+  showTitle={showTitle}
+  tab="Blog"
+>
+  <PostsPage posts={data} page={page} pages={pages} root={root} slot="main" />
+</ContentLayout>

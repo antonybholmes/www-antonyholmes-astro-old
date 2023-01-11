@@ -1,0 +1,131 @@
+---
+import BaseCol from "../../components/BaseCol.astro"
+import ContentDiv from "../../components/ContentDiv.astro"
+import MorePosts from "../../components/post/more-posts"
+import PostBody from "../../components/post/post-body"
+import PostDetailsHoz from "../../components/post/post-details-hoz"
+import PostHeader from "../../components/post/post-header"
+import PostSocialMedia from "../../components/post/post-social-media"
+import PostSocialMediaVert from "../../components/post/post-social-media-vert"
+import PostTags from "../../components/post/post-tags"
+import ProsAndCons from "../../components/post/pros-and-cons"
+import RelatedPosts from "../../components/post/related-posts"
+import IBasePost from "../../interfaces/base-post"
+import IPreviewPost from "../../interfaces/preview-post"
+import DefaultLayout from "../../layouts/DefaultLayout.astro"
+import PostLayout from "../../layouts/PostLayout.astro"
+import { getAuthorMap } from "../../lib/api/author"
+import { getAllPostsAndReviews, getCategoryMap } from "../../lib/api/post"
+import markdownHtml from "../../lib/markdown-html"
+import { getCanonicalPostSlug } from "../../lib/slug"
+
+export async function getStaticPaths() {
+  const allPosts = await Promise.all(
+    getAllPostsAndReviews(getAuthorMap()).map(async post => {
+      return {
+        ...post,
+        //excerpt: await markdownHtml(post.frontmatter.rawExcerpt || ""),
+        html: await markdownHtml(post.frontmatter.rawContent || ""),
+      }
+    })
+  )
+
+  const categoryMap = getCategoryMap(allPosts)
+
+  let paths: any[] = []
+
+  allPosts.forEach(post => {
+    let postIndex = -1
+
+    // Find index of post in sorted array so we can find
+    // previous related posts
+    Object.keys(categoryMap).every(category => {
+      categoryMap[category].every((p: IPreviewPost, index: number) => {
+        if (p.fields.slug === post.fields.slug) {
+          postIndex = index
+          return false
+        }
+
+        return true
+      })
+
+      if (postIndex !== -1) {
+        return false
+      }
+
+      return true
+    })
+
+    const relatedPosts = allPosts.filter(p =>
+      post.frontmatter.related.includes(p.frontmatter.title)
+    )
+
+    const readMorePosts: IBasePost[] = [] //categoryMap[post.frontmatter.section].slice(postIndex + 1)
+
+    paths.push({
+      params: { slug: getCanonicalPostSlug(post.fields.slug) },
+      props: {
+        post,
+        relatedPosts,
+        readMorePosts,
+      },
+    })
+  })
+
+  return paths
+}
+
+const { slug } = Astro.params
+const { post, relatedPosts, readMorePosts } = Astro.props
+const morePosts: any[] = []
+---
+
+<DefaultLayout title={post.frontmatter.title} tab="Blog" headerMode="dark">
+  <div slot="main">
+    <PostHeader post={post} />
+
+    <ContentDiv className="my-40">
+      <BaseCol className="gap-y-4 lg:gap-y-8" slot="main">
+        <PostDetailsHoz post={post} />
+
+        <PostSocialMedia post={post} className="lg:hidden" />
+
+        <PostLayout>
+          <PostSocialMediaVert post={post} slot="left" />
+
+          <BaseCol tag="section" className="gap-y-8" slot="main">
+            {
+              post.fields.type === "review" && (
+                <ProsAndCons post={post} client:visible />
+              )
+            }
+
+            <PostBody html={post.html} className="text-justify" />
+            <PostTags post={post} />
+          </BaseCol>
+
+          <div slot="right">
+            {
+              morePosts.length > 0 && (
+                <MorePosts posts={morePosts} title={post.frontmatter.tags[0]} />
+              )
+            }
+          </div>
+        </PostLayout>
+      </BaseCol>
+      <></>
+    </ContentDiv>
+
+    {
+      readMorePosts.length > 0 && (
+        <ContentDiv className="py-16">
+          <RelatedPosts
+            posts={readMorePosts}
+            title="Keep Reading"
+            slot="main"
+          />
+        </ContentDiv>
+      )
+    }
+  </div>
+</DefaultLayout>
