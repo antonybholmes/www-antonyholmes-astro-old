@@ -10,7 +10,7 @@ const HeroPosts = ({ posts }: IPostsProps) => {
 
   return (
     <section className="grid grid-cols-1 gap-12 xl:grid-cols-10">
-      <PreviewPost post={topPost} className="xl:col-span-6" />
+      <PreviewPost post={topPost} className="xl:col-span-6" loading="eager" />
 
       <BaseCol className="gap-y-4 xl:col-span-4">
         {topPosts.map((post, index) => {
