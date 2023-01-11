@@ -12,17 +12,18 @@ const HeroPosts = ({ posts }: IPostsProps) => {
     <section className="grid grid-cols-1 gap-12 xl:grid-cols-10">
       <PreviewPost post={topPost} className="xl:col-span-6" loading="eager" />
 
-      <BaseCol className="gap-y-4 xl:col-span-4">
+      <ul className="flex flex-col gap-y-4 xl:col-span-4">
         {topPosts.map((post, index) => {
           return (
-            <HeroPostSmall
-              post={post}
-              className={cn([index > 0, "border-t border-slate-200 pt-6"])}
-              key={index}
-            />
+            <li key={index}>
+              <HeroPostSmall
+                post={post}
+                className={cn([index > 0, "border-t border-slate-200 pt-6"])}
+              />
+            </li>
           )
         })}
-      </BaseCol>
+      </ul>
     </section>
   )
 }

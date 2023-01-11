@@ -12,7 +12,7 @@ interface IProps extends IPostProps {
 
 const PostCategoryLink = ({
   post,
-  textSize = "text-lg",
+  textSize = "text-2xl md:text-lg",
   showSections = false,
   className,
 }: IProps) => {
