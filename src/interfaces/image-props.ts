@@ -1,6 +1,6 @@
-import IImageLoadProps from "./image-load-props"
+import IImageSizeProps from "./image-size-props"
 
-export default interface IImageProps extends IImageLoadProps {
-  size?: number[]
-  sizes?: [number, number][]
+export default interface IImageProps extends IImageSizeProps {
+  src: string
+  alt: string
 }

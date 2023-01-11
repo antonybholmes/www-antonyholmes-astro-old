@@ -1,10 +1,10 @@
-import cn from "../../lib/class-names"
+import IImageSizeProps from "../../interfaces/image-size-props"
 import IPostProps from "../../interfaces/post-props"
+import cn from "../../lib/class-names"
 import BaseLink from "../link/base-link"
 import BasePostImage from "./base-post-image"
-import IImageProps from "../../interfaces/image-props"
 
-interface IProps extends IPostProps, IImageProps {}
+interface IProps extends IPostProps, IImageSizeProps {}
 
 const PostImage = ({
   post,
