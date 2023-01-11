@@ -16,7 +16,7 @@ interface IProps extends IAvatarProps {
   root?: string
 }
 
-const AvatarImage = ({ author, src, size = [320, 320], className }: IProps) => {
+const AvatarImage = ({ author, src, size = [160, 160], className }: IProps) => {
   if (src === undefined) {
     src = getUrlFriendlyTag(author.frontmatter.name)
   }
