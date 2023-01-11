@@ -1,10 +1,10 @@
-import { getPostUrl } from "../../lib/articles"
 import cn from "../../lib/class-names"
 import IPostProps from "../../interfaces/post-props"
 import FacebookIcon from "../../icons/facebook"
 import LinkedInIcon from "../../icons/linkedin"
 import TwitterIcon from "../../icons/twitter"
 import BaseLink from "../link/base-link"
+import { getPostUrl } from "../../lib/urls"
 
 export const CLS_TEXT_GRAY_HOVER = "w-6"
 

@@ -6,6 +6,7 @@ import {
   REVIEW_SLUG,
   TAG_SLUG,
   PEOPLE_SLUG,
+  SITE_URL,
 } from "../constants"
 import { getUrlFriendlyTag } from "./tags"
 
@@ -39,4 +40,12 @@ export const getSectionBaseUrl = (category: string, section: string) => {
 
 export const getTagBaseUrl = (tag: string) => {
   return `${TAG_SLUG}/${getUrlFriendlyTag(tag)}`
+}
+
+export const getPostRelativeUrl = (slug: string): string => {
+  return `/blog/${slug}`
+}
+
+export const getPostUrl = (slug: string): string => {
+  return `${SITE_URL}${slug}`
 }

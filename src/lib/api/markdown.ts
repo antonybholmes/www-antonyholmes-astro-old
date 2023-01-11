@@ -88,6 +88,7 @@ export const getAuthorFields = (path: string): IAuthorFields => {
     email: "",
     rawContent: "",
     rawExcerpt: "",
+    pubmed: "",
   }
 
   getFields(path, items)
