@@ -8,7 +8,7 @@ import LargeHeader from "./large-header"
 import MenuOverlay from "./menu-overlay"
 import SmallHeader from "./small-header"
 
-function Header({
+export default function Header({
   title,
   tab,
   headerMode = "light",
@@ -48,8 +48,8 @@ function Header({
 
       <header
         className={cn(
-          "transition-color fixed top-0 z-50 w-full border-b backdrop-blur duration-300",
-          [headerMode === "light", "bg-white/80", "bg-slate-800/80"],
+          "transition-ani transition-color fixed top-0 z-50 w-full border-b backdrop-blur",
+          [headerMode === "light", "bg-white/98", "bg-slate-800/95"],
           [
             scrollY > 10,
             [headerMode === "light", "border-slate-200", "border-white/20"],
@@ -57,6 +57,7 @@ function Header({
           ],
           className
         )}
+        style={{ marginTop: "-1px" }}
       >
         <SmallHeader
           title={title}
@@ -78,5 +79,3 @@ function Header({
     </>
   )
 }
-
-export default Header

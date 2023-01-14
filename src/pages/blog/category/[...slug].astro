@@ -2,80 +2,57 @@
 import PostsPage from "../../../components/pages/posts-page"
 import ContentLayout from "../../../layouts/ContentLayout.astro"
 import { getAuthorMap } from "../../../lib/api/author"
-import { getAllPostsAndReviews } from "../../../lib/api/post"
-import markdownHtml from "../../../lib/markdown-html"
-import { paginate } from "../../../lib/paginate"
+import {
+  addAuthorsToPosts,
+  addExcerpts,
+  getAllPosts,
+  getCategoryPostMap,
+  sortPosts,
+} from "../../../lib/api/post"
+import { getPageCount, paginate } from "../../../lib/paginate"
 import { getUrlFriendlyTag } from "../../../lib/tags"
 import {
   getCategoryBaseUrl,
   getSectionBaseUrl,
-  getSectionRelativeUrl,
+  getSectionUrl,
 } from "../../../lib/urls"
 
 export async function getStaticPaths() {
   let paths: any[] = []
 
-  const allPosts = await Promise.all(
-    getAllPostsAndReviews(getAuthorMap()).map(async post => {
-      return {
-        ...post,
-        excerpt: await markdownHtml(post.frontmatter.rawExcerpt || ""),
-      }
-    })
+  const allPosts = addAuthorsToPosts(
+    await Promise.all(addExcerpts(sortPosts(getAllPosts()))),
+    getAuthorMap()
   )
 
-  const categories = new Set<string>()
-  const catPaths = new Set<string>()
+  const categoryMap = getCategoryPostMap(allPosts)
 
-  allPosts.forEach(post => {
-    post.frontmatter.categories.forEach((category: string) => {
-      categories.add(category.split("/")[0])
-      catPaths.add(category)
-    })
-  })
+  Object.keys(categoryMap).forEach(category => {
+    const categoryPosts = categoryMap[category]["All"]
 
-  Array.from(categories).forEach(category => {
-    // we only look at the root category so need to extract this before
-    // filtering the posts
-    const posts = allPosts.filter(post =>
-      post.frontmatter.categories
-        .map(category => category.split("/")[0])
-        .includes(category)
-    )
-
-    paths = paths.concat(
-      paginate(posts, getUrlFriendlyTag(category), {
+    paths.push(
+      paginate(categoryPosts, getUrlFriendlyTag(category), {
         title: category,
         showTitle: true,
         superTitle: "Category",
         root: getCategoryBaseUrl(category),
       })
     )
-  })
 
-  // sections
-
-  Array.from(catPaths).forEach(catPath => {
-    const path = catPath.split("/")
-    const category = path[0]
-    const section = path.length > 1 ? path[1] : "All"
-
-    if (section !== "All") {
-      // we only look at the root category so need to extract this before
-      // filtering the posts
-      const posts = allPosts.filter(post =>
-        post.frontmatter.categories.includes(catPath)
-      )
-
-      paths = paths.concat(
-        paginate(posts, getSectionRelativeUrl(category, section), {
-          title: section,
-          showTitle: true,
-          superTitle: "Section",
-          root: getSectionBaseUrl(category, section),
-        })
-      )
-    }
+    Object.keys(categoryMap[category]).forEach(section => {
+      if (section !== "All") {
+        const root = getSectionUrl(category, section)
+        console.log(root)
+        paths.push(
+          paginate(categoryPosts, root, {
+            title: section,
+            showTitle: true,
+            superTitle: "Section",
+            root: getSectionBaseUrl(category, section),
+          })
+        )
+      }
+    })
   })
 
   return paths

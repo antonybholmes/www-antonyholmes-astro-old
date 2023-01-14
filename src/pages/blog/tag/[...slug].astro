@@ -2,37 +2,32 @@
 import PostsPage from "../../../components/pages/posts-page"
 import ContentLayout from "../../../layouts/ContentLayout.astro"
 import { getAuthorMap } from "../../../lib/api/author"
-import { getAllPosts } from "../../../lib/api/post"
-import markdownHtml from "../../../lib/markdown-html"
-import { paginate } from "../../../lib/paginate"
+import {
+  addAuthorsToPosts,
+  addExcerpts,
+  getAllPosts,
+  getTagPostMap,
+  sortPosts,
+} from "../../../lib/api/post"
+import { getPageCount, paginate } from "../../../lib/paginate"
 import { getUrlFriendlyTag } from "../../../lib/tags"
 import { getTagBaseUrl } from "../../../lib/urls"
 
 export async function getStaticPaths() {
   let paths: any[] = []
 
-  const allPosts = await Promise.all(
-    getAllPosts(getAuthorMap()).map(async post => {
-      return {
-        ...post,
-        excerpt: await markdownHtml(post.frontmatter.rawExcerpt || ""),
-      }
-    })
+  const allPosts = addAuthorsToPosts(
+    await Promise.all(addExcerpts(sortPosts(getAllPosts()))),
+    getAuthorMap()
   )
 
-  const tags = new Set<string>()
+  const tagMap = getTagPostMap(allPosts)
 
-  allPosts.forEach(post => {
-    post.frontmatter.tags.forEach((tag: string) => {
-      tags.add(tag)
-    })
-  })
+  Object.keys(tagMap).forEach((tag: string) => {
+    const tagPosts = tagMap[tag]
 
-  Array.from(tags).forEach(tag => {
-    const posts = allPosts.filter(post => post.frontmatter.tags.includes(tag))
-
-    paths = paths.concat(
-      paginate(posts, getUrlFriendlyTag(tag), {
+    paths.push(
+      paginate(tagPosts, getUrlFriendlyTag(tag), {
         title: tag,
         showTitle: true,
         superTitle: "Tag",
@@ -40,10 +35,6 @@ export async function getStaticPaths() {
       })
     )
   })
-
-  paths = paths.concat(
-    paginate(allPosts, "", { title: "Blog", showTitle: false })
-  )
 
   return paths
 }

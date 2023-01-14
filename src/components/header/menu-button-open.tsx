@@ -1,30 +1,40 @@
 import { gsap } from "gsap"
-import { useEffect, useRef, useState } from "preact/hooks"
+import {
+  FocusEventHandler,
+  MouseEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from "preact/hooks"
+import IClassProps from "../../interfaces/class-props"
 import cn from "../../lib/class-names"
+import BaseButton from "../link/base-button"
 import IMenuProps from "./menu-props"
 
 const DURATION = 0.2
 
-const X1 = 21
-const X2 = 43
-const Y1 = 26
+const X1 = 20
+const X2 = 42
+const Y1 = 25
 const Y2 = 32
-const Y3 = 38
+const Y3 = 37
 
 const LINE_STYLE = {
   strokeWidth: 2,
 }
 
-export interface IMenuButtonProps extends IMenuProps {
+export interface IMenuButtonProps extends IMenuProps, IClassProps {
   showMenu: boolean
   headerMode?: string
 }
 
-const MenuOpenButton = ({
+export default function MenuButtonOpen({
   showMenu,
   headerMode = "light",
   onClick,
-}: IMenuButtonProps) => {
+  className,
+  style,
+}: IMenuButtonProps) {
   const [focus, setFocus] = useState(false)
   const [hover, setHover] = useState(false)
 
@@ -141,14 +151,14 @@ const MenuOpenButton = ({
           },
           0
         )
-        .to(
-          ref2.current,
-          {
-            duration: DURATION,
-            opacity: 0,
-          },
-          0
-        )
+        // .to(
+        //   ref2.current,
+        //   {
+        //     duration: DURATION,
+        //     opacity: 0,
+        //   },
+        //   0
+        // )
         .to(
           ref1.current,
           {
@@ -189,14 +199,14 @@ const MenuOpenButton = ({
           },
           0
         )
-        .to(
-          ref2.current,
-          {
-            duration: DURATION,
-            opacity: 1,
-          },
-          0
-        )
+        // .to(
+        //   ref2.current,
+        //   {
+        //     duration: DURATION,
+        //     opacity: 1,
+        //   },
+        //   0
+        // )
         .to(
           ref1.current,
           {
@@ -216,33 +226,41 @@ const MenuOpenButton = ({
     }
   }, [showMenu])
 
-  const onMouseEnter = () => {
+  const onMouseEnter: MouseEventHandler = () => {
     setHover(true)
   }
 
-  const onMouseLeave = () => {
+  const onMouseLeave: MouseEventHandler = () => {
     setHover(false)
   }
 
-  const onFocus = () => {
+  const onFocus: FocusEventHandler = () => {
     setFocus(true)
   }
 
-  const onBlur = () => {
+  const onBlur: FocusEventHandler = () => {
     setFocus(false)
   }
 
-  const cls = cn([
+  const cls = cn("stroke-1", [
     headerMode === "dark",
-    "stroke-white/80 group-hover:stroke-white",
-    "stroke-slate-600 group-hover:stroke-slate-900",
+    "stroke-white",
+    "stroke-slate-900",
   ])
 
   return (
-    <button
+    <BaseButton
       onClick={onClick}
-      className="group relative h-16 min-w-16 outline-none"
-      aria-label={showMenu ? "Close Menu" : "Open Menu"}
+      className={cn(
+        "group relative h-15 min-w-15",
+        [
+          headerMode !== "dark",
+          "transition-ani transition-color hover:bg-slate-200",
+        ],
+        className
+      )}
+      style={style}
+      ariaLabel={showMenu ? "Close Menu" : "Open Menu"}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       onFocus={onFocus}
@@ -252,12 +270,26 @@ const MenuOpenButton = ({
       <span ref={refl3} className={cn(cls, "top-9")} style={style} /> */}
 
       <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-        <line ref={ref1} x1={X1} y1={Y1} x2={X2} y2={Y1} className={cls} />
-        <line ref={ref2} x1={X1} y1={Y2} x2={X2} y2={Y2} className={cls} />
-        <line ref={ref3} x1={X1} y1={Y3} x2={X2} y2={Y3} className={cls} />
+        <line
+          ref={ref1}
+          x1={X1}
+          y1={Y1}
+          x2={X2}
+          y2={Y1}
+          className={cls}
+          shapeRendering="crispEdges"
+        />
+        {/* <line ref={ref2} x1={X1} y1={Y2} x2={X2} y2={Y2} className={cls} /> */}
+        <line
+          ref={ref3}
+          x1={X1}
+          y1={Y3}
+          x2={X2}
+          y2={Y3}
+          className={cls}
+          shapeRendering="crispEdges"
+        />
       </svg>
-    </button>
+    </BaseButton>
   )
 }
-
-export default MenuOpenButton

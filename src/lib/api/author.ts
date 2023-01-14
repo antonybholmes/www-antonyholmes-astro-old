@@ -1,25 +1,24 @@
-import fs from "fs"
-import path, { join } from "path"
-import { PEOPLE_SLUG } from "../../constants"
+import { join } from "path"
+import IAuthor from "../../interfaces/author"
 import IAuthorMap from "../../interfaces/author-map"
 import IPostAuthor from "../../interfaces/post-author"
-import { getCanonicalAuthorSlug } from "../slug"
+import markdownHtml from "../markdown-html"
+import { getCanonicalSlug } from "../slug"
 import { getUrlFriendlyTag } from "../tags"
 import { getAllFiles } from "./files"
-import { getAuthorFields } from "./markdown"
+import { getAuthorFrontmatter } from "./markdown"
 
-const authorsDir = join(process.cwd(), "_content", "authors")
+const PEOPLE_DIR = join(process.cwd(), "_content", "people")
 
 export const getAuthorPaths = () => {
-  return getAllFiles(authorsDir)
+  return getAllFiles(PEOPLE_DIR)
 }
 
 export const getAuthorBySlug = (slug: string): IPostAuthor => {
-  slug = getCanonicalAuthorSlug(slug)
-  const realPath = slug.replace(/\.md$/, "")
-  const fullPath = join(authorsDir, `${realPath}.md`)
+  slug = getCanonicalSlug(slug)
+  const fullPath = join(PEOPLE_DIR, `${slug}.md`)
 
-  return { slug: slug, frontmatter: getAuthorFields(fullPath) }
+  return { slug: slug, frontmatter: getAuthorFrontmatter(fullPath) }
 }
 
 export const getAllAuthors = (): IPostAuthor[] => {
@@ -33,9 +32,18 @@ export const getAuthorMap = (authors: IPostAuthor[] = []): IAuthorMap => {
     authors = getAllAuthors()
   }
 
-  return Object.fromEntries(authors.map(x => [x.frontmatter.name, x]))
+  return Object.fromEntries(
+    authors.map(x => [getUrlFriendlyTag(x.frontmatter.name), x])
+  )
 }
 
-export const getAuthorUrl = (author: IPostAuthor) => {
-  return `${PEOPLE_SLUG}/${getUrlFriendlyTag(author.frontmatter.name)}`
+export async function addAuthorHtml(author: IPostAuthor): Promise<IAuthor> {
+  return {
+    ...author,
+    html: await markdownHtml(author.frontmatter.rawContent || ""),
+  }
+}
+
+export function addHtmlToAuthors(authors: IPostAuthor[]): Promise<IAuthor>[] {
+  return authors.map(author => addAuthorHtml(author))
 }

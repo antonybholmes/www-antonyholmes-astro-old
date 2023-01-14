@@ -2,19 +2,21 @@
 import PostsPage from "../../../components/pages/posts-page"
 import ContentLayout from "../../../layouts/ContentLayout.astro"
 import { getAuthorMap } from "../../../lib/api/author"
-import { getAllPosts } from "../../../lib/api/post"
-import markdownHtml from "../../../lib/markdown-html"
-import { paginate } from "../../../lib/paginate"
+import {
+  addAuthorsToPosts,
+  addExcerpts,
+  getAllPosts,
+  sortPosts,
+} from "../../../lib/api/post"
+import { getPageCount, paginate } from "../../../lib/paginate"
 
 export async function getStaticPaths() {
-  const allPosts = await Promise.all(
-    getAllPosts(getAuthorMap()).map(async post => {
-      return {
-        ...post,
-        excerpt: await markdownHtml(post.frontmatter.rawExcerpt || ""),
-      }
-    })
+  const allPosts = addAuthorsToPosts(
+    await Promise.all(addExcerpts(sortPosts(getAllPosts()))),
+    getAuthorMap()
   )
+
+  const pages = getPageCount(allPosts)
 
   const paths = paginate(allPosts, "")
 

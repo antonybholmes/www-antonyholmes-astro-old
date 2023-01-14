@@ -8,14 +8,18 @@ module.exports = {
     extend: {
       width: {
         4.5: "1.125rem",
+        15: "3.75rem",
         "1/20": "5%",
         "9/20": "45%",
         "5/100": "5%",
         "15/100": "15%",
         "25/100": "25%",
         "30/100": "30%",
+        "35/100": "35%",
         "40/100": "40%",
+        "45/100": "45%",
         "48/100": "48%",
+        "55/100": "55%",
         "60/100": "60%",
         "64/100": "64%",
         "70/100": "70%",
@@ -146,14 +150,15 @@ module.exports = {
         100: "100",
       },
       gridTemplateColumns: {
+        // Simple 20 column grid
         16: "repeat(16, minmax(0, 1fr))",
         20: "repeat(20, minmax(0, 1fr))",
       },
       gridColumn: {
+        "span-13": "span 13 / span 13",
         "span-14": "span 14 / span 14",
-        "span-15": "span 15 / span 15",
+        "span-15": "span 14 / span 15",
         "span-18": "span 18 / span 18",
-        "span-19": "span 19 / span 18",
       },
       strokeWidth: {
         2: "2px",
@@ -161,24 +166,27 @@ module.exports = {
         4: "4px",
       },
       transitionProperty: {
-        'filter': 'filter',
+        filter: "filter",
       },
       margin: {
-        '18': '4.5rem',
+        18: "4.5rem",
       },
       translate: {
-        'toggle':'8px'
+        toggle: "8px",
       },
       keyframes: {
-        'header-link': {
-          '0%': { opacity: 0},
-          '100%': { opacity: 1, width:'calc(100% - 2rem)' },
-        }
+        "header-link": {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1, width: "calc(100% - 2rem)" },
+        },
       },
       animation: {
-        'header-link': 'header-link 200ms ease-in-out 200ms forwards',
-      }
+        "header-link": "header-link 200ms ease-in-out 200ms forwards",
+      },
+      opacity: {
+        98: ".98",
+      },
     },
   },
-	plugins: [],
+  plugins: [],
 }

@@ -24,7 +24,7 @@ export const paginate = (
       props: {
         page: 0,
         pages,
-        data: getPagePosts(data, 0),
+        data: getPageItems(data, 0),
         ...globalProps,
       },
     })
@@ -46,7 +46,7 @@ export const paginate = (
       props: {
         page,
         pages,
-        data: getPagePosts(data, page),
+        data: getPageItems(data, page),
         ...globalProps,
       },
     })
@@ -55,11 +55,18 @@ export const paginate = (
   return paths
 }
 
-export const getPageCount = (posts: any[]): number => {
-  return Math.floor((posts.length + RECORDS_PER_PAGE - 1) / RECORDS_PER_PAGE)
+export const getPageCount = (
+  items: any[],
+  pageSize: number = RECORDS_PER_PAGE
+): number => {
+  return Math.floor((items.length + pageSize - 1) / pageSize)
 }
 
-export const getPagePosts = (posts: any[], page: number = 0): any[] => {
-  const start = page * RECORDS_PER_PAGE
-  return posts.slice(start, start + RECORDS_PER_PAGE)
+export const getPageItems = (
+  items: any[],
+  page: number = 0,
+  pageSize: number = RECORDS_PER_PAGE
+): any[] => {
+  const start = page * pageSize
+  return items.slice(start, start + pageSize)
 }

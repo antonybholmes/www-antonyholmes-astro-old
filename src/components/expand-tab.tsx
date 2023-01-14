@@ -1,4 +1,4 @@
-import { useState } from "preact/hooks"
+import { MouseEventHandler, useState } from "preact/hooks"
 import IChildrenProps from "../interfaces/children-props"
 import ExpandDetails from "./expand-details"
 import ExpandTabButton from "./expand-tab-button"
@@ -6,19 +6,19 @@ import ExpandTabButton from "./expand-tab-button"
 interface IProps extends IChildrenProps {
   title: string
   isExpanded?: boolean
-  onClick?: any
+  onClick?: (e: MouseEvent) => void
 }
 
-const ExpandTab = ({
+export default function ExpandTab({
   title,
   isExpanded = true,
   className,
   children,
   onClick,
-}: IProps) => {
+}: IProps) {
   const [expanded, setExpanded] = useState(isExpanded)
 
-  const handleClick = (e: any) => {
+  function _onClick(e: MouseEvent) {
     if (onClick) {
       onClick(e)
     } else {
@@ -30,11 +30,7 @@ const ExpandTab = ({
 
   return (
     <div className={className}>
-      <ExpandTabButton
-        expanded={status}
-        onClick={handleClick}
-        className="hover:underline"
-      >
+      <ExpandTabButton expanded={status} onClick={_onClick}>
         {title}
       </ExpandTabButton>
 
@@ -42,5 +38,3 @@ const ExpandTab = ({
     </div>
   )
 }
-
-export default ExpandTab

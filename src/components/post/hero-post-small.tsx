@@ -1,7 +1,7 @@
 import IPostProps from "../../interfaces/post-props"
 import cn from "../../lib/class-names"
 import BaseCol from "../base-col"
-import CompactAvatars from "../compact-avatars"
+import CompactAvatars from "../person/compact-avatars"
 import HTML from "../html"
 import DateFormatter from "./date-formatter"
 import PostCategoryLink from "./post-category-link"
@@ -13,44 +13,41 @@ interface IProps extends IPostProps {
   showAvatar?: boolean
 }
 
-const HeroPostSmall = ({
+export default function HeroPostSmall({
   post,
   showDescription = true,
   showAvatar = true,
   className,
-}: IProps) => (
-  <article
-    className={cn(
-      "grid grid-cols-1 md:gap-6",
-      [
-        post.frontmatter.hero !== "",
-        "md:grid-cols-5 xl:grid-cols-3 3xl:grid-cols-4",
-      ],
-      className
-    )}
-  >
-    <PostImage post={post} className="mb-4 h-48 md:h-32" />
+}: IProps) {
+  return (
+    <article
+      className={cn(
+        "grid grid-cols-1 md:grid-cols-4 md:gap-x-6 lg:grid-cols-5 xl:grid-cols-3",
+        className
+      )}
+    >
+      <div className="col-span-1">
+        <PostImage post={post} className="mb-4 h-48 md:h-32" />
+      </div>
+      <BaseCol className="col-span-3 gap-y-1 lg:col-span-3 xl:col-span-2 ">
+        <BaseCol>
+          <PostCategoryLink post={post} textSize="text-2xl md:text-base" />
+          <PostTitleLink post={post} className="text-2xl" />
+        </BaseCol>
+        {showDescription && (
+          <HTML html={post.excerpt} className="text-sm text-slate-600" />
+        )}
 
-    <BaseCol className="col-span-4 gap-y-1 xl:col-span-2 3xl:col-span-3">
-      <BaseCol>
-        <PostCategoryLink post={post} textSize="text-2xl md:text-base" />
-        <PostTitleLink post={post} className="text-2xl" />
+        {showAvatar && (
+          <CompactAvatars
+            authors={post.authors}
+            showImages={false}
+            className="mt-1"
+          />
+        )}
+
+        <DateFormatter date={post.fields.date} />
       </BaseCol>
-      {showDescription && (
-        <HTML html={post.excerpt} className="text-sm text-slate-600" />
-      )}
-
-      {showAvatar && (
-        <CompactAvatars
-          authors={post.authors}
-          showImages={false}
-          className="mt-1"
-        />
-      )}
-
-      <DateFormatter date={post.fields.date} />
-    </BaseCol>
-  </article>
-)
-
-export default HeroPostSmall
+    </article>
+  )
+}

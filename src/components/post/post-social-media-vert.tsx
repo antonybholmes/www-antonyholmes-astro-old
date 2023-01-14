@@ -1,10 +1,10 @@
-import { getPostUrl } from "../../lib/articles"
 import IPostProps from "../../interfaces/post-props"
 import FacebookIcon from "../../icons/facebook"
 import LinkedInIcon from "../../icons/linkedin"
 import TwitterIcon from "../../icons/twitter"
 import BaseLink from "../link/base-link"
 import { CLS_SOCIAL_ICON, CLS_TEXT_GRAY_HOVER } from "./post-social-media"
+import { getPostUrl } from "../../lib/urls"
 
 const PostSocialMediaVert = ({ post }: IPostProps) => {
   const url = getPostUrl(post.fields.slug)

@@ -5,7 +5,7 @@ import remarkRehype from "remark-rehype"
 import rehypeStringify from "rehype-stringify"
 import rehypeSlug from "rehype-slug"
 
-export const markdownHtml = async (markdown: string) => {
+export default async function markdownHtml(markdown: string) {
   //const result = await remark().use(html).use(prism).process(markdown)
   const result = await unified()
     .use(remarkParse)
@@ -26,7 +26,6 @@ export const markdownHtml = async (markdown: string) => {
     .use(rehypeSlug)
     .use(rehypeStringify, { allowDangerousHtml: true })
     .process(markdown)
+
   return result.toString()
 }
-
-export default markdownHtml

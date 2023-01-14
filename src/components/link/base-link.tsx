@@ -1,8 +1,8 @@
-import cn from "../../lib/class-names"
+import IFocusProps from "../../interfaces/focus-props"
 import ILinkProps from "../../interfaces/link-props"
 import IMouseProps from "../../interfaces/mouse-props"
+import cn from "../../lib/class-names"
 import ExtLink from "./ext-link"
-import IFocusProps from "../../interfaces/focus-props"
 
 interface IProps extends ILinkProps, IMouseProps, IFocusProps {
   underline?: boolean
@@ -28,9 +28,7 @@ const BaseLink = ({
   }
 
   // Test if we use the NextJS router link or a regular a for external urls
-  const isExt =
-    href &&
-    (!href.startsWith("/") || href.startsWith("http") || href.startsWith("www"))
+  const isExt = href && (href.startsWith("http") || href.startsWith("www"))
 
   if (isExt) {
     return (
@@ -52,10 +50,6 @@ const BaseLink = ({
       </ExtLink>
     )
   } else {
-    if (!children) {
-      children = <>{href}</>
-    }
-
     return (
       <a
         href={href}

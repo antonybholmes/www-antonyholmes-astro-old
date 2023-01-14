@@ -1,6 +1,6 @@
 import cn from "../../lib/class-names"
 import IPostProps from "../../interfaces/post-props"
-import CompactAvatars from "../compact-avatars"
+import CompactAvatars from "../person/compact-avatars"
 import DateFormatter from "./date-formatter"
 
 interface IProps extends IPostProps {

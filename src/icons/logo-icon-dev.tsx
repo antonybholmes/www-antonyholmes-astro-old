@@ -16,23 +16,23 @@ export default function LogoIcon({ headerMode = "light", className }: IProps) {
     <svg
       viewBox="0 0 62 24"
       xmlns="http://www.w3.org/2000/svg"
-      class={cn("group h-9 border font-bold", className)}
+      className={cn("group h-9 border font-bold", className)}
     >
       <rect
         width="24"
         height="24"
-        class={cn("transition-ani transition-color", [
+        className={cn("transition-ani transition-color", [
           headerMode === "light",
           "  fill-sky-600 text-white group-hover:fill-sky-500",
           "fill-slate-300 group-hover:fill-slate-200",
         ])}
       />
       <text
-        alignment-baseline="middle"
-        text-anchor="middle"
+        alignmentBaseline="middle"
+        textAnchor="middle"
         x="12"
         y="14"
-        class={cn("transition-ani transition-color", [
+        className={cn("transition-ani transition-color", [
           headerMode === "light",
           "fill-white",
           "fill-slate-900",
@@ -41,15 +41,15 @@ export default function LogoIcon({ headerMode = "light", className }: IProps) {
         ah
       </text>
       <text
-        alignment-baseline="middle"
+        alignmentBaseline="middle"
         textAnchor="middle"
         x="28"
         y="14"
-        class={textClass}
+        className={textClass}
       >
         .
       </text>
-      <text alignment-baseline="middle" x="21" y="14" class={textClass}>
+      <text alignmentBaseline="middle" x="21" y="14" className={textClass}>
         dev
       </text>
     </svg>

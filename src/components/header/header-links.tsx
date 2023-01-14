@@ -20,15 +20,12 @@ const HeaderLinks = ({
   tab = tab.toLowerCase()
 
   return (
-    <ul
-      className="flex flex-row flex-nowrap items-center justify-center gap-4"
-      style={{ marginBottom: "-1px" }}
-    >
+    <ul className="flex flex-row flex-nowrap items-center justify-center gap-2">
       {HEADER_LINKS.map((link: ILink, index: number) => {
         const selected = link.name.toLowerCase() === tab
 
         return (
-          <li key={index} className="inline">
+          <li key={index}>
             <HeaderLink
               link={link}
               selected={selected}

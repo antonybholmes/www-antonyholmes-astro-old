@@ -12,7 +12,7 @@ const BasePostImage = ({
   className,
 }: IProps) => (
   <BaseImage
-    src={`/images/posts/${post.frontmatter.hero}.webp`}
+    src={`/assets/images/posts/${post.frontmatter.hero}.webp`}
     alt={post.frontmatter.title}
     size={size}
     loading={loading}
