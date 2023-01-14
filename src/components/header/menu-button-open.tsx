@@ -1,11 +1,5 @@
 import { gsap } from "gsap"
-import {
-  FocusEventHandler,
-  MouseEventHandler,
-  useEffect,
-  useRef,
-  useState,
-} from "preact/hooks"
+import { useEffect, useRef, useState } from "preact/hooks"
 import IClassProps from "../../interfaces/class-props"
 import cn from "../../lib/class-names"
 import BaseButton from "../link/base-button"
@@ -226,19 +220,19 @@ export default function MenuButtonOpen({
     }
   }, [showMenu])
 
-  const onMouseEnter: MouseEventHandler = () => {
+  function onMouseEnter() {
     setHover(true)
   }
 
-  const onMouseLeave: MouseEventHandler = () => {
+  function onMouseLeave() {
     setHover(false)
   }
 
-  const onFocus: FocusEventHandler = () => {
+  function onFocus() {
     setFocus(true)
   }
 
-  const onBlur: FocusEventHandler = () => {
+  function onBlur() {
     setFocus(false)
   }
 
@@ -276,8 +270,8 @@ export default function MenuButtonOpen({
           y1={Y1}
           x2={X2}
           y2={Y1}
-          className={cls}
-          shapeRendering="crispEdges"
+          class={cls}
+          shape-rendering="crispEdges"
         />
         {/* <line ref={ref2} x1={X1} y1={Y2} x2={X2} y2={Y2} className={cls} /> */}
         <line
@@ -286,8 +280,8 @@ export default function MenuButtonOpen({
           y1={Y3}
           x2={X2}
           y2={Y3}
-          className={cls}
-          shapeRendering="crispEdges"
+          class={cls}
+          shape-rendering="crispEdges"
         />
       </svg>
     </BaseButton>

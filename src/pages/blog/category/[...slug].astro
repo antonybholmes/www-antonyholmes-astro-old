@@ -1,5 +1,5 @@
 ---
-import PostsPage from "../../../components/pages/posts-page"
+import PostsPage from "../../../components/pages/PostsPage.astro"
 import ContentLayout from "../../../layouts/ContentLayout.astro"
 import { getAuthorMap } from "../../../lib/api/author"
 import {
@@ -42,7 +42,6 @@ export async function getStaticPaths() {
     Object.keys(categoryMap[category]).forEach(section => {
       if (section !== "All") {
         const root = getSectionUrl(category, section)
-        console.log(root)
         paths.push(
           paginate(categoryPosts, root, {
             title: section,

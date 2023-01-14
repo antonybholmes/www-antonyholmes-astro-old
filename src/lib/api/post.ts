@@ -76,34 +76,34 @@ export function getPostByPath(path: string, index: number = -1): IBasePost {
 }
 
 export function sortPosts(posts: IBasePost[]): IBasePost[] {
-  return (
-    posts
-      // .filter(post => {
-      //   return (
-      //     process.env.NODE_ENV === "development" ||
-      //     post.frontmatter.status === "published"
-      //   )
-      // })
-      // sort posts by date in descending order
-      .sort((post1, post2) => {
-        const d1 = new Date(post1.fields.date)
-        const d2 = new Date(post2.fields.date)
-        if (d1 > d2) {
-          return -1
-        } else if (d1 < d2) {
-          return 1
-        } else {
-          // dates equal so compare names
-          return post1.frontmatter.title.localeCompare(post2.frontmatter.title)
-        }
-      })
-      .map((post, index) => {
-        return {
-          ...post,
-          fields: { ...post.fields, index },
-        }
-      })
-  )
+  const ret = posts
+    // .filter(post => {
+    //   return (
+    //     process.env.NODE_ENV === "development" ||
+    //     post.frontmatter.status === "published"
+    //   )
+    // })
+    // sort posts by date in descending order
+    .sort((post1, post2) => {
+      const d1 = new Date(post1.fields.date)
+      const d2 = new Date(post2.fields.date)
+      if (d1 > d2) {
+        return -1
+      } else if (d1 < d2) {
+        return 1
+      } else {
+        // dates equal so compare names
+        return post1.frontmatter.title.localeCompare(post2.frontmatter.title)
+      }
+    })
+    .map((post, index) => {
+      return {
+        ...post,
+        fields: { ...post.fields, index },
+      }
+    })
+
+  return ret
 }
 
 // export function getAllPosts(authorMap: IAuthorMap): IAuthorPost[] {
@@ -140,18 +140,20 @@ export function addHtmlToPosts(posts: IAuthorPost[]): Promise<IPost>[] {
   return posts.map(post => addHtml(post))
 }
 
-export function addReadingTimeToPosts(posts: IPost[]): IPost[] {
-  return posts.map(post => {
-    return { ...post, stats: readingTime(post.frontmatter.rawContent) }
-  })
-}
-
 export function addExcerpts(posts: IBasePost[]): Promise<IPreviewPost>[] {
-  return posts.map(post => addExcerpt(post))
+  const ret = posts.map(async post => {
+    return {
+      ...post,
+      excerpt: await markdownHtml(post.frontmatter.rawExcerpt || ""),
+    }
+  })
+
+  return ret
 }
 
 export function getAllPosts(): IBasePost[] {
-  return getPostPaths().map(path => getPostByPath(path))
+  const ret = getPostPaths().map(path => getPostByPath(path))
+  return ret
 }
 
 export function getAllReviews(): IBasePost[] {

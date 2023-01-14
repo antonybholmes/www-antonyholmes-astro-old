@@ -87,7 +87,7 @@ const morePosts: any[] = []
 
 <DefaultLayout title={post.frontmatter.title} tab="Blog" headerMode="dark">
   <div slot="main">
-    <PostHeader post={post} />
+    <PostHeader post={post} client:visible />
 
     <ContentDiv className="my-40">
       <BaseCol className="gap-y-4 lg:gap-y-8" slot="main">

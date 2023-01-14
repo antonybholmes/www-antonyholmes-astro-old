@@ -1,5 +1,5 @@
 ---
-import PostsPage from "../../../components/pages/posts-page"
+import PostsPage from "../../../components/pages/PostsPage.astro"
 import ContentLayout from "../../../layouts/ContentLayout.astro"
 import { getAuthorMap } from "../../../lib/api/author"
 import {
@@ -15,7 +15,6 @@ export async function getStaticPaths() {
     await Promise.all(addExcerpts(sortPosts(getAllPosts()))),
     getAuthorMap()
   )
-
   const pages = getPageCount(allPosts)
 
   const paths = paginate(allPosts, "")
