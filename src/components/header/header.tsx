@@ -37,14 +37,13 @@ export default function Header({
 
   return (
     <>
-      {showMenu && (
-        <MenuOverlay
-          title={title}
-          tab={tab}
-          showMenu={showMenu}
-          onClick={onClick}
-        />
-      )}
+      {/* {showMenu && ( */}
+      <MenuOverlay
+        title={title}
+        tab={tab}
+        showMenu={showMenu}
+        onClick={onClick}
+      />
 
       <header
         className={cn(

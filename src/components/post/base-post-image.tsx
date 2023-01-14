@@ -4,6 +4,7 @@ import cn from "../../lib/class-names"
 import PlaceholderImage from "../placeholder-image"
 
 interface IProps extends IPostProps, IImageSizeProps {
+  duration: number
   imgClassName?: string
 }
 
@@ -11,6 +12,7 @@ const BasePostImage = ({
   post,
   size = [1600, 800],
   loading = "lazy",
+  duration = 0.4,
   imgClassName,
   className,
 }: IProps) => (
@@ -19,6 +21,7 @@ const BasePostImage = ({
     alt={post.frontmatter.title}
     size={size}
     loading={loading}
+    duration={duration}
     className={className}
     imgClassName={cn("object-cover", imgClassName)}
   />

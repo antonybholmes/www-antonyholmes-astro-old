@@ -8,6 +8,7 @@ import { gsap } from "gsap"
 export interface IProps extends IImageProps, IClassProps {
   containerClassName?: string
   imgClassName?: string
+  duration?: number
 }
 
 export default function PlaceholderImage({
@@ -20,6 +21,7 @@ export default function PlaceholderImage({
   className,
   containerClassName,
   imgClassName,
+  duration = 0.4,
   style,
 }: IProps) {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -31,7 +33,7 @@ export default function PlaceholderImage({
     gsap.timeline().to(
       ref1.current,
       {
-        duration: 0.4,
+        duration: duration,
         opacity: 1,
       },
       0

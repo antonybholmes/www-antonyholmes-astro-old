@@ -47,32 +47,19 @@ export default function SmallHeader({
   // }, [showMenu])
 
   return (
-    <>
-      {showMenu && (
-        <MenuOverlay
-          title={title}
-          tab={tab}
-          showMenu={showMenu}
+    <nav className="w-full md:hidden">
+      <VCenterRow>
+        <MenuOpenButton
           onClick={onClick}
+          showMenu={showMenu}
+          headerMode={headerMode}
+          style={{ marginBottom: "-1px" }}
         />
-      )}
-      <nav className="w-full md:hidden">
-        <VCenterRow>
-          <MenuOpenButton
-            onClick={onClick}
-            showMenu={showMenu}
-            headerMode={headerMode}
-            style={{ marginBottom: "-1px" }}
-          />
 
-          <BaseLink href="/" ariaLabel="Goto Homepage">
-            <LogoIcon
-              headerMode={headerMode}
-              style={{ marginBottom: "-1px" }}
-            />
-          </BaseLink>
-        </VCenterRow>
-      </nav>
-    </>
+        <BaseLink href="/" ariaLabel="Goto Homepage">
+          <LogoIcon headerMode={headerMode} style={{ marginBottom: "-1px" }} />
+        </BaseLink>
+      </VCenterRow>
+    </nav>
   )
 }

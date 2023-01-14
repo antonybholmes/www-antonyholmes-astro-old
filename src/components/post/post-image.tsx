@@ -19,6 +19,7 @@ export default function PostImage({
         post={post}
         size={size}
         loading={loading}
+        duration={0.2}
         className={className}
         imgClassName="scale-102 trans-300 transition-transform hover:scale-105"
       />
