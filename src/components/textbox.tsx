@@ -26,7 +26,7 @@ const TextBox = ({
     textRef.current.value = value
   }, [textRef, value])
 
-  const _handleInput = (e: any) => {
+  const _onInput = (e: any) => {
     //_setValue(e.target.value)
 
     if (e.key === "Enter" && onChange !== null) {
@@ -52,7 +52,7 @@ const TextBox = ({
       <div className={`w-full`}>
         <input
           type="text"
-          onKeyDown={_handleInput}
+          onKeyDown={_onInput}
           onFocus={handleFocus}
           onBlur={handleBlur}
           className={cn("w-full outline-none", [!alignLeft, "text-right"])}

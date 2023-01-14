@@ -1,6 +1,6 @@
 import BaseLink from "../link/base-link"
 //import Search from '../search/search'
-import LogoIcon from "../../icons/logo-icon-com"
+import LogoIcon from "../../icons/logo-icon"
 import ContentDiv from "../content-div"
 import HeaderLinks from "./header-links"
 import IHeaderProps from "./header-props"
@@ -9,7 +9,7 @@ interface IProps extends IHeaderProps {
   scrollY: number
 }
 
-function LargeHeader({
+export default function LargeHeader({
   title,
   tab,
   headerMode = "light",
@@ -19,9 +19,9 @@ function LargeHeader({
   return (
     <ContentDiv className="hidden md:flex">
       <></>
-      <nav className="flex flex-row items-center gap-x-8 lg:gap-x-16">
-        <BaseLink href="/" ariaLabel="Goto Homepage" className="block">
-          <LogoIcon headerMode={headerMode} />
+      <nav className="flex h-full flex-row items-center gap-x-8 lg:gap-x-12">
+        <BaseLink href="/" ariaLabel="Goto Homepage">
+          <LogoIcon headerMode={headerMode} style={{ marginBottom: "-1px" }} />
         </BaseLink>
 
         <HeaderLinks
@@ -36,5 +36,3 @@ function LargeHeader({
     </ContentDiv>
   )
 }
-
-export default LargeHeader

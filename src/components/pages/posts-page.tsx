@@ -1,16 +1,16 @@
+import IAuthorPost from "../../interfaces/author-post"
 import IFieldMap from "../../interfaces/field-map"
-import IPreviewPost from "../../interfaces/preview-post"
 import BaseCol from "../base-col"
 import PagePagination from "../page-pagination"
+import CategoryPosts from "../post/category-posts"
+import CategoryPostsVert from "../post/category-posts-vert"
 import HeadPosts from "../post/head-posts"
 import HeroPosts from "../post/hero-posts"
 import LatestPosts from "../post/latest-posts"
 import RestPosts from "../post/rest-posts"
-import CategoryPosts from "../post/category-posts"
-import CategoryPostsVert from "../post/category-posts-vert"
 
 interface IProps {
-  posts: IPreviewPost[]
+  posts: IAuthorPost[]
   page: number
   pages: number
   showLatestPosts?: boolean

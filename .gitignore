@@ -12,6 +12,13 @@ pnpm-debug.log*
 pnpm-lock.yaml
 yarn.lock
 
+# constantly modified so
+# don't index
+public/atom.xml
+public/rss.xml
+public/rss.json
+public/sitemap*
+
 # environment variables
 .env.local
 .env.production

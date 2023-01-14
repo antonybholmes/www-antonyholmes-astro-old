@@ -31,6 +31,6 @@ export default defineConfig({
     }),
     prefetch(),
     partytown(),
-    //htmlBeautifier(),
+    htmlBeautifier(),
   ],
 })

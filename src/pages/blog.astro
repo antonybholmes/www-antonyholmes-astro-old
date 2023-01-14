@@ -2,22 +2,21 @@
 import PostsPage from "../components/pages/posts-page"
 import ContentLayout from "../layouts/ContentLayout.astro"
 import { getAuthorMap } from "../lib/api/author"
-import { getAllPostsAndReviews } from "../lib/api/post"
-import markdownHtml from "../lib/markdown-html"
-import { getPageCount, getPagePosts } from "../lib/paginate"
+import {
+  addAuthorsToPosts,
+  addExcerpts,
+  getAllPosts,
+  sortPosts,
+} from "../lib/api/post"
+import { getPageCount, getPageItems } from "../lib/paginate"
 
-const allPosts = await Promise.all(
-  getAllPostsAndReviews(getAuthorMap()).map(async post => {
-    return {
-      ...post,
-      excerpt: await markdownHtml(post.frontmatter.rawExcerpt || ""),
-      //html : await markdownHtml(post.frontmatter.rawContent || ''),
-    }
-  })
-)
-
-const posts = getPagePosts(allPosts)
+const allPosts = sortPosts(getAllPosts())
 const pages = getPageCount(allPosts)
+
+const posts = addAuthorsToPosts(
+  await Promise.all(addExcerpts(getPageItems(allPosts, 0, 10))),
+  getAuthorMap()
+)
 ---
 
 <ContentLayout title="Blog" showTitle={false}>

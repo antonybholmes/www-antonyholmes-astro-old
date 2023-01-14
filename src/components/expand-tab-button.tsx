@@ -1,55 +1,42 @@
 import { useState } from "preact/hooks"
-import cn from "../lib/class-names"
 import IChildrenProps from "../interfaces/children-props"
+import cn from "../lib/class-names"
 import ExpandTabArrow from "./expand-tab-arrow"
-import VCenterRow from "./v-center-row"
+import AnchorButton from "./link/anchor-button"
 
 interface IProps extends IChildrenProps {
   expanded?: boolean
-  onClick?: any
+  onClick?: (e: MouseEvent) => void
 }
 
-const ExpandTabButton = ({
+export default function ExpandTabButton({
   expanded = false,
   onClick,
   className,
   children,
-}: IProps) => {
+}: IProps) {
   const [hover, setHover] = useState(false)
 
-  const handleMouseEnter = () => {
+  function onMouseEnter() {
     setHover(true)
   }
 
-  const handleMouseLeave = () => {
+  function onMouseLeave() {
     setHover(false)
   }
 
-  const handleInput: any = (e: any) => {
-    //_setValue(e.target.value)
-
-    if (e.key === "Enter" && onClick) {
-      //@ts-ignore
-      onClick(null)
-    }
-  }
-
   return (
-    <VCenterRow
-      tabIndex={0}
+    <AnchorButton
       onClick={onClick}
-      onKeyDown={handleInput}
       className={cn(
-        "cursor-pointer justify-between gap-x-2 py-2 font-bold",
+        "transition-color -mx-3 flex cursor-pointer flex-row items-center justify-between gap-x-2 rounded py-1 px-3 font-bold transition hover:bg-slate-100",
         className
       )}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       <div>{children}</div>
       <ExpandTabArrow expanded={expanded} hover={hover} />
-    </VCenterRow>
+    </AnchorButton>
   )
 }
-
-export default ExpandTabButton

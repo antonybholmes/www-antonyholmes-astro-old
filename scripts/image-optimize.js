@@ -6,7 +6,7 @@ const sharp = require("sharp")
 let maxSize = "1024x1024"
 let sizes = [40, 80, 160, 320, 640]
 
-let dir = "./public/images/people"
+let dir = "./public/assets/images/people"
 
 let files = fs.readdirSync(dir)
 
@@ -38,7 +38,7 @@ files
 maxSize = "2048x1024"
 sizes = [200, 400, 800, 800, 1600]
 
-dir = "./public/images/posts"
+dir = "./public/assets/images/posts"
 
 files = fs.readdirSync(dir)
 

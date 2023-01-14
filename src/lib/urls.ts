@@ -2,13 +2,22 @@ import {
   BROKERAGE_SLUG,
   CATEGORY_SLUG,
   CREDIT_CARD_SLUG,
-  PORTFOLIO_SLUG,
-  REVIEW_SLUG,
-  TAG_SLUG,
   PEOPLE_SLUG,
+<<<<<<< HEAD
   SITE_URL,
+=======
+  PORTFOLIO_SLUG,
+  POST_SLUG,
+  REVIEW_SLUG,
+  SITE_URL,
+  TAG_SLUG,
+>>>>>>> main
 } from "../constants"
 import { getUrlFriendlyTag } from "./tags"
+
+export const getAuthorUrl = (name: string) => {
+  return `${PEOPLE_SLUG}/${getUrlFriendlyTag(name)}`
+}
 
 export const getReviewBaseUrl = (tag: string) => {
   return `${REVIEW_SLUG}/${getUrlFriendlyTag(tag)}`
@@ -30,22 +39,35 @@ export const getCategoryBaseUrl = (category: string) => {
   return `${CATEGORY_SLUG}/${getUrlFriendlyTag(category)}`
 }
 
-export const getSectionRelativeUrl = (category: string, section: string) => {
+export const getSectionUrl = (category: string, section: string) => {
   return `${getUrlFriendlyTag(category)}/section/${getUrlFriendlyTag(section)}`
 }
 
 export const getSectionBaseUrl = (category: string, section: string) => {
-  return `${CATEGORY_SLUG}/${getSectionRelativeUrl(category, section)}`
+  return `${CATEGORY_SLUG}/${getSectionUrl(category, section)}`
 }
 
 export const getTagBaseUrl = (tag: string) => {
   return `${TAG_SLUG}/${getUrlFriendlyTag(tag)}`
 }
 
+<<<<<<< HEAD
 export const getPostRelativeUrl = (slug: string): string => {
   return `/blog/${slug}`
 }
 
 export const getPostUrl = (slug: string): string => {
   return `${SITE_URL}${slug}`
+=======
+export const getTagUrl = (tag: string) => {
+  return getTagBaseUrl(tag)
+}
+
+export const getPostBaseUrl = (slug: string): string => {
+  return `${POST_SLUG}/${slug}`
+}
+
+export const getPostUrl = (slug: string): string => {
+  return `${SITE_URL}/${POST_SLUG}/${slug}`
+>>>>>>> main
 }

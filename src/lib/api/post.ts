@@ -3,58 +3,68 @@ import IAuthorMap from "../../interfaces/author-map"
 import IAuthorPost from "../../interfaces/author-post"
 import IBasePost from "../../interfaces/base-post"
 import IFieldMap from "../../interfaces/field-map"
-import { getCanonicalPostSlug } from "../slug"
+import IPost from "../../interfaces/post"
+import IPostAuthor from "../../interfaces/post-author"
+import IPreviewPost from "../../interfaces/preview-post"
+import markdownHtml from "../markdown-html"
 import { getUrlFriendlyTag } from "../tags"
 import { getAllMDFiles } from "./files"
-import { getPostFrontmatter } from "./markdown"
+import { getFields, getPostFrontmatter } from "./markdown"
 
 export const POSTS_DIR = join(process.cwd(), "_content", "posts")
 export const REVIEWS_DIR = join(process.cwd(), "_content", "reviews")
 
-export const getPostPaths = () => {
+export function getPostPaths() {
   return getAllMDFiles(POSTS_DIR)
 }
 
-export const getReviewPaths = () => {
+export function getReviewPaths() {
   return getAllMDFiles(REVIEWS_DIR)
 }
 
-export function addAuthors(
+export function getAuthors(
   post: IBasePost,
+  authorMap: IAuthorMap
+): IPostAuthor[] {
+  return post.frontmatter.authors.map(a => authorMap[getUrlFriendlyTag(a)])
+}
+
+export function addAuthors(
+  post: IPreviewPost,
   authorMap: IAuthorMap
 ): IAuthorPost {
   return {
     ...post,
-    authors: post.frontmatter.authors.map(a => authorMap[a]),
+    authors: getAuthors(post, authorMap),
   }
 }
 
-function getDate(slug: string): string {
-  const match = slug.match(/(\d{4})-(\d{2})-(\d{2})/)
-
-  return match ? match.slice(1, 4).join("-") : "2022-01-01"
+export function addAuthorsToPosts(
+  posts: IPreviewPost[],
+  authorMap: IAuthorMap
+): IAuthorPost[] {
+  return posts.map(post => addAuthors(post, authorMap))
 }
 
-function getFields(index: number, slug: string, type: string) {
-  return {
-    index,
-    type,
-    slug: `/blog/${slug}`,
-    date: getDate(slug),
-    categories: {},
-  }
+/**
+ * Turns a slug into a file path and uses that to read
+ * the post data.
+ *
+ * @param slug a post slug
+ * @returns a post with basic frontmatter loaded.
+ */
+export function getPostBySlug(slug: string): IBasePost {
+  return getPostByPath(join(POSTS_DIR, `${slug}.md`))
 }
 
-export const getPostByPath = (path: string, index: number = -1): IBasePost => {
-  const slug = getCanonicalPostSlug(path)
-
+export function getPostByPath(path: string, index: number = -1): IBasePost {
   // const fullPath = join(
   //   isPublished ? POSTS_DIR : DRAFTS_DIR,
   //   `${slug}.md`
   // )
 
   const post = {
-    fields: getFields(index, slug, "post"),
+    fields: getFields(index, path),
     frontmatter: getPostFrontmatter(path),
   }
 
@@ -65,32 +75,15 @@ export const getPostByPath = (path: string, index: number = -1): IBasePost => {
   return post
 }
 
-export const getReviewByPath = (
-  path: string,
-  index: number = -1
-): IBasePost => {
-  const slug = getCanonicalPostSlug(path)
-
-  const post = {
-    fields: getFields(index, slug, "review"),
-    frontmatter: getPostFrontmatter(path),
-  }
-
-  return post
-}
-
-export function sortPosts(
-  posts: IBasePost[],
-  authorMap: IAuthorMap
-): IAuthorPost[] {
+export function sortPosts(posts: IBasePost[]): IBasePost[] {
   return (
     posts
-      .filter(post => {
-        return (
-          process.env.NODE_ENV === "development" ||
-          post.frontmatter.status === "published"
-        )
-      })
+      // .filter(post => {
+      //   return (
+      //     process.env.NODE_ENV === "development" ||
+      //     post.frontmatter.status === "published"
+      //   )
+      // })
       // sort posts by date in descending order
       .sort((post1, post2) => {
         const d1 = new Date(post1.fields.date)
@@ -110,27 +103,64 @@ export function sortPosts(
           fields: { ...post.fields, index },
         }
       })
-      .map(post => {
-        return addAuthors(post, authorMap)
-      })
   )
 }
 
-export function getAllPosts(authorMap: IAuthorMap): IAuthorPost[] {
-  return sortPosts(
-    getPostPaths().map(path => getPostByPath(path)),
-    authorMap
-  )
+// export function getAllPosts(authorMap: IAuthorMap): IAuthorPost[] {
+//   return sortPosts(
+//     getPostPaths().map(path => getPostByPath(path)),
+//     authorMap
+//   )
+// }
+
+// export function getAllPosts(authorMap: IAuthorMap): IAuthorPost[] {
+//   return sortPosts(
+//     getPostPaths()
+//       .map(path => getPostByPath(path))
+//       .concat(getReviewPaths().map(path => getReviewByPath(path))),
+//     authorMap
+//   )
+// }
+
+export async function addHtml(post: IAuthorPost): Promise<IPost> {
+  return {
+    ...post,
+    html: await markdownHtml(post.frontmatter.rawContent || ""),
+  }
 }
 
-export function getAllPostsAndReviews(authorMap: IAuthorMap): IAuthorPost[] {
-  return sortPosts(
-    getPostPaths()
-      .map(path => getPostByPath(path))
-      .concat(getReviewPaths().map(path => getReviewByPath(path))),
-    authorMap
-  )
+export async function addExcerpt(post: IBasePost): Promise<IPreviewPost> {
+  return {
+    ...post,
+    excerpt: await markdownHtml(post.frontmatter.rawExcerpt || ""),
+  }
 }
+
+export function addHtmlToPosts(posts: IAuthorPost[]): Promise<IPost>[] {
+  return posts.map(post => addHtml(post))
+}
+
+export function addReadingTimeToPosts(posts: IPost[]): IPost[] {
+  return posts.map(post => {
+    return { ...post, stats: readingTime(post.frontmatter.rawContent) }
+  })
+}
+
+export function addExcerpts(posts: IBasePost[]): Promise<IPreviewPost>[] {
+  return posts.map(post => addExcerpt(post))
+}
+
+export function getAllPosts(): IBasePost[] {
+  return getPostPaths().map(path => getPostByPath(path))
+}
+
+export function getAllReviews(): IBasePost[] {
+  return getAllPosts().filter(post => post.frontmatter.type === "review") //getReviewPaths().map(path => getPostByPath(path, "review"))
+}
+
+// export function getAllPostsAndReviews(): IBasePost[] {
+//   return getAllPosts().concat(getAllReviews())
+// }
 
 export const allPostsBySlugMap = (
   posts: { slug: string; fields: IFieldMap }[]
@@ -168,7 +198,7 @@ export function getCategories(post: IBasePost) {
   return ret
 }
 
-export function getCategoryMap(
+export function getCategoryPostMap(
   posts: IBasePost[],
   max: number = -1
 ): IFieldMap {
@@ -176,14 +206,31 @@ export function getCategoryMap(
 
   posts.forEach(post => {
     post.frontmatter.categories.forEach((category: string) => {
-      const c = getUrlFriendlyTag(category)
+      const path = category.split("/")
+      const c = path[0]
+      const s = path.length > 1 ? path[1] : "All"
 
       if (!(c in categoryMap)) {
-        categoryMap[c] = []
+        categoryMap[c] = {}
       }
 
-      if (max === -1 || categoryMap[c].length < max) {
-        categoryMap[c].push(post)
+      if (!(s in categoryMap[c])) {
+        categoryMap[c][s] = []
+      }
+
+      if (!("All" in categoryMap[c])) {
+        categoryMap[c]["All"] = []
+      }
+
+      if (max === -1 || categoryMap[c][s].length < max) {
+        categoryMap[c][s].push(post)
+      }
+
+      if (s !== "All") {
+        // every post is added to all by default
+        if (max === -1 || categoryMap[c]["All"].length < max) {
+          categoryMap[c]["All"].push(post)
+        }
       }
     })
   })
@@ -191,7 +238,7 @@ export function getCategoryMap(
   return categoryMap
 }
 
-export function getTagMap(posts: IBasePost[], max: number = -1): IFieldMap {
+export function getTagPostMap(posts: IBasePost[], max: number = -1): IFieldMap {
   const tagMap: IFieldMap = {}
 
   posts.forEach(post => {
@@ -207,17 +254,43 @@ export function getTagMap(posts: IBasePost[], max: number = -1): IFieldMap {
 
       // add a url friendly version to make it easier
       // to find tags
-      const t = getUrlFriendlyTag(tag)
+      //const t = getUrlFriendlyTag(tag)
 
-      if (!(t in tagMap)) {
-        tagMap[t] = []
+      if (!(tag in tagMap)) {
+        tagMap[tag] = []
       }
 
-      if (max === -1 || tagMap[t].length < max) {
-        tagMap[t].push(post)
+      if (max === -1 || tagMap[tag].length < max) {
+        tagMap[tag].push(post)
       }
     })
   })
 
   return tagMap
+}
+
+export function getAuthorPostMap(
+  posts: IBasePost[],
+  max: number = -1
+): IFieldMap {
+  const tagMap: IFieldMap = {}
+
+  posts.forEach(post => {
+    post.frontmatter.authors.forEach((author: string) => {
+      const a = getUrlFriendlyTag(author)
+
+      if (!(a in tagMap)) {
+        tagMap[a] = []
+      }
+
+      if (max === -1 || tagMap[a].length < max) {
+        tagMap[a].push(post)
+      }
+    })
+  })
+
+  return tagMap
+}
+function readingTime(rawContent: string): any {
+  throw new Error("Function not implemented.")
 }

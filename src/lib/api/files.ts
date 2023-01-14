@@ -1,7 +1,7 @@
 import fs from "fs"
-import path, { join } from "path"
+import path from "path"
 
-export const getAllFiles = (dir = "", ret: string[] = []) => {
+export function getAllFiles(dir: string, ret: string[] = []) {
   const files = fs.readdirSync(dir)
 
   files.forEach(file => {
@@ -16,5 +16,6 @@ export const getAllFiles = (dir = "", ret: string[] = []) => {
   return ret
 }
 
-export const getAllMDFiles = (dir = "") =>
-  getAllFiles(dir).filter(file => file.endsWith(".md"))
+export function getAllMDFiles(dir: string): string[] {
+  return getAllFiles(dir).filter(file => file.endsWith(".md"))
+}

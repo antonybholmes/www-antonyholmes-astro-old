@@ -20,7 +20,7 @@
       },
       {
         "name": "Web Development",
-        "details": ["Javascript", "React", "Typescript", "Gatsby", "Astro"],
+        "details": ["Javascript", "preact/hooks", "Typescript", "Gatsby", "Astro"],
         "notes": ""
       },
       {

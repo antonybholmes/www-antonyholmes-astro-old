@@ -7,25 +7,14 @@ import markdownHtml from "../../lib/markdown-html"
 import { paginate } from "../../lib/paginate"
 
 export async function getStaticPaths() {
-  const allAuthors = await Promise.all(
-    getAllAuthors().map(async author => {
-      return {
-        ...author,
-        html: await markdownHtml(author.frontmatter.rawContent || ""),
-      }
-    })
-  )
+  const paths: any[] = []
 
-  const allPosts = await Promise.all(
-    getAllPosts(getAuthorMap(allAuthors)).map(async post => {
-      return {
-        ...post,
-        excerpt: await markdownHtml(post.frontmatter.rawExcerpt || ""),
-      }
-    })
-  )
+  const authorMap = getAuthorMap()
 
-  let paths: any[] = []
+  const allPosts = addAuthorsToPosts(
+    await Promise.all(addExcerpts(sortPosts(getAllPosts()))),
+    getAuthorMap()
+  )
 
   allAuthors.forEach(author => {
     const authorPosts = allPosts.filter(post => {

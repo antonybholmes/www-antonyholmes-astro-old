@@ -1,0 +1,13 @@
+---
+import IClassProps from "../interfaces/class-props"
+import cn from "../lib/class-names"
+import BaseRow from "./BaseRow.astro"
+
+export interface Props extends IClassProps {}
+
+const { className } = Astro.props
+---
+
+<BaseRow className={cn("items-center", className)}>
+  <slot />
+</BaseRow>

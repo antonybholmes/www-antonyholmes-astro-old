@@ -25,11 +25,11 @@ const IndexLink = ({
   //     )
   // }, [hover])
 
-  const _handleMouseEnter = (e: any) => {
+  const _onMouseEnter = (e: any) => {
     setHover(true)
   }
 
-  const _handleMouseLeave = (e: any) => {
+  const _onMouseLeave = (e: any) => {
     setHover(false)
   }
 
@@ -37,8 +37,8 @@ const IndexLink = ({
     <BaseLink
       href={href}
       ariaLabel={ariaLabel}
-      onMouseEnter={_handleMouseEnter}
-      onMouseLeave={_handleMouseLeave}
+      onMouseEnter={_onMouseEnter}
+      onMouseLeave={_onMouseLeave}
       underline={underline}
       className={cn("flex flex-row gap-x-1", className)}
     >

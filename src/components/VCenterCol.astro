@@ -1,0 +1,13 @@
+---
+import cn from "../lib/class-names"
+import IClassProps from "../interfaces/class-props"
+import BaseCol from "./BaseCol.astro"
+
+export interface Props extends IClassProps {}
+
+const { className } = Astro.props
+---
+
+<BaseCol className={cn("justify-center", className)}>
+  <slot />
+</BaseCol>
