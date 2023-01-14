@@ -21,7 +21,7 @@ import {
 } from "../lib/api/post"
 import { getPageItems } from "../lib/paginate"
 import { getUrlFriendlyTag } from "../lib/tags"
-import { getAuthorUrl } from "../lib/urls"
+import { getAuthorBaseUrl } from "../lib/urls"
 
 const authorMap = getAuthorMap()
 
@@ -39,16 +39,15 @@ const author = authorMap[getUrlFriendlyTag("Antony Holmes")]
   <div slot="main">
     <div class="grid grid-cols-1 gap-y-8 xl:grid-cols-2 xl:gap-x-12">
       <VCenterCol className="h-full items-center gap-y-8">
-        <BaseLink href={getAuthorUrl("Antony Holmes")} ariaLabel="View profile">
+        <BaseLink
+          href={getAuthorBaseUrl("Antony Holmes")}
+          ariaLabel="View profile"
+        >
           <div class="relative z-10 overflow-hidden rounded-full">
-            <<<<<<< HEAD
             <AvatarImageLarge
               author={author}
               className="max-w-64 scale-102 transition-ani transition-transform hover:scale-105"
             />
-            =======
-            <AvatarImageLarge author={author} className="max-w-64" />
-            >>>>>>> main
           </div>
         </BaseLink>
         <BaseCol className="gap-y-2">

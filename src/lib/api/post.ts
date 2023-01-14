@@ -291,6 +291,3 @@ export function getAuthorPostMap(
 
   return tagMap
 }
-function readingTime(rawContent: string): any {
-  throw new Error("Function not implemented.")
-}

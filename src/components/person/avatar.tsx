@@ -1,11 +1,11 @@
-import cn from "../../lib/class-names"
-import { getAuthorUrl } from "../../lib/urls"
 import IClassProps from "../../interfaces/class-props"
 import IPostAuthor from "../../interfaces/post-author"
-import AvatarImage from "./avatar-image"
+import cn from "../../lib/class-names"
+import { getAuthorBaseUrl } from "../../lib/urls"
 import BaseCol from "../base-col"
 import BaseLink from "../link/base-link"
 import VCenterRow from "../v-center-row"
+import AvatarImage from "./avatar-image"
 
 interface IProps extends IClassProps {
   author: IPostAuthor
@@ -19,7 +19,7 @@ export default function Avatar({
   isSmall = false,
   className,
 }: IProps) {
-  const href = getAuthorUrl(author.frontmatter.name)
+  const href = getAuthorBaseUrl(author.frontmatter.name)
 
   return (
     <VCenterRow className={cn("gap-x-3", className)}>

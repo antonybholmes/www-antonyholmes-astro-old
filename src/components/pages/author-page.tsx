@@ -1,6 +1,6 @@
 import { PEOPLE_SLUG } from "../../constants"
 import IAuthor from "../../interfaces/author"
-import IPreviewPost from "../../interfaces/preview-post"
+import IAuthorPost from "../../interfaces/author-post"
 import BaseRow from "../base-row"
 import HCenterRow from "../h-center-row"
 import PageTitle from "../page-title"
@@ -10,12 +10,12 @@ import PostsPage from "./posts-page"
 
 interface IProps {
   author: IAuthor
-  posts: IPreviewPost[]
-  currentPage: number
+  posts: IAuthorPost[]
+  page: number
   pages: number
 }
 
-const AuthorPage = ({ author, posts, currentPage, pages }: IProps) => (
+const AuthorPage = ({ author, posts, page, pages }: IProps) => (
   <>
     <BaseRow className="gap-x-8">
       <div className="w-full">
@@ -40,7 +40,7 @@ const AuthorPage = ({ author, posts, currentPage, pages }: IProps) => (
     <section className="mt-16 border-t border-slate-200 pt-16">
       <PostsPage
         posts={posts}
-        page={currentPage}
+        page={page}
         pages={pages}
         root={`${PEOPLE_SLUG}/${author.slug}`}
       />

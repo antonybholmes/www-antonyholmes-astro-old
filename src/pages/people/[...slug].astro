@@ -1,76 +1,61 @@
 ---
 import AuthorPage from "../../components/pages/author-page"
 import ContentLayout from "../../layouts/ContentLayout.astro"
-import { getAllAuthors, getAuthorMap } from "../../lib/api/author"
-import { getAllPosts } from "../../lib/api/post"
-import markdownHtml from "../../lib/markdown-html"
-import { paginate } from "../../lib/paginate"
+import {
+  addAuthorHtml,
+  getAllAuthors,
+  getAuthorMap,
+} from "../../lib/api/author"
+import {
+  addAuthorsToPosts,
+  addExcerpts,
+  getAllPosts,
+  getAuthorPostMap,
+  sortPosts,
+} from "../../lib/api/post"
+import { getPageItems, paginate } from "../../lib/paginate"
+import { getUrlFriendlyTag } from "../../lib/tags"
+import { getAuthorBaseUrl } from "../../lib/urls"
 
 export async function getStaticPaths() {
   const paths: any[] = []
 
-  const authorMap = getAuthorMap()
-
-  const allPosts = addAuthorsToPosts(
-    await Promise.all(addExcerpts(sortPosts(getAllPosts()))),
-    getAuthorMap()
+  const authors = await Promise.all(
+    getAllAuthors().map(author => addAuthorHtml(author))
   )
 
-  allAuthors.forEach(author => {
-    const authorPosts = allPosts.filter(post => {
-      return post.frontmatter.authors.includes(author.frontmatter.name)
-    })
+  const authorMap = getAuthorMap()
 
-    paths = paths.concat(paginate(authorPosts, author.slug, { author }))
+  const postMap = getAuthorPostMap(
+    addAuthorsToPosts(
+      await Promise.all(addExcerpts(sortPosts(getAllPosts()))),
+      authorMap
+    )
+  )
 
-    // const pages = Math.floor(
-    //   (authorPosts.length + RECORDS_PER_PAGE - 1) / RECORDS_PER_PAGE
-    // )
+  authors.forEach(author => {
+    const slug = getUrlFriendlyTag(author.frontmatter.name)
+    const posts = postMap[slug]
 
-    // paths.push({
-    //   params: {
-    //     slug: author.slug,
-    //   },
-    //   props: {
-    //     author,
-    //     currentPage: 1,
-    //     pages,
-    //     posts: authorPosts.slice(0, RECORDS_PER_PAGE)
-    //   }
-    // })
-
-    // let start = 0
-
-    // for (let i = 0; i < pages; ++i) {
-    //   const currentPage = i + 1
-
-    //   paths.push({
-    //     params: {
-    //       slug: `${author.slug}/page/${currentPage.toString()}`,
-    //     },
-    //     props: {
-    //       author,
-    //       currentPage,
-    //       pages,
-    //       posts: authorPosts.slice(start, start + RECORDS_PER_PAGE)
-    //     }
-    //   })
-
-    //   start += RECORDS_PER_PAGE
-    // }
+    paths.push(
+      paginate(posts, slug, {
+        author,
+        root: getAuthorBaseUrl(author.frontmatter.name),
+      })
+    )
   })
 
   return paths
 }
 
-const { author, currentPage, pages, data } = Astro.props
+const { author, data, page, pages } = Astro.props
 ---
 
 <ContentLayout title={author.frontmatter.name}>
   <AuthorPage
     author={author}
     posts={data}
-    currentPage={currentPage}
+    page={page}
     pages={pages}
     slot="main"
   />

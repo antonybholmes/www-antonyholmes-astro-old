@@ -1,6 +1,7 @@
 import IAuthorPost from "../../interfaces/author-post"
 import IFieldMap from "../../interfaces/field-map"
 import BaseCol from "../base-col"
+import HCenterRow from "../h-center-row"
 import PagePagination from "../page-pagination"
 import CategoryPosts from "../post/category-posts"
 import CategoryPostsVert from "../post/category-posts-vert"
@@ -42,7 +43,11 @@ const PostsPage = ({
       {restPosts.length > 0 && <RestPosts posts={restPosts} />}
 
       {/* <Pagination page={page} pages={pages} /> */}
-      {pages > 1 && <PagePagination page={page} pages={pages} root={root} />}
+      {pages > 1 && (
+        <HCenterRow className="mt-16">
+          <PagePagination page={page} pages={pages} root={root} />
+        </HCenterRow>
+      )}
 
       {showLatestPosts && <LatestPosts posts={posts} />}
 

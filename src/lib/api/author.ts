@@ -10,24 +10,24 @@ import { getAuthorFrontmatter } from "./markdown"
 
 const PEOPLE_DIR = join(process.cwd(), "_content", "people")
 
-export const getAuthorPaths = () => {
+export function getAuthorPaths() {
   return getAllFiles(PEOPLE_DIR)
 }
 
-export const getAuthorBySlug = (slug: string): IPostAuthor => {
+export function getAuthorBySlug(slug: string): IPostAuthor {
   slug = getCanonicalSlug(slug)
   const fullPath = join(PEOPLE_DIR, `${slug}.md`)
 
   return { slug: slug, frontmatter: getAuthorFrontmatter(fullPath) }
 }
 
-export const getAllAuthors = (): IPostAuthor[] => {
+export function getAllAuthors(): IPostAuthor[] {
   const paths = getAuthorPaths()
   const authors = paths.map(path => getAuthorBySlug(path))
   return authors
 }
 
-export const getAuthorMap = (authors: IPostAuthor[] = []): IAuthorMap => {
+export function getAuthorMap(authors: IPostAuthor[] = []): IAuthorMap {
   if (!authors || authors.length === 0) {
     authors = getAllAuthors()
   }
