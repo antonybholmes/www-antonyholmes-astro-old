@@ -23,15 +23,19 @@ if (!tab) {
 ---
 
 <BaseLayout title={title}>
-  <Header
-    title={title}
-    tab={tab}
-    headerMode={headerMode}
-    navLightBg={navLightBg}
-    client:load
-  />
+  <slot name="head" slot="head" />
+  <div slot="main">
+    <Header
+      title={title}
+      tab={tab}
+      headerMode={headerMode}
+      navLightBg={navLightBg}
+      client:load
+    />
 
-  <main class={cn("w-full min-h-screen", className)}>
-    <slot name="main" />
-  </main>
+    <main class={cn("w-full min-h-screen", className)}>
+      <slot name="main" />
+    </main>
+  </div>
+  <slot name="end" slot="end" />
 </BaseLayout>

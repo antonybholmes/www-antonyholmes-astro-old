@@ -3,16 +3,19 @@ import BaseCol from "../components/base-col"
 import BaseRow from "../components/base-row"
 
 import BlueLink from "../components/link/blue-link"
-import LogoIcon from "../icons/logo-icon-com"
+import LogoIcon from "../icons/logo-icon"
 import { SITE_NAME, UPDATED, VERSION, YEAR } from "../constants"
 import ThreeQuarterLayout from "../layouts/ThreeQuarterLayout.astro"
+import ContentLayout from "../layouts/ContentLayout.astro"
 
 const CLS = "block rounded-lg px-4 py-2 bg-blue-100 font-bold"
 ---
 
-<ThreeQuarterLayout title="Help">
+<ContentLayout title="Help">
   <div slot="main">
-    <BaseCol className="gap-y-4 rounded-xl bg-apple-gray p-6 text-sm">
+    <BaseCol
+      className="gap-y-4 rounded-xl bg-apple-gray p-6 text-sm w-full lg:w-1/2"
+    >
       <BaseRow><LogoIcon /></BaseRow>
 
       <div>
@@ -26,13 +29,13 @@ const CLS = "block rounded-lg px-4 py-2 bg-blue-100 font-bold"
       </p>
     </BaseCol>
 
-    <div class="mt-16">
+    <div class="mt-16 text-sm">
       <p>
         This website is made possible by open source software and other
         services:
       </p>
 
-      <ul class="mt-4 flex flex-row flex-wrap gap-2 text-sm">
+      <ul class="mt-4 flex w-full flex-col gap-y-2 text-sm lg:w-1/2">
         <li class={CLS}>
           <BlueLink
             href="https://astro.build/"
@@ -112,4 +115,4 @@ const CLS = "block rounded-lg px-4 py-2 bg-blue-100 font-bold"
       </ul>
     </div>
   </div>
-</ThreeQuarterLayout>
+</ContentLayout>

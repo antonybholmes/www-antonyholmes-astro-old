@@ -32,7 +32,7 @@ skills.map((skillset: any, skillSetIndex: number) => {
             return (
               <li
                 class={cn(
-                  "transition-ani transition-color rounded-lg bg-gradient-to-br px-4 py-8 text-white",
+                  "trans-300 transition-color rounded-lg bg-gradient-to-br px-4 py-8 text-white",
                   [
                     index % 2 == 0,
                     "bg-fuchsia-400 hover:bg-fuchsia-500",
@@ -63,7 +63,7 @@ skills.map((skillset: any, skillSetIndex: number) => {
                   </h4>
                   <h4 class="text-sm font-normal text-slate-500">{job.date}</h4>
                 </header>
-                <div class="transition-ani transition-color col-span-3 rounded-2xl bg-slate-100 p-6 hover:bg-slate-200  lg:p-10">
+                <div class="trans-300 transition-color col-span-3 rounded-2xl bg-slate-100 p-6 hover:bg-slate-200  lg:p-10">
                   <p>{job.overview}</p>
                   <ul class="ml-6 mt-4 flex list-disc flex-col gap-y-2">
                     {job.details.map((detail, detailIndex) => (
@@ -92,7 +92,7 @@ skills.map((skillset: any, skillSetIndex: number) => {
                   </h4>
                   <h4 class="text-sm font-normal text-slate-500">{job.date}</h4>
                 </header>
-                <div class="transition-ani transition-color col-span-3 rounded-2xl bg-slate-100 p-8  hover:bg-slate-200">
+                <div class="trans-300 transition-color col-span-3 rounded-2xl bg-slate-100 p-8  hover:bg-slate-200">
                   <ul class="ml-6 flex list-disc flex-col gap-y-2">
                     {job.details.map((detail, detailIndex) => (
                       <li>{detail}</li>
@@ -115,7 +115,7 @@ skills.map((skillset: any, skillSetIndex: number) => {
             <li>
               <article class="grid grid-cols-1 gap-x-8 gap-y-4 lg:grid-cols-4">
                 <div />
-                <div class="transition-ani transition-color col-span-3 h-full w-full rounded-2xl border border-slate-200 px-8 py-12 hover:border-blue-400">
+                <div class="trans-300 transition-color col-span-3 h-full w-full rounded-2xl border border-slate-200 px-8 py-12 hover:border-blue-400">
                   <header>
                     <h3 class="text-xl font-bold">{degree.title}</h3>
                     {/* {degree.date !== '' && (

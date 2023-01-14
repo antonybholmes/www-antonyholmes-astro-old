@@ -20,7 +20,7 @@ export default function LogoIcon({
       <rect
         width="48"
         height="48"
-        class={cn("transition-ani transition-color", [
+        class={cn("trans-300 transition-color", [
           headerMode === "dark",
           "fill-slate-600",
           "fill-sky-600 text-white group-hover:fill-sky-500",

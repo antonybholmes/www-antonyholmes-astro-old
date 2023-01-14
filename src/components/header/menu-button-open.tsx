@@ -249,7 +249,7 @@ export default function MenuButtonOpen({
         "group relative h-15 min-w-15",
         [
           headerMode !== "dark",
-          "transition-ani transition-color hover:bg-slate-200",
+          "trans-300 transition-color hover:bg-slate-200",
         ],
         className
       )}

@@ -33,12 +33,13 @@ let { title, headerMode = "light", isIndexed = true } = Astro.props
 <html lang="en">
   <head>
     <BaseHead title={title} isIndexed={isIndexed} />
+    <slot name="head" />
   </head>
 
   <body class={cn([headerMode === "light", "bg-white", "bg-slate-800"])}>
-    <slot />
+    <slot name="main" />
     <Footer />
 
-    <script src="/themes/prism.js" is:inline></script>
+    <slot name="end" />
   </body>
 </html>

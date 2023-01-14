@@ -86,6 +86,8 @@ const morePosts: any[] = []
 ---
 
 <DefaultLayout title={post.frontmatter.title} tab="Blog" headerMode="dark">
+  <link href="/themes/prism.css" rel="stylesheet" slot="head" />
+
   <div slot="main">
     <PostHeader post={post} client:visible />
 
@@ -133,4 +135,6 @@ const morePosts: any[] = []
       )
     }
   </div>
+
+  <script src="/themes/prism.js" is:inline slot="end"></script>
 </DefaultLayout>

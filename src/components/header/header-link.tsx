@@ -12,7 +12,7 @@ export const LINK_CLS = cn(
   "px-3",
   "py-1.5",
   "whitespace-nowrap",
-  "transition-ani",
+  "trans-300",
   "transition-colors",
   "whitespace-nowrap",
   "rounded-lg",
@@ -175,7 +175,7 @@ export default function HeaderLink({
         {/* <div
           ref={ref}
           className={cn(
-            "transition-ani absolute bottom-0 transition-opacity",
+            "trans-300 absolute bottom-0 transition-opacity",
             [headerMode === "light", "bg-blue-600", "bg-white"],
             [
               selected,

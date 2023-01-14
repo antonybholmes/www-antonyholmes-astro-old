@@ -36,7 +36,7 @@ export default function StarRating({ rating, stars = 5 }: IProps) {
   }
 
   return (
-    <ul className="transition-ani transition-color flex flex-row gap-1 fill-amber-300 hover:fill-amber-200">
+    <ul className="trans-300 transition-color flex flex-row gap-1 fill-amber-300 hover:fill-amber-200">
       {items}
     </ul>
   )

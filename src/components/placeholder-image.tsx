@@ -31,7 +31,7 @@ export default function PlaceholderImage({
     gsap.timeline().to(
       ref1.current,
       {
-        duration: 0.5,
+        duration: 0.4,
         opacity: 1,
       },
       0

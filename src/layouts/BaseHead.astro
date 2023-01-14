@@ -19,8 +19,6 @@ import "@fontsource/plus-jakarta-sans/800.css"
 
 import "../styles/main.scss"
 
-// import Prism from 'prismjs';
-
 import { SITE_NAME, TWITTER } from "../constants"
 
 export interface Props {
@@ -54,8 +52,6 @@ const permalink = new URL(Astro.url.pathname, Astro.site).href
 <meta name="msapplication-TileColor" content="#da532c" />
 <meta name="theme-color" content="#ffffff" />
 
-<link href="/themes/prism.css" rel="stylesheet" />
-
 <link rel="bookmark" href={permalink} />
 
 <!-- Open Graph / Facebook -->
@@ -72,13 +68,6 @@ const permalink = new URL(Astro.url.pathname, Astro.site).href
 <meta property="twitter:description" content={desc} />
 <meta property="twitter:creator" content={TWITTER} />
 <!-- <meta property="twitter:image" content="https://astro.build/social.jpg?v=1" /> -->
-
-<!-- Fonts -->
-<!-- <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
-  rel="stylesheet"> -->
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <!-- Google tag (gtag.js) -->

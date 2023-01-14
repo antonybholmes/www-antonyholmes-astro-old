@@ -1,5 +1,10 @@
 ---
-import AuthorPage from "../../components/pages/author-page"
+import BaseRow from "../../components/BaseRow.astro"
+import HCenterRow from "../../components/HCenterRow.astro"
+import PageTitle from "../../components/page-title"
+import PostsPage from "../../components/pages/PostsPage.astro"
+import AvatarImageLarge from "../../components/person/avatar-image-large"
+import PostBody from "../../components/post/post-body"
 import ContentLayout from "../../layouts/ContentLayout.astro"
 import {
   addAuthorHtml,
@@ -13,9 +18,10 @@ import {
   getAuthorPostMap,
   sortPosts,
 } from "../../lib/api/post"
-import { getPageItems, paginate } from "../../lib/paginate"
+import { paginate } from "../../lib/paginate"
 import { getUrlFriendlyTag } from "../../lib/tags"
 import { getAuthorBaseUrl } from "../../lib/urls"
+import { PEOPLE_SLUG } from "../../constants"
 
 export async function getStaticPaths() {
   const paths: any[] = []
@@ -52,11 +58,35 @@ const { author, data, page, pages } = Astro.props
 ---
 
 <ContentLayout title={author.frontmatter.name}>
-  <AuthorPage
-    author={author}
-    posts={data}
-    page={page}
-    pages={pages}
-    slot="main"
-  />
+  <div slot="main">
+    <BaseRow className="gap-x-8">
+      <div class="w-full">
+        <HCenterRow className="mb-8 lg:hidden">
+          <div>
+            <AvatarImageLarge author={author} className="w-56" />
+          </div>
+        </HCenterRow>
+        <PageTitle
+          title={author.frontmatter.name}
+          superTitle="Posts by"
+          subTitle={author.frontmatter.title}
+          className="text-center lg:text-left"
+        />
+        <PostBody html={author.html} className="mt-8" />
+      </div>
+      <div class="hidden lg:block">
+        <AvatarImageLarge author={author} className="w-64" />
+      </div>
+    </BaseRow>
+
+    <section class="mt-16 border-t border-slate-200 pt-16">
+      <PostsPage
+        posts={data}
+        page={page}
+        pages={pages}
+        root={`${PEOPLE_SLUG}/${author.slug}`}
+        client:visible
+      />
+    </section>
+  </div>
 </ContentLayout>
