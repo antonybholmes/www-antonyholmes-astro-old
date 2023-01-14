@@ -3,15 +3,11 @@ import {
   CATEGORY_SLUG,
   CREDIT_CARD_SLUG,
   PEOPLE_SLUG,
-<<<<<<< HEAD
-  SITE_URL,
-=======
   PORTFOLIO_SLUG,
   POST_SLUG,
   REVIEW_SLUG,
   SITE_URL,
   TAG_SLUG,
->>>>>>> main
 } from "../constants"
 import { getUrlFriendlyTag } from "./tags"
 
@@ -51,14 +47,6 @@ export const getTagBaseUrl = (tag: string) => {
   return `${TAG_SLUG}/${getUrlFriendlyTag(tag)}`
 }
 
-<<<<<<< HEAD
-export const getPostRelativeUrl = (slug: string): string => {
-  return `/blog/${slug}`
-}
-
-export const getPostUrl = (slug: string): string => {
-  return `${SITE_URL}${slug}`
-=======
 export const getTagUrl = (tag: string) => {
   return getTagBaseUrl(tag)
 }
@@ -69,5 +57,4 @@ export const getPostBaseUrl = (slug: string): string => {
 
 export const getPostUrl = (slug: string): string => {
   return `${SITE_URL}/${POST_SLUG}/${slug}`
->>>>>>> main
 }
