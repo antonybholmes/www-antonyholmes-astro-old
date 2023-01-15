@@ -1,0 +1,22 @@
+---
+import CompactAvatars from "../components/person/compact-avatars"
+import IPostAuthor from "../interfaces/post-author"
+import ContentLayout from "../layouts/ContentLayout.astro"
+import { getAllAuthors } from "../lib/api/author"
+
+const authors = getAllAuthors()
+---
+
+<ContentLayout title="People" showTitle={false}>
+  <ul slot="main">
+    {
+      authors.map((author: IPostAuthor, index: number) => {
+        return (
+          <li>
+            <CompactAvatars authors={[author]} />
+          </li>
+        )
+      })
+    }
+  </ul>
+</ContentLayout>

@@ -11,7 +11,7 @@ interface IProps extends IClassProps {
   onClick: any
 }
 
-function MenuLinks({
+export default function MenuLinks({
   title,
   headerMode = "light",
   tab = "",
@@ -95,5 +95,3 @@ function MenuLinks({
     </ul>
   )
 }
-
-export default MenuLinks
