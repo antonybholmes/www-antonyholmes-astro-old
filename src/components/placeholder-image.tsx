@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from "preact/hooks"
+import { gsap } from "gsap"
+import { useEffect, useRef } from "preact/hooks"
 import type IClassProps from "../interfaces/class-props"
 import IImageProps from "../interfaces/image-props"
 import cn from "../lib/class-names"
 import BaseImage from "./base-image"
-import { gsap } from "gsap"
 
 export interface IProps extends IImageProps, IClassProps {
   containerClassName?: string
@@ -24,14 +24,14 @@ export default function PlaceholderImage({
   duration = 0.4,
   style,
 }: IProps) {
-  const [isLoaded, setIsLoaded] = useState(false)
+  //const [isLoaded, setIsLoaded] = useState(false)
 
-  const ref1 = useRef(null)
+  const containerRef = useRef(null)
 
   useEffect(() => {
     // @ts-ignore
     gsap.timeline().to(
-      ref1.current,
+      containerRef.current,
       {
         duration: duration,
         opacity: 1,
@@ -41,7 +41,10 @@ export default function PlaceholderImage({
   }, [])
 
   return (
-    <div ref={ref1} className={cn("opacity-0", className, containerClassName)}>
+    <div
+      ref={containerRef}
+      className={cn("opacity-0", className, containerClassName)}
+    >
       {/* <div
         style={{ gridArea: "1/1" }}
         className={cn(
@@ -64,7 +67,7 @@ export default function PlaceholderImage({
         alt={alt}
         className={cn(className, imgClassName)}
         style={style}
-        onLoad={() => setIsLoaded(true)}
+        //onLoad={() => setIsLoaded(true)}
       />
       {/* </div> */}
     </div>

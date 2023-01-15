@@ -152,7 +152,7 @@ export default function MenuOverlay({
     <div
       ref={overlayRef}
       className={cn(
-        " fixed left-0 top-0 z-100  flex h-screen w-full flex-row bg-black/70 backdrop-blur-sm"
+        "fixed left-0 top-0 z-100 flex h-screen w-full flex-row bg-black/70 backdrop-blur-sm"
       )}
       style={{ visibility: "hidden" }}
     >
