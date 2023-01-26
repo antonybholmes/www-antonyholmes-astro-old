@@ -17,6 +17,7 @@ const blogCollection = defineCollection({
     url: z.string().optional(),
     status: z.string().default("draft"),
     type: z.string().default("post"),
+    related: z.string().array().optional(),
   }),
 })
 
