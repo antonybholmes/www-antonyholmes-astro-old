@@ -18,7 +18,7 @@ export default function HeroImage({
         className={className}
         imgClassName={className}
       />
-      {post.frontmatter.heroCaption !== "" && (
+      {post.data.heroCaption && (
         <HeroImageCaption
           post={post}
           className="trans-700 opacity-0 transition-opacity group-hover:opacity-100"

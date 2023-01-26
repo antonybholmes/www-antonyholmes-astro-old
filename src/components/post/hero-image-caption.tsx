@@ -10,7 +10,7 @@ export default function HeroImageCaption({ post, className }: IPostProps) {
       )}
       style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
     >
-      {post.frontmatter.heroCaption}
+      {post.data.heroCaption}
     </div>
   )
 }

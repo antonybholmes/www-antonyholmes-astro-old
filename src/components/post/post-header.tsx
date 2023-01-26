@@ -14,8 +14,8 @@ const PostHeader = ({ post }: IPostProps) => (
           <PostCategoryLink post={post} showSections={true} />
 
           <PageTitle
-            title={post.frontmatter.title}
-            subTitle={post.frontmatter.description}
+            title={post.data.title}
+            subTitle={post.data.description}
             className="text-slate-50"
           />
         </div>

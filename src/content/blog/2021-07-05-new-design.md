@@ -5,7 +5,6 @@ authors: ["Antony Holmes"]
 categories: ["News", "Web Development"]
 tags: ["Website", "Gatsby", "React"]
 type: "post"
-related: ""
 status: "published"
 hero: "generic1"
 ---

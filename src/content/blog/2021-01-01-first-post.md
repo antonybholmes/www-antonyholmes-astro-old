@@ -5,7 +5,6 @@ authors: ["Antony Holmes"]
 categories: ["News"]
 tags: ["Website"]
 type: "post"
-related: []
 hero: "post"
 heroCaption: "This post is more technologically advanced than a stamp."
 status: "published"

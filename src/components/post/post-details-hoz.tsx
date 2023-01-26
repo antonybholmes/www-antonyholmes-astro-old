@@ -17,10 +17,10 @@ const PostDetailsHoz = ({ post, stats, className }: IProps) => (
     )}
   >
     <VCenterRow className="justify-between">
-      <Avatars authors={post.authors} />
+      <Avatars authors={post.data.authors} />
 
       <VCenterRow className="hidden gap-2 gap-x-3 border-l border-slate-300 py-1 pl-4 text-sm text-slate-500 md:flex md:pl-6">
-        <DateFormatter date={post.fields.date} />
+        <DateFormatter date={post.data.date} />
         <span className="block h-1 w-1 rounded-full bg-slate-400" />
         <span>{stats.text}</span>
       </VCenterRow>
@@ -30,7 +30,7 @@ const PostDetailsHoz = ({ post, stats, className }: IProps) => (
     {/* <PostSocialMedia post={post} /> */}
 
     <VCenterRow className="gap-x-3 text-sm text-slate-500 md:hidden">
-      <DateFormatter date={post.fields.date} />
+      <DateFormatter date={post.data.date} />
       <span className="block h-1 w-1 rounded-full bg-slate-400" />
       <span>{stats.text}</span>
     </VCenterRow>
