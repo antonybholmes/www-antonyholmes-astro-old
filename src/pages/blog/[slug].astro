@@ -22,17 +22,23 @@ import {
   sortPosts,
 } from "../../lib/api/post"
 import { getCanonicalSlug } from "../../lib/slug"
-import readingTime from "reading-time"
+import readingTime, { ReadTimeResults } from "reading-time"
+import { CollectionEntry, getCollection, getEntryBySlug } from "astro:content"
 
 export async function getStaticPaths() {
-  const allPosts = await Promise.all(
-    addHtmlToPosts(
-      addAuthorsToPosts(
-        await Promise.all(addExcerpts(sortPosts(getAllPosts()))),
-        getAuthorMap()
-      )
-    )
-  )
+  // Get all entries from a collection. Requires the name of the collection as an argument.
+  const allPosts = await getCollection("blog")
+
+  // console.log(allBlogPosts)
+
+  // const allPosts = await Promise.all(
+  //   addHtmlToPosts(
+  //     addAuthorsToPosts(
+  //       await Promise.all(addExcerpts(sortPosts(getAllPosts()))),
+  //       getAuthorMap()
+  //     )
+  //   )
+  // )
 
   //const categoryMap = getCategoryMap(allPosts)
 
@@ -60,17 +66,17 @@ export async function getStaticPaths() {
     //     return true
     //   })
 
-    const relatedPosts = allPosts.filter(p =>
-      post.frontmatter.related.includes(p.frontmatter.title)
+    const relatedPosts = allPosts.filter(
+      p => post.data.related && post.data.related.includes(p.data.title)
     )
 
-    const readMorePosts: IBasePost[] = [] //categoryMap[post.frontmatter.section].slice(postIndex + 1)
+    const readMorePosts: CollectionEntry<"blog">[] = [] //categoryMap[post.frontmatter.section].slice(postIndex + 1)
 
     paths.push({
-      params: { slug: getCanonicalSlug(post.fields.slug) },
+      params: { slug: post.slug },
       props: {
         post,
-        stats: readingTime(post.frontmatter.rawContent),
+        stats: readingTime(post.body),
         relatedPosts,
         readMorePosts,
       },
@@ -80,12 +86,20 @@ export async function getStaticPaths() {
   return paths
 }
 
+interface Props {
+  post: CollectionEntry<"blog">
+  stats: ReadTimeResults
+  relatedPosts: CollectionEntry<"blog">[]
+  readMorePosts: CollectionEntry<"blog">[]
+}
+
 const { slug } = Astro.params
 const { post, stats, relatedPosts, readMorePosts } = Astro.props
+const { Content, headings } = await post.render()
 const morePosts: any[] = []
 ---
 
-<DefaultLayout title={post.frontmatter.title} tab="Blog" headerMode="dark">
+<DefaultLayout title={post.data.title} tab="Blog" headerMode="dark">
   <link href="/themes/prism.css" rel="stylesheet" slot="head" />
 
   <div slot="main">
@@ -102,19 +116,22 @@ const morePosts: any[] = []
 
           <BaseCol tag="section" className="gap-y-8" slot="main">
             {
-              post.frontmatter.type === "review" && (
+              post.data.type === "review" && (
                 <ProsAndCons post={post} client:visible />
               )
             }
 
-            <PostBody html={post.html} className="text-justify" />
+            <!-- <PostBody html={post.html} className="text-justify" /> -->
+
+            <Content />
+
             <PostTags post={post} />
           </BaseCol>
 
           <div slot="right">
             {
               morePosts.length > 0 && (
-                <MorePosts posts={morePosts} title={post.frontmatter.tags[0]} />
+                <MorePosts posts={morePosts} title={post.data.tags[0]} />
               )
             }
           </div>

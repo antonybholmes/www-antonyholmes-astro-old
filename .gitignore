@@ -26,3 +26,5 @@ public/sitemap*
 .DS_Store
 
 .bin/
+
+.astro
