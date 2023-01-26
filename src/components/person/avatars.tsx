@@ -5,7 +5,7 @@ import Avatar from "../person/avatar"
 import WrapRow from "../wrap-row"
 
 interface IProps extends IClassProps {
-  authors: IPostAuthor[]
+  authors: string[]
   showTitle?: boolean
   isSmall?: boolean
 }
