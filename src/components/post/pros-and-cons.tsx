@@ -6,22 +6,19 @@ import ExpandTab from "../expand-tab"
 import HCenterRow from "../h-center-row"
 import StarRating from "./star-rating"
 import VCenterRow from "../v-center-row"
+import IPostProps from "../../interfaces/post-props"
 
-interface IProps {
-  post: IPost
-}
-
-export default function ProsAndCons({ post }: IProps) {
+export default function ProsAndCons({ post }: IPostProps) {
   return (
     <BaseCol className="gap-y-4">
       <VCenterRow>
-        <StarRating rating={post.frontmatter.rating} />
+        <StarRating rating={post.data.rating} />
       </VCenterRow>
 
       <ExpandTab title="Pros & Cons" isExpanded={true}>
         <div className="my-2 grid grid-cols-1 gap-4 lg:grid-cols-2">
           <ul className="flex flex-col gap-y-2 rounded-lg border border-slate-200 p-4 text-sm">
-            {post.frontmatter.pros.map((pro: string, index: number) => {
+            {post.data.pros.map((pro: string, index: number) => {
               return (
                 <li className="flex flex-row items-center gap-x-2" key={index}>
                   <HCenterRow className="h-4 w-4 shrink-0 items-center rounded-full bg-emerald-400 stroke-white">
@@ -35,7 +32,7 @@ export default function ProsAndCons({ post }: IProps) {
           </ul>
 
           <ul className="flex flex-col gap-y-2 rounded-lg border border-slate-200 p-4 text-sm">
-            {post.frontmatter.cons.map((con: string, index: number) => {
+            {post.data.cons.map((con: string, index: number) => {
               return (
                 <li className="flex flex-row items-center gap-x-2" key={index}>
                   <HCenterRow className="h-4 w-4 shrink-0 items-center rounded-full bg-rose-400 stroke-white">
@@ -52,7 +49,7 @@ export default function ProsAndCons({ post }: IProps) {
 
       <ExpandTab title="Details" isExpanded={true}>
         <ul className="my-2 flex list-inside list-disc flex-col gap-y-1 text-sm">
-          {post.frontmatter.details.map((detail: string, index: number) => {
+          {post.data.details.map((detail: string, index: number) => {
             return <li key={index}>{detail}</li>
           })}
         </ul>

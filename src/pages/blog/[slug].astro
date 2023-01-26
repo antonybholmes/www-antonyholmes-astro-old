@@ -21,7 +21,7 @@ import {
   getAllPosts,
   sortPosts,
 } from "../../lib/api/post"
-import { getCanonicalSlug } from "../../lib/slug"
+import { getCanonicalSlug, getDateFromSlug } from "../../lib/slug"
 import readingTime, { ReadTimeResults } from "reading-time"
 import { CollectionEntry, getCollection, getEntryBySlug } from "astro:content"
 
@@ -76,6 +76,7 @@ export async function getStaticPaths() {
       params: { slug: post.slug },
       props: {
         post,
+        date: getDateFromSlug(post.slug),
         stats: readingTime(post.body),
         relatedPosts,
         readMorePosts,
@@ -88,13 +89,14 @@ export async function getStaticPaths() {
 
 interface Props {
   post: CollectionEntry<"blog">
+  date: string
   stats: ReadTimeResults
   relatedPosts: CollectionEntry<"blog">[]
   readMorePosts: CollectionEntry<"blog">[]
 }
 
 const { slug } = Astro.params
-const { post, stats, relatedPosts, readMorePosts } = Astro.props
+const { post, date, stats, relatedPosts, readMorePosts } = Astro.props
 const { Content, headings } = await post.render()
 const morePosts: any[] = []
 ---
@@ -107,7 +109,7 @@ const morePosts: any[] = []
 
     <ContentDiv className="my-40">
       <BaseCol className="gap-y-4 lg:gap-y-8" slot="main">
-        <PostDetailsHoz post={post} stats={stats} />
+        <PostDetailsHoz post={post} date={date} stats={stats} />
 
         <PostSocialMedia post={post} className="lg:hidden" />
 

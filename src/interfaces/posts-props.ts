@@ -1,6 +1,6 @@
-import IAuthorPost from "./author-post"
+import { CollectionEntry } from "astro:content"
 import IClassProps from "./class-props"
 
 export default interface IPostsProps extends IClassProps {
-  posts: IAuthorPost[]
+  posts: CollectionEntry<"blog">[]
 }
