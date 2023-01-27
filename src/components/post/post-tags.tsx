@@ -8,14 +8,14 @@ export default function PostTags({ post, className }: IPostProps) {
     <VCenterRow className={cn("gap-x-6", className)}>
       <span className="font-bold">Tags:</span>
       <ul className="flex flex-row flex-wrap gap-2">
-        {post.frontmatter.tags
+        {post.data.tags
           .sort()
           .map(tag => tag.trim())
           .map((tag: string, index: number) => {
             return (
               <li key={index}>
                 <PostTagLinkBlue tag={tag} />
-                {index < post.frontmatter.tags.length - 1 && <span>,</span>}
+                {index < post.data.tags.length - 1 && <span>,</span>}
               </li>
             )
           })}

@@ -1,17 +1,27 @@
-import { gsap } from "gsap"
-import { useEffect, useRef } from "preact/hooks"
-import type IClassProps from "../interfaces/class-props"
+import { useEffect, useMemo, useState } from "preact/hooks"
+import { memo } from "preact/compat"
+import IChildrenProps from "../interfaces/children-props"
 import IImageProps from "../interfaces/image-props"
 import cn from "../lib/class-names"
-import BaseImage from "./base-image"
+import { parse } from "../lib/path"
+import {
+  getPlaceholderSrc,
+  getSizes,
+  getSizeStr,
+  getSrc,
+  getSrcSet,
+} from "./base-image"
 
-export interface IProps extends IImageProps, IClassProps {
+export interface IPlaceholderProps extends IChildrenProps {
   containerClassName?: string
   imgClassName?: string
-  duration?: number
 }
 
-export default function PlaceholderImage({
+interface IProps extends IImageProps, IPlaceholderProps {}
+
+//based on ideas from https://blog.logrocket.com/progressive-image-loading-react-tutorial/#:~:text=With%20progressive%20image%20loading%2C%20the,images%20are%20coming%20up%20momentarily.
+
+export default memo(function PlaceholderImage({
   src,
   alt,
   size = [640, 320],
@@ -21,55 +31,88 @@ export default function PlaceholderImage({
   className,
   containerClassName,
   imgClassName,
-  duration = 0.4,
   style,
+  children,
 }: IProps) {
-  //const [isLoaded, setIsLoaded] = useState(false)
+  const p = useMemo(() => parse(src), [src])
 
-  const containerRef = useRef(null)
+  const currentSrc = useMemo(
+    () => getSrc(src, p.name, p.dir, p.ext, size),
+    [src]
+  )
+
+  const placeholderSrc = useMemo(
+    () => getPlaceholderSrc(src, p.name, p.dir, p.ext),
+    [src]
+  )
+
+  const currentSizes = useMemo(
+    () => (sizes.length === 0 ? getSizes(size) : sizes),
+    [src]
+  )
+
+  const currentSrcSet = useMemo(
+    () => getSrcSet(src, p.name, p.dir, p.ext, currentSizes),
+    [src]
+  )
+
+  const currentSizeStr = useMemo(() => getSizeStr(size), [src])
+
+  const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
-    // @ts-ignore
-    gsap.timeline().to(
-      containerRef.current,
-      {
-        duration: duration,
-        opacity: 1,
-      },
-      0
-    )
-  }, [])
+    // Based on https://codeburst.io/how-to-progressively-load-images-in-react-using-hooks-80c50fd447cd
+
+    // start loading original image
+    const imageToLoad = new Image()
+    imageToLoad.src = currentSrc
+    imageToLoad.onload = () => {
+      setIsLoaded(true)
+    }
+  }, [src])
 
   return (
-    <div
-      ref={containerRef}
-      className={cn("opacity-0", className, containerClassName)}
+    <figure
+      className={cn(
+        "relative overflow-hidden z-20",
+        className,
+        containerClassName
+      )}
     >
-      {/* <div
-        style={{ gridArea: "1/1" }}
-        className={cn(
-          "delay-1000 duration-1000 transition-opacity h-full w-full backdrop-blur",
-          [isLoaded, "opacity-0"]
-        )}
-      /> */}
-
-      {/* <div ref={ref1}
-        className={cn("h-full w-full"
-        )}
-        style={{ gridArea: "1/1" }}
-      > */}
-      <BaseImage
-        src={src}
-        size={size}
-        sizes={sizes}
+      <img
+        src={placeholderSrc}
+        width={size[0]}
+        height={size[1]}
         loading={loading}
         decoding={decoding}
         alt={alt}
-        className={cn(className, imgClassName)}
-        style={style}
-        //onLoad={() => setIsLoaded(true)}
+        className={cn("absolute w-full h-full z-10 object-cover", [
+          isLoaded,
+          "opacity-0 invisible placeholder-hide",
+          "opacity-100",
+        ])}
       />
-      {/* </div> */}
-    </div>
+
+      <picture>
+        <img
+          src={currentSrc}
+          srcSet={currentSrcSet}
+          sizes={currentSizeStr}
+          width={size[0]}
+          height={size[1]}
+          className={cn(
+            "w-full h-full absolute trans-ani-700 transition-placeholder object-cover z-0",
+            className,
+            imgClassName
+          )}
+          style={style}
+          loading={loading}
+          decoding={decoding}
+          alt={alt}
+        />
+      </picture>
+
+      {children && children}
+    </figure>
   )
-}
+})

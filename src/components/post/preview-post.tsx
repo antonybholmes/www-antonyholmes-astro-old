@@ -9,6 +9,7 @@ import DateFormatter from "./date-formatter"
 import PostCategoryLink from "./post-category-link"
 import PostImage from "./post-image"
 import PostTitleLink from "./post-title-link"
+import { getDateFromSlug } from "../../lib/slug"
 
 interface IProps extends IPostProps, IImageLoadProps {
   imageClassName?: string
@@ -36,6 +37,8 @@ export default function PreviewPost({
   dateBelow = false,
   loading = "lazy",
 }: IProps) {
+  const date = getDateFromSlug(post.slug)
+
   return (
     <article className={cn("flex flex-col gap-y-4", className)}>
       <PostImage post={post} loading={loading} className={imageClassName} />
@@ -45,34 +48,34 @@ export default function PreviewPost({
           {showSection && <PostCategoryLink post={post} />}
           <PostTitleLink post={post} className={headerClassName} />
         </BaseCol>
-        {showDescription && (
+        {/* {showDescription && (
           <HTML
             html={post.excerpt}
             className={cn("text-slate-600", contentClassName)}
           />
-        )}
+        )} */}
 
         {dateBelow ? (
           <>
             {showAvatar && (
               <CompactAvatars
-                authors={post.authors}
+                people={post.data.authors}
                 showImages={showAvatarImage}
               />
             )}
 
-            <DateFormatter date={post.fields.date} />
+            <DateFormatter date={date} />
           </>
         ) : (
           <VCenterRow className="justify-between">
             {showAvatar && (
               <CompactAvatars
-                authors={post.authors}
+                people={post.data.authors}
                 showImages={showAvatarImage}
               />
             )}
 
-            <DateFormatter date={post.fields.date} />
+            <DateFormatter date={date} />
           </VCenterRow>
         )}
       </BaseCol>

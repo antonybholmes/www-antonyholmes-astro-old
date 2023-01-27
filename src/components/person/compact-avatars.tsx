@@ -1,60 +1,61 @@
 import IClassProps from "../../interfaces/class-props"
-import IPostAuthor from "../../interfaces/post-author"
 import cn from "../../lib/class-names"
 import { getAuthorBaseUrl } from "../../lib/urls"
-import AvatarImage from "./avatar-image"
+import CondComp from "../component"
 import BaseLink from "../link/base-link"
 import VCenterRow from "../v-center-row"
+import AvatarImage from "./avatar-image"
 
 interface IProps extends IClassProps {
-  authors: IPostAuthor[]
+  people: string[]
   showImages?: boolean
 }
 
 export default function CompactAvatars({
-  authors,
+  people,
   showImages = true,
   className,
 }: IProps) {
   return (
     <VCenterRow className="gap-x-3">
-      {showImages && (
+      <CondComp cond={showImages}>
         <ul
           className={cn("relative h-12", className)}
-          style={{ width: `${3 + (authors.length - 1) * 0.5}rem` }}
+          style={{ width: `${3 + (people.length - 1) * 0.5}rem` }}
         >
-          {authors.map((author, index) => (
+          {people.map((person, index) => (
             <li key={index}>
               <BaseLink
-                href={getAuthorBaseUrl(author.frontmatter.name)}
-                ariaLabel={`Click to read more about ${author}`}
+                href={getAuthorBaseUrl(person)}
+                ariaLabel={`Click to read more about ${person}`}
+                className={cn(
+                  "absolute block rounded-full border border-white",
+                  `ml-${index * 2}`
+                )}
               >
-                <AvatarImage
-                  author={author}
-                  className={cn(
-                    "absolute h-12 w-12 border border-white",
-                    `ml-${index * 2}`
-                  )}
-                  key={index}
-                />
+                <AvatarImage person={person} className="h-12 w-12" />
               </BaseLink>
             </li>
           ))}
         </ul>
-      )}
+      </CondComp>
 
-      <ul className="flex flex-row flex-wrap items-center gap-x-1 text-sm font-bold">
-        {authors.map((author, index) => (
+      <ul className="flex flex-row flex-wrap items-center gap-x-1 text-sm font-semibold">
+        {people.map((person, index) => (
           <li key={index}>
             <BaseLink
-              href={getAuthorBaseUrl(author.frontmatter.name)}
-              ariaLabel={`Click to read more about ${author}`}
+              href={getAuthorBaseUrl(person)}
+              ariaLabel={`Click to read more about ${person}`}
               underline={true}
             >
-              {author.frontmatter.name}
+              {person}
             </BaseLink>
-            {index < authors.length - 2 && <span>,</span>}
-            {index === authors.length - 2 && <span className="ml-1">&</span>}
+            {index < people.length - 2 ? <span>,</span> : <></>}
+            {index === people.length - 2 ? (
+              <span className="ml-1">&</span>
+            ) : (
+              <></>
+            )}
           </li>
         ))}
       </ul>

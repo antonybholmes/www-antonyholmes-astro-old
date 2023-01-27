@@ -18,7 +18,7 @@ export default function PostCategoryLink({
 }: IProps) {
   const items: any[] = []
 
-  post.frontmatter.categories.sort().forEach((category, index) => {
+  post.data.categories.sort().forEach((category, index) => {
     // categories can look like 'Reviews/Credit Cards' so we only want
     // the root part of the category
 

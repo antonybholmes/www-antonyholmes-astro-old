@@ -1,3 +1,4 @@
+import { CollectionEntry } from "astro:content"
 import { join } from "path"
 import IAuthorMap from "../../interfaces/author-map"
 import IAuthorPost from "../../interfaces/author-post"
@@ -7,6 +8,7 @@ import IPost from "../../interfaces/post"
 import IPostAuthor from "../../interfaces/post-author"
 import IPreviewPost from "../../interfaces/preview-post"
 import markdownHtml from "../markdown-html"
+import { getDateFromSlug } from "../slug"
 import { getUrlFriendlyTag } from "../tags"
 import { getAllMDFiles } from "./files"
 import { getFields, getPostFrontmatter } from "./markdown"
@@ -75,7 +77,9 @@ export function getPostByPath(path: string, index: number = -1): IBasePost {
   return post
 }
 
-export function sortPosts(posts: IBasePost[]): IBasePost[] {
+export function sortPosts(
+  posts: CollectionEntry<"blog">[]
+): CollectionEntry<"blog">[] {
   const ret = posts
     // .filter(post => {
     //   return (
@@ -85,21 +89,15 @@ export function sortPosts(posts: IBasePost[]): IBasePost[] {
     // })
     // sort posts by date in descending order
     .sort((post1, post2) => {
-      const d1 = new Date(post1.fields.date)
-      const d2 = new Date(post2.fields.date)
+      const d1 = new Date(getDateFromSlug(post1.slug))
+      const d2 = new Date(getDateFromSlug(post2.slug))
       if (d1 > d2) {
         return -1
       } else if (d1 < d2) {
         return 1
       } else {
         // dates equal so compare names
-        return post1.frontmatter.title.localeCompare(post2.frontmatter.title)
-      }
-    })
-    .map((post, index) => {
-      return {
-        ...post,
-        fields: { ...post.fields, index },
+        return post1.data.title.localeCompare(post2.data.title)
       }
     })
 

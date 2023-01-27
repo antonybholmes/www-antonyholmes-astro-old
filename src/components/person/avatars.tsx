@@ -1,25 +1,24 @@
-import cn from "../../lib/class-names"
 import IClassProps from "../../interfaces/class-props"
-import IPostAuthor from "../../interfaces/post-author"
+import cn from "../../lib/class-names"
 import Avatar from "../person/avatar"
 import WrapRow from "../wrap-row"
 
 interface IProps extends IClassProps {
-  authors: string[]
+  people: string[]
   showTitle?: boolean
   isSmall?: boolean
 }
 
 export default function Avatars({
-  authors,
+  people,
   showTitle = false,
   isSmall = false,
   className,
 }: IProps) {
   return (
     <WrapRow className={cn("gap-4", className)}>
-      {authors.map((author, index) => (
-        <Avatar author={author} isSmall={isSmall} key={index} />
+      {people.map((person, index) => (
+        <Avatar person={person} isSmall={isSmall} key={index} />
       ))}
     </WrapRow>
   )

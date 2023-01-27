@@ -1,5 +1,4 @@
 import IClassProps from "../../interfaces/class-props"
-import IPostAuthor from "../../interfaces/post-author"
 import cn from "../../lib/class-names"
 import { getAuthorBaseUrl } from "../../lib/urls"
 import BaseCol from "../base-col"
@@ -8,43 +7,31 @@ import VCenterRow from "../v-center-row"
 import AvatarImage from "./avatar-image"
 
 interface IProps extends IClassProps {
-  author: IPostAuthor
+  person: string
   showTitle?: boolean
   isSmall?: boolean
 }
 
-export default function Avatar({
-  author,
-  showTitle = false,
-  isSmall = false,
-  className,
-}: IProps) {
-  const href = getAuthorBaseUrl(author.frontmatter.name)
+export default function Avatar({ person, isSmall = false, className }: IProps) {
+  const href = getAuthorBaseUrl(person)
 
   return (
     <VCenterRow className={cn("gap-x-3", className)}>
-      <BaseLink
-        href={href}
-        ariaLabel={`Click to read more about ${author.frontmatter.name}`}
-        className={cn("block", [isSmall, "h-10 w-10", "h-12 w-12"])}
-      >
-        <AvatarImage author={author} />
+      <BaseLink href={href} ariaLabel={`Click to read more about ${person}`}>
+        <AvatarImage
+          person={person}
+          className={cn([isSmall, "h-10 w-10", "h-12 w-12"])}
+        />
       </BaseLink>
       <BaseCol>
         <BaseLink
           href={href}
-          ariaLabel={`Click to read more information about ${author.frontmatter.name}`}
+          ariaLabel={`Click to read more information about ${person}`}
           underline={true}
           className={cn("font-bold", [isSmall, "text-sm"])}
         >
-          {author.frontmatter.name}
+          {person}
         </BaseLink>
-
-        {showTitle && (
-          <div className="text-sm font-light text-slate-500">
-            {author.frontmatter.title.split(",")[0].trim()}
-          </div>
-        )}
       </BaseCol>
     </VCenterRow>
   )

@@ -10,8 +10,8 @@
     "preview": "astro preview",
     "rss": "node scripts/rss.mjs",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,svelte,astro}\"",
-    "update-version": "node scripts/update-version.js",
-    "image-optimize": "node scripts/image-optimize.js"
+    "update-version": "node scripts/update-version.mjs",
+    "image-optimize": "node scripts/image-optimize.mjs"
   },
   "dependencies": {
     "@astrojs/partytown": "^1.0.3",
@@ -19,10 +19,10 @@
     "@astrojs/prefetch": "^0.1.1",
     "@astrojs/rss": "^2.1.0",
     "@fontsource/plus-jakarta-sans": "^4.5.11",
-    "astro": "^2.0.1",
+    "astro": "^2.0.2",
     "astro-html-beautifier": "^1.0.4",
     "autoprefixer": "^10.4.13",
-    "axios": "^1.2.4",
+    "axios": "^1.2.5",
     "cssnano": "^5.1.14",
     "date-fns": "2.29.3",
     "fs-extra": "^11.1.0",

@@ -14,24 +14,18 @@ export default function PostImage({
   className,
 }: IProps) {
   const image = (
-    <div className={cn("relative overflow-hidden rounded-lg", className)}>
-      <BasePostImage
-        post={post}
-        size={size}
-        loading={loading}
-        duration={0.2}
-        className={className}
-        imgClassName="scale-102 trans-300 transition-transform hover:scale-105"
-      />
-    </div>
+    <BasePostImage
+      post={post}
+      size={size}
+      loading={loading}
+      className={cn("rounded-xl", className)}
+      imgClassName="scale-102 hover:scale-105"
+    />
   )
 
-  if (post.fields.slug) {
+  if (post.slug) {
     return (
-      <BaseLink
-        href={getPostBaseUrl(post.fields.slug)}
-        ariaLabel={post.frontmatter.title}
-      >
+      <BaseLink href={getPostBaseUrl(post.slug)} ariaLabel={post.data.title}>
         {image}
       </BaseLink>
     )
