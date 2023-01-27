@@ -1,8 +1,6 @@
+import IChildrenProps from "../interfaces/children-props"
 import cn from "../lib/class-names"
-import HTML, { IHtmlProps } from "./html"
 
-const MarkdownBody = ({ html, className }: IHtmlProps) => (
-  <HTML html={html} className={cn("markdown", className)} />
-)
-
-export default MarkdownBody
+export default function MarkdownBody({ className, children }: IChildrenProps) {
+  return <div className={cn("markdown", className)}>{children}</div>
+}

@@ -22,31 +22,26 @@ import { paginate } from "../../lib/paginate"
 import { getUrlFriendlyTag } from "../../lib/tags"
 import { getAuthorBaseUrl } from "../../lib/urls"
 import { PEOPLE_SLUG } from "../../constants"
+import { CollectionEntry, getCollection } from "astro:content"
 
 export async function getStaticPaths() {
   const paths: any[] = []
 
-  const authors = await Promise.all(
-    getAllAuthors().map(author => addAuthorHtml(author))
-  )
+  const people = await getCollection("people")
+  const allPosts = await getCollection("blog")
 
-  const authorMap = getAuthorMap()
+  const authorMap = getAuthorMap(people)
 
-  const postMap = getAuthorPostMap(
-    addAuthorsToPosts(
-      await Promise.all(addExcerpts(sortPosts(getAllPosts()))),
-      authorMap
-    )
-  )
+  const postMap = getAuthorPostMap(await sortPosts(allPosts))
 
-  authors.forEach(author => {
-    const slug = getUrlFriendlyTag(author.frontmatter.name)
+  people.forEach(person => {
+    const slug = getUrlFriendlyTag(person.data.name)
     const posts = postMap[slug]
 
     paths.push(
       paginate(posts, slug, {
-        author,
-        root: getAuthorBaseUrl(author.frontmatter.name),
+        person,
+        root: getAuthorBaseUrl(person.data.name),
       })
     )
   })
@@ -54,28 +49,37 @@ export async function getStaticPaths() {
   return paths
 }
 
-const { author, data, page, pages } = Astro.props
+interface Props {
+  person: CollectionEntry<"people">
+  data: CollectionEntry<"blog">[]
+  page: number
+  pages: number
+}
+
+const { person, data, page, pages } = Astro.props
+
+const { Content, headings } = await person.render()
 ---
 
-<ContentLayout title={author.frontmatter.name}>
+<ContentLayout title={person.data.name}>
   <div slot="main">
     <BaseRow className="gap-x-8">
       <div class="w-full">
         <HCenterRow className="mb-8 lg:hidden">
           <div>
-            <AvatarImageLarge author={author} className="w-56" />
+            <AvatarImageLarge person={person.data.name} className="w-56" />
           </div>
         </HCenterRow>
         <PageTitle
-          title={author.frontmatter.name}
+          title={person.data.name}
           superTitle="Posts by"
-          subTitle={author.frontmatter.title}
+          subTitle={person.data.title}
           className="text-center lg:text-left"
         />
-        <PostBody html={author.html} className="mt-8" />
+        <PostBody className="mt-8"><Content /></PostBody>
       </div>
       <div class="hidden lg:block">
-        <AvatarImageLarge author={author} className="w-64" />
+        <AvatarImageLarge person={person.data.name} className="w-64" />
       </div>
     </BaseRow>
 
@@ -84,7 +88,7 @@ const { author, data, page, pages } = Astro.props
         posts={data}
         page={page}
         pages={pages}
-        root={`${PEOPLE_SLUG}/${author.slug}`}
+        root={`${PEOPLE_SLUG}/${person.slug}`}
       />
     </section>
   </div>

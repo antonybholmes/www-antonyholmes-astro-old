@@ -9,7 +9,7 @@ export default class TagMap {
 
   constructor(posts: IBasePost[], max: number = -1) {
     posts.forEach(post => {
-      post.frontmatter.tags.forEach((tag: string) => {
+      post.data.tags.forEach((tag: string) => {
         this._tags.add(tag)
         // Add the tag as is
         if (!(tag in this._tagMap)) {

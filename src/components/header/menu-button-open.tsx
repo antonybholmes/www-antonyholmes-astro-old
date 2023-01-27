@@ -1,21 +1,17 @@
 import { gsap } from "gsap"
-import { useEffect, useRef, useState } from "preact/hooks"
+import { useEffect, useRef } from "preact/hooks"
 import IClassProps from "../../interfaces/class-props"
 import cn from "../../lib/class-names"
 import BaseButton from "../link/base-button"
 import IMenuProps from "./menu-props"
 
-const DURATION = 0.2
+const DURATION = 0.1
 
-const X1 = 20
-const X2 = 42
-const Y1 = 25
-const Y2 = 32
-const Y3 = 37
-
-const LINE_STYLE = {
-  strokeWidth: 2,
-}
+const X1 = 0
+const X2 = 16
+const Y1 = 4
+const Y2 = 8
+const Y3 = 12
 
 export interface IMenuButtonProps extends IMenuProps, IClassProps {
   showMenu: boolean
@@ -29,8 +25,8 @@ export default function MenuButtonOpen({
   className,
   style,
 }: IMenuButtonProps) {
-  const [focus, setFocus] = useState(false)
-  const [hover, setHover] = useState(false)
+  //const [focus, setFocus] = useState(false)
+  //const [hover, setHover] = useState(false)
 
   //const t1 = useRef(null)
   //const t2 = useRef(null)
@@ -133,7 +129,7 @@ export default function MenuButtonOpen({
           ref1.current,
           {
             duration: DURATION,
-            attr: { y1: 32, y2: 32 },
+            attr: { y1: Y2, y2: Y2 },
           },
           0
         )
@@ -141,7 +137,7 @@ export default function MenuButtonOpen({
           ref3.current,
           {
             duration: DURATION,
-            attr: { y1: 32, y2: 32 },
+            attr: { y1: Y2, y2: Y2 },
           },
           0
         )
@@ -220,57 +216,55 @@ export default function MenuButtonOpen({
     }
   }, [showMenu])
 
-  function onMouseEnter() {
-    setHover(true)
-  }
+  // function onMouseEnter() {
+  //   setHover(true)
+  // }
 
-  function onMouseLeave() {
-    setHover(false)
-  }
+  // function onMouseLeave() {
+  //   setHover(false)
+  // }
 
-  function onFocus() {
-    setFocus(true)
-  }
+  // function onFocus() {
+  //   setFocus(true)
+  // }
 
-  function onBlur() {
-    setFocus(false)
-  }
-
-  const cls = cn("stroke-1", [
-    headerMode === "dark",
-    "stroke-white",
-    "stroke-slate-900",
-  ])
+  // function onBlur() {
+  //   setFocus(false)
+  // }
 
   return (
     <BaseButton
       onClick={onClick}
       className={cn(
-        "group relative h-15 min-w-15",
+        "relative flex shrink-0 grow-0 flex-row items-center justify-center trans-ani-300 transition-color p-3 -ml-3",
         [
-          headerMode !== "dark",
-          "trans-300 transition-color hover:bg-slate-200",
+          headerMode === "dark",
+          "stroke-white",
+          "stroke-slate-400 hover:stroke-slate-900",
         ],
         className
       )}
       style={style}
       ariaLabel={showMenu ? "Close Menu" : "Open Menu"}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      onFocus={onFocus}
-      onBlur={onBlur}
+      // onMouseEnter={onMouseEnter}
+      // onMouseLeave={onMouseLeave}
+      // onFocus={onFocus}
+      // onBlur={onBlur}
     >
       {/* <span ref={refl1} className={cn(cls, "top-7")} style={style} />
       <span ref={refl3} className={cn(cls, "top-9")} style={style} /> */}
 
-      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        viewBox="0 0 16 16"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-4 w-4"
+      >
         <line
           ref={ref1}
           x1={X1}
           y1={Y1}
           x2={X2}
           y2={Y1}
-          class={cls}
           shape-rendering="crispEdges"
         />
         {/* <line ref={ref2} x1={X1} y1={Y2} x2={X2} y2={Y2} className={cls} /> */}
@@ -280,7 +274,6 @@ export default function MenuButtonOpen({
           y1={Y3}
           x2={X2}
           y2={Y3}
-          class={cls}
           shape-rendering="crispEdges"
         />
       </svg>

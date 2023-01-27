@@ -3,7 +3,7 @@ title: "New website design!"
 description: "I've redesigned my website using Gatsby."
 authors: ["Antony Holmes"]
 categories: ["News", "Web Development"]
-tags: ["Website", "Gatsby", "React"]
+tags: ["Website", "Gatsby", "preact/hooks"]
 type: "post"
 status: "published"
 hero: "generic1"

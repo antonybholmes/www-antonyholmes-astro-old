@@ -12,13 +12,13 @@ export const CLS_SOCIAL_ICON =
   "fill-slate-300 hover:fill-blue-400 trans-300 transition-color border border-slate-200 rounded-full flex flex-row items-center justify-center w-10 h-10"
 
 const PostSocialMedia = ({ post, className }: IPostProps) => {
-  const url = getPostUrl(post.fields.slug)
+  const url = getPostUrl(post.slug)
   return (
     <ul className={cn("flex flex-row items-center gap-x-2", className)}>
       <li>
         <BaseLink
           ariaLabel="Post article to Twitter"
-          href={`https://twitter.com/intent/tweet?text=${post.frontmatter.title}&url=${url}`}
+          href={`https://twitter.com/intent/tweet?text=${post.data.title}&url=${url}`}
           className={CLS_SOCIAL_ICON}
         >
           <TwitterIcon className={CLS_TEXT_GRAY_HOVER} />

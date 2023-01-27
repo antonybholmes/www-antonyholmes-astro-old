@@ -22,8 +22,18 @@ const blogCollection = defineCollection({
   }),
 })
 
+const peopleCollection = defineCollection({
+  schema: z.object({
+    name: z.string(),
+    title: z.string(),
+    email: z.string().optional(),
+    pubmed: z.string().optional(),
+  }),
+})
+
 // 3. Export a single `collections` object to register your collection(s)
 //    This key should match your collection directory name in "src/content"
 export const collections = {
   blog: blogCollection,
+  people: peopleCollection,
 }

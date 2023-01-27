@@ -4,7 +4,7 @@ import MenuOpenButton from "./menu-button-open"
 import LogoIcon from "../../icons/logo-icon"
 import VCenterRow from "../v-center-row"
 import IHeaderProps from "./header-props"
-import MenuOverlay, { IMenuOverlayProps } from "./menu-overlay"
+import { IMenuOverlayProps } from "./menu-overlay"
 
 interface IProps extends IHeaderProps, IMenuOverlayProps {}
 
@@ -47,7 +47,7 @@ export default function SmallHeader({
   // }, [showMenu])
 
   return (
-    <nav className="w-full md:hidden">
+    <nav className="w-full xl:hidden">
       <VCenterRow>
         <MenuOpenButton
           onClick={onClick}

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply text-slate-900 text-base font-normal;
+  @apply text-base font-normal text-slate-900;
 }
 
 h1,
@@ -11,27 +11,27 @@ h2,
 h3,
 h4,
 h5 {
-  @apply leading-none font-bold;
+  @apply font-bold leading-none;
 }
 
-.trans-300 {
-  @apply duration-300 ease-in-out;
+.trans-ani-300 {
+  @apply duration-300 ease-out;
 }
 
-.trans-500 {
-  @apply duration-500 ease-in-out;
+.trans-ani-500 {
+  @apply duration-500 ease-out;
 }
 
-.trans-700 {
-  @apply duration-700 ease-in-out;
+.trans-ani-700 {
+  @apply duration-700 ease-out;
 }
 
-.trans-1000 {
-  @apply duration-1000 ease-in-out;
+.trans-ani-1000 {
+  @apply duration-1000 ease-out;
 }
 
 .markdown a {
-  @apply hover:underline text-blue-600;
+  @apply text-blue-600 hover:underline;
 }
 
 .markdown-white {
@@ -51,7 +51,7 @@ h5 {
 }
 
 .markdown h1 {
-  @apply text-3xl mb-4;
+  @apply mb-4 text-3xl capitalize;
 }
 
 .markdown h1:not(:first-child) {
@@ -59,7 +59,7 @@ h5 {
 }
 
 .markdown h2 {
-  @apply text-2xl mb-4;
+  @apply mb-4 text-2xl capitalize;
 }
 
 .markdown h2:not(:first-child) {
@@ -67,7 +67,7 @@ h5 {
 }
 
 .markdown h3 {
-  @apply text-xl mb-4;
+  @apply mb-4 text-xl capitalize;
 }
 
 .markdown h3:not(:first-child) {
@@ -75,7 +75,7 @@ h5 {
 }
 
 .markdown h4 {
-  @apply text-lg mb-4;
+  @apply mb-4 text-lg capitalize;
 }
 
 .markdown h4:not(:first-child) {
@@ -84,6 +84,11 @@ h5 {
 
 .markdown p {
   @apply mb-4;
+}
+
+.markdown th,
+td {
+  padding: 0.5rem 2rem;
 }
 
 .post {
@@ -154,4 +159,20 @@ h5 {
   border-bottom-color: rgba(0, 0, 0, 0.8);
   margin-left: -10px;
   margin-top: -10px;
+}
+
+.overlay-show {
+  transition: opacity 300ms ease-out, visibility 0s ease-out;
+}
+
+.overlay-hide {
+  transition: opacity 300ms ease-out, visibility 0s ease-out 300ms;
+}
+
+.placeholder-show {
+  transition: opacity 300ms ease-out, visibility 0s ease-out;
+}
+
+.placeholder-hide {
+  transition: opacity 700ms ease-out, visibility 0s ease-out 700ms;
 }

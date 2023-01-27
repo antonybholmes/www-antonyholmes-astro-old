@@ -1,13 +1,7 @@
 import { CollectionEntry } from "astro:content"
 import { join } from "path"
-import IAuthorMap from "../../interfaces/author-map"
-import IAuthorPost from "../../interfaces/author-post"
 import IBasePost from "../../interfaces/base-post"
 import IFieldMap from "../../interfaces/field-map"
-import IPost from "../../interfaces/post"
-import IPostAuthor from "../../interfaces/post-author"
-import IPreviewPost from "../../interfaces/preview-post"
-import markdownHtml from "../markdown-html"
 import { getDateFromSlug } from "../slug"
 import { getUrlFriendlyTag } from "../tags"
 import { getAllMDFiles } from "./files"
@@ -22,30 +16,6 @@ export function getPostPaths() {
 
 export function getReviewPaths() {
   return getAllMDFiles(REVIEWS_DIR)
-}
-
-export function getAuthors(
-  post: IBasePost,
-  authorMap: IAuthorMap
-): IPostAuthor[] {
-  return post.frontmatter.authors.map(a => authorMap[getUrlFriendlyTag(a)])
-}
-
-export function addAuthors(
-  post: IPreviewPost,
-  authorMap: IAuthorMap
-): IAuthorPost {
-  return {
-    ...post,
-    authors: getAuthors(post, authorMap),
-  }
-}
-
-export function addAuthorsToPosts(
-  posts: IPreviewPost[],
-  authorMap: IAuthorMap
-): IAuthorPost[] {
-  return posts.map(post => addAuthors(post, authorMap))
 }
 
 /**
@@ -70,8 +40,8 @@ export function getPostByPath(path: string, index: number = -1): IBasePost {
     frontmatter: getPostFrontmatter(path),
   }
 
-  // if (post.frontmatter.hero === "") {
-  //   post.frontmatter.hero = `generic${(index % GENERIC_IMAGES) + 1}`
+  // if (post.data.hero === "") {
+  //   post.data.hero = `generic${(index % GENERIC_IMAGES) + 1}`
   // }
 
   return post
@@ -84,7 +54,7 @@ export function sortPosts(
     // .filter(post => {
     //   return (
     //     process.env.NODE_ENV === "development" ||
-    //     post.frontmatter.status === "published"
+    //     post.data.status === "published"
     //   )
     // })
     // sort posts by date in descending order
@@ -120,44 +90,6 @@ export function sortPosts(
 //   )
 // }
 
-export async function addHtml(post: IAuthorPost): Promise<IPost> {
-  return {
-    ...post,
-    html: await markdownHtml(post.frontmatter.rawContent || ""),
-  }
-}
-
-export async function addExcerpt(post: IBasePost): Promise<IPreviewPost> {
-  return {
-    ...post,
-    excerpt: await markdownHtml(post.frontmatter.rawExcerpt || ""),
-  }
-}
-
-export function addHtmlToPosts(posts: IAuthorPost[]): Promise<IPost>[] {
-  return posts.map(post => addHtml(post))
-}
-
-export function addExcerpts(posts: IBasePost[]): Promise<IPreviewPost>[] {
-  const ret = posts.map(async post => {
-    return {
-      ...post,
-      excerpt: await markdownHtml(post.frontmatter.rawExcerpt || ""),
-    }
-  })
-
-  return ret
-}
-
-export function getAllPosts(): IBasePost[] {
-  const ret = getPostPaths().map(path => getPostByPath(path))
-  return ret
-}
-
-export function getAllReviews(): IBasePost[] {
-  return getAllPosts().filter(post => post.frontmatter.type === "review") //getReviewPaths().map(path => getPostByPath(path, "review"))
-}
-
 // export function getAllPostsAndReviews(): IBasePost[] {
 //   return getAllPosts().concat(getAllReviews())
 // }
@@ -168,16 +100,16 @@ export const allPostsBySlugMap = (
   let ret: any = {}
 
   posts.forEach(post => {
-    ret[post.fields.slug] = post
+    ret[post.slug] = post
   })
 
   return ret
 }
 
-export function getCategories(post: IBasePost) {
+export function getCategories(post: CollectionEntry<"blog">) {
   const ret: IFieldMap = []
 
-  post.frontmatter.categories.forEach(category => {
+  post.data.categories.forEach(category => {
     let path = category.split("/").concat(["All"])
 
     let pathMap: any = {}
@@ -199,13 +131,13 @@ export function getCategories(post: IBasePost) {
 }
 
 export function getCategoryPostMap(
-  posts: IBasePost[],
+  posts: CollectionEntry<"blog">[],
   max: number = -1
 ): IFieldMap {
   const categoryMap: IFieldMap = {}
 
   posts.forEach(post => {
-    post.frontmatter.categories.forEach((category: string) => {
+    post.data.categories.forEach((category: string) => {
       const path = category.split("/")
       const c = path[0]
       const s = path.length > 1 ? path[1] : "All"
@@ -238,11 +170,14 @@ export function getCategoryPostMap(
   return categoryMap
 }
 
-export function getTagPostMap(posts: IBasePost[], max: number = -1): IFieldMap {
+export function getTagPostMap(
+  posts: CollectionEntry<"blog">[],
+  max: number = -1
+): IFieldMap {
   const tagMap: IFieldMap = {}
 
   posts.forEach(post => {
-    post.frontmatter.tags.forEach((tag: string) => {
+    post.data.tags.forEach((tag: string) => {
       // Add the tag as is
       // if (!(tag in tagMap)) {
       //   tagMap[tag] = []
@@ -270,13 +205,13 @@ export function getTagPostMap(posts: IBasePost[], max: number = -1): IFieldMap {
 }
 
 export function getAuthorPostMap(
-  posts: IBasePost[],
+  posts: CollectionEntry<"blog">[],
   max: number = -1
 ): IFieldMap {
   const tagMap: IFieldMap = {}
 
   posts.forEach(post => {
-    post.frontmatter.authors.forEach((author: string) => {
+    post.data.authors.forEach((author: string) => {
       const a = getUrlFriendlyTag(author)
 
       if (!(a in tagMap)) {

@@ -3,7 +3,7 @@ title: "Creating a React toggle switch using SVG"
 description: "How to make a simple toggle switch using React."
 authors: ["Antony Holmes"]
 categories: ["Web Development"]
-tags: ["Typescript", "Preact", "React", "SVG", "Tutorials"]
+tags: ["Typescript", "Preact", "preact/hooks", "SVG", "Tutorials"]
 type: "post"
 status: "published"
 hero: "code"

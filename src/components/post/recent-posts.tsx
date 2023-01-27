@@ -11,7 +11,7 @@ export default function RecentPosts({ posts, title = "Recent Posts" }: IProps) {
       <h2 className="text-3xl font-bold">{title}</h2>
       <div className="mt-16 grid w-full grid-cols-1 md:grid-cols-3 md:gap-8">
         {posts.map(post => (
-          <PreviewPost key={post.fields.slug} post={post} />
+          <PreviewPost key={post.slug} post={post} />
         ))}
       </div>
     </div>

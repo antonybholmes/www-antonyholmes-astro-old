@@ -24,9 +24,9 @@ export default async function generateRssFeed(posts: IBasePost[]) {
 
   posts.forEach(post => {
     feed.addItem({
-      title: post.frontmatter.title,
-      id: `${SITE_URL}/blog/${post.fields.slug}`,
-      link: `${SITE_URL}/blog/${post.fields.slug}`,
+      title: post.data.title,
+      id: `${SITE_URL}/blog/${post.slug}`,
+      link: `${SITE_URL}/blog/${post.slug}`,
       //description: post.description,
       date: new Date(post.fields.date),
     })

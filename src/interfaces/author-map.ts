@@ -1,5 +1,5 @@
-import IPostAuthor from "./post-author"
+import { CollectionEntry } from "astro:content"
 
 export default interface IAuthorMap {
-  [key: string]: IPostAuthor
+  [key: string]: CollectionEntry<"people">
 }

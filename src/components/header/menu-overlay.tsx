@@ -1,11 +1,7 @@
-import { gsap } from "gsap"
-import { useEffect, useRef } from "preact/hooks"
-import { ANIMATION_DURATION_MS } from "../../constants"
-import LogoIcon from "../../icons/logo-icon"
+import SmallLogoIcon from "../../icons/logo-icon-small"
 import cn from "../../lib/class-names"
-import BaseRow from "../base-row"
-import HCenterRow from "../h-center-row"
 import BaseLink from "../link/base-link"
+import VCenterRow from "../v-center-row"
 import IHeaderProps from "./header-props"
 import MenuOpenButton from "./menu-button-open"
 import MenuLinks from "./menu-links"
@@ -21,154 +17,115 @@ export default function MenuOverlay({
   showMenu,
   onClick,
 }: IMenuOverlayProps) {
-  const overlayRef = useRef(null)
-  const sideMenuRef = useRef(null)
-
-  useEffect(() => {
-    animateMenu()
-  }, [])
-
-  useEffect(() => {
-    animateMenu()
-  }, [showMenu])
-
-  function animateMenu() {
-    if (showMenu) {
-      // @ts-ignore
-      gsap
-        .timeline()
-        .set(
-          overlayRef.current,
-          {
-            visibility: "visible",
-          },
-          0
-        )
-        .set(
-          sideMenuRef.current,
-          {
-            visibility: "visible",
-          },
-          0
-        )
-        .to(
-          overlayRef.current,
-          {
-            duration: ANIMATION_DURATION_MS,
-            opacity: 1,
-          },
-          0
-        )
-        .to(
-          sideMenuRef.current,
-          {
-            duration: ANIMATION_DURATION_MS,
-            opacity: 1,
-          },
-          0
-        )
-        .to(
-          sideMenuRef.current,
-          {
-            x: 0,
-            duration: ANIMATION_DURATION_MS,
-          },
-          0
-        )
-    } else {
-      gsap
-        .timeline()
-
-        .to(
-          overlayRef.current,
-          {
-            duration: ANIMATION_DURATION_MS,
-            opacity: 0,
-          },
-          0
-        )
-        .to(
-          overlayRef.current,
-          {
-            duration: ANIMATION_DURATION_MS,
-            opacity: 0,
-          },
-          0
-        )
-        .to(
-          sideMenuRef.current,
-          {
-            duration: ANIMATION_DURATION_MS,
-            opacity: 0,
-          },
-          0
-        )
-        .to(
-          sideMenuRef.current,
-          {
-            x: "-4rem",
-            duration: ANIMATION_DURATION_MS,
-          },
-          0
-        )
-        .set(
-          overlayRef.current,
-          {
-            visibility: "hidden",
-            delay: ANIMATION_DURATION_MS,
-          },
-          0
-        )
-        .set(
-          sideMenuRef.current,
-          {
-            visibility: "hidden",
-            delay: ANIMATION_DURATION_MS,
-          },
-          0
-        )
-    }
-  }
+  // const overlayRef = useRef(null)
+  // const sideMenuRef = useRef(null)
 
   // useEffect(() => {
-  //   if (!isFirstRun.current) {
-  //     if (showMenu) {
-  //       // @ts-ignore
-  //       t2.current.pause()
-  //       // @ts-ignore
-  //       t1.current.restart()
-  //     } else {
-  //       // @ts-ignore
-  //       t1.current.pause()
-  //       // @ts-ignore
-  //       t2.current.restart()
-  //     }
+  //   if (showMenu) {
+  //     gsap
+  //       .timeline()
+  //       .set(overlayRef.current, {
+  //         visibility: "visible",
+  //       })
+  //       .to(
+  //         overlayRef.current,
+  //         {
+  //           duration: ANIMATION_DURATION_S,
+  //           opacity: 1,
+  //           ease: Power3.easeOut,
+  //         },
+  //         0
+  //       )
+  //       .to(
+  //         sideMenuRef.current,
+  //         {
+  //           duration: ANIMATION_DURATION_S,
+  //           opacity: 1,
+  //           ease: Power3.easeOut,
+  //         },
+  //         0
+  //       )
+  //       .to(
+  //         sideMenuRef.current,
+  //         {
+  //           x: 0,
+  //           duration: ANIMATION_DURATION_S,
+  //           ease: Power3.easeOut,
+  //         },
+  //         0
+  //       )
+  //   } else {
+  //     gsap
+  //       .timeline()
+  //       .to(
+  //         overlayRef.current,
+  //         {
+  //           duration: ANIMATION_DURATION_S,
+  //           opacity: 0,
+  //           ease: Power3.easeOut,
+  //         },
+  //         0
+  //       )
+  //       .to(
+  //         overlayRef.current,
+  //         {
+  //           duration: ANIMATION_DURATION_S,
+  //           opacity: 0,
+  //           ease: Power3.easeOut,
+  //         },
+  //         0
+  //       )
+  //       .to(
+  //         sideMenuRef.current,
+  //         {
+  //           duration: ANIMATION_DURATION_S,
+  //           opacity: 0,
+  //           ease: Power3.easeOut,
+  //         },
+  //         0
+  //       )
+  //       .to(
+  //         sideMenuRef.current,
+  //         {
+  //           x: "-4rem",
+  //           duration: ANIMATION_DURATION_S,
+  //           ease: Power3.easeOut,
+  //         },
+  //         0
+  //       )
+  //       .set(overlayRef.current, {
+  //         visibility: "hidden",
+  //       })
   //   }
-
-  //   isFirstRun.current = false
   // }, [showMenu])
 
   return (
     <div
-      ref={overlayRef}
+      //ref={overlayRef}
       className={cn(
-        "fixed left-0 top-0 z-100 flex h-screen w-full flex-row bg-black/70 backdrop-blur-sm"
+        "fixed left-0 top-0 z-100 flex h-screen w-full flex-row bg-black/70 backdrop-blur-sm overflow-hidden",
+        [
+          showMenu,
+          "overlay-show opacity-100 visible",
+          "overlay-hide opacity-0 invisible",
+        ]
       )}
-      style={{ visibility: "hidden" }}
     >
       <div
-        ref={sideMenuRef}
-        className="h-full w-72 bg-white"
-        style={{ visibility: "hidden" }}
+        //ref={sideMenuRef}
+        className={cn(
+          "h-full w-72 bg-white trans-ani-300 transition-translation",
+          [showMenu, "ml-0", "-ml-8"]
+        )}
       >
-        <BaseRow>
+        <VCenterRow className="gap-x-2 px-5 py-3">
           <MenuOpenButton showMenu={showMenu} onClick={onClick} />
           <div>
             <BaseLink href="/">
-              <LogoIcon className="shrink-0" />
+              <SmallLogoIcon className="shrink-0" />
             </BaseLink>
           </div>
-        </BaseRow>
+        </VCenterRow>
         <MenuLinks title={title} tab={tab} onClick={onClick} className="grow" />
       </div>
       <div onClick={onClick} className="h-full grow">

@@ -11,7 +11,7 @@ const allPosts = getAllPosts(getAuthorMap())
 const tags = new Set<string>()
 
 allPosts.forEach(post => {
-  post.frontmatter.tags.forEach((tag: string) => {
+  post.data.tags.forEach((tag: string) => {
     tags.add(tag)
   })
 })

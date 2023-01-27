@@ -24,11 +24,13 @@ import { getUrlFriendlyTag } from "../lib/tags"
 import { getAuthorBaseUrl } from "../lib/urls"
 import { getCollection } from "astro:content"
 
-const authorMap = getAuthorMap()
+const people = await getCollection("people")
+
+const authorMap = getAuthorMap(people)
 
 const posts = getPageItems(sortPosts(await getCollection("blog")), 0, 10)
 
-const author = authorMap[getUrlFriendlyTag("Antony Holmes")]
+const person = authorMap[getUrlFriendlyTag("Antony Holmes")]
 ---
 
 <ContentLayout title="Home" showCrumbs={false}>

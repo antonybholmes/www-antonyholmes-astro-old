@@ -1,3 +1,4 @@
+import { CollectionEntry } from "astro:content"
 import { join } from "path"
 import IAuthor from "../../interfaces/author"
 import IAuthorMap from "../../interfaces/author-map"
@@ -27,13 +28,9 @@ export function getAllAuthors(): IPostAuthor[] {
   return authors
 }
 
-export function getAuthorMap(authors: IPostAuthor[] = []): IAuthorMap {
-  if (!authors || authors.length === 0) {
-    authors = getAllAuthors()
-  }
-
+export function getAuthorMap(authors: CollectionEntry<"people">[]): IAuthorMap {
   return Object.fromEntries(
-    authors.map(x => [getUrlFriendlyTag(x.frontmatter.name), x])
+    authors.map(x => [getUrlFriendlyTag(x.data.name), x])
   )
 }
 

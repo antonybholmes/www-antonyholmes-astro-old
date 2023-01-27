@@ -56,7 +56,7 @@ const feed = new Feed(feedOptions)
 
 posts.forEach(post => {
   feed.addItem({
-    title: post.frontmatter.title,
+    title: post.data.title,
     id: `${config.SITE_URL}/blog/${post.slug}`,
     link: `${config.SITE_URL}/blog/${post.slug}`,
     //description: post.description,

@@ -9,7 +9,7 @@ const KeepReading = ({ posts }: IPostsProps) => {
       <HCenterRow className="mt-16">
         <div className="grid w-full grid-cols-1 md:w-90/100 md:grid-cols-2 md:gap-8 lg:w-80/100 xl:w-60/100">
           {posts.map(post => (
-            <PreviewPost key={post.fields.slug} post={post} />
+            <PreviewPost key={post.slug} post={post} />
           ))}
         </div>
       </HCenterRow>

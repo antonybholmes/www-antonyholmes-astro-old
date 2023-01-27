@@ -1,22 +1,14 @@
 ---
+import { getCollection } from "astro:content"
 import PostsPage from "../components/pages/PostsPage.astro"
 import ContentLayout from "../layouts/ContentLayout.astro"
-import { getAuthorMap } from "../lib/api/author"
-import {
-  addAuthorsToPosts,
-  addExcerpts,
-  getAllPosts,
-  sortPosts,
-} from "../lib/api/post"
+import { sortPosts } from "../lib/api/post"
 import { getPageCount, getPageItems } from "../lib/paginate"
 
-const allPosts = sortPosts(getAllPosts())
+const allPosts = sortPosts(await getCollection("blog"))
 const pages = getPageCount(allPosts)
 
-const posts = addAuthorsToPosts(
-  await Promise.all(addExcerpts(getPageItems(allPosts, 0, 10))),
-  getAuthorMap()
-)
+const posts = getPageItems(allPosts, 0, 10)
 ---
 
 <ContentLayout title="Blog" showTitle={false}>

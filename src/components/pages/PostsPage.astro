@@ -1,6 +1,7 @@
 ---
 import IAuthorPost from "../../interfaces/author-post"
 import IFieldMap from "../../interfaces/field-map"
+import IPostsProps from "../../interfaces/posts-props"
 import BaseCol from "../base-col"
 import HCenterRow from "../h-center-row"
 import PagePagination from "../page-pagination"
@@ -11,8 +12,7 @@ import HeroPosts from "../post/hero-posts"
 import LatestPosts from "../post/latest-posts"
 import RestPosts from "../post/rest-posts"
 
-interface Props {
-  posts: IAuthorPost[]
+interface Props extends IPostsProps {
   page: number
   pages: number
   showLatestPosts?: boolean

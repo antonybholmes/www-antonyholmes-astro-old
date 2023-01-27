@@ -10,7 +10,7 @@ const allPosts = getAllPosts(getAuthorMap())
 const categories = new Set<string>()
 
 allPosts.forEach(post => {
-  post.frontmatter.categories.forEach(category => {
+  post.data.categories.forEach(category => {
     categories.add(category.split("/")[0])
   })
 })

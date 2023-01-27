@@ -7,13 +7,13 @@ import { CLS_SOCIAL_ICON, CLS_TEXT_GRAY_HOVER } from "./post-social-media"
 import { getPostUrl } from "../../lib/urls"
 
 const PostSocialMediaVert = ({ post }: IPostProps) => {
-  const url = getPostUrl(post.fields.slug)
+  const url = getPostUrl(post.slug)
   return (
     <ul className="flex flex-col gap-y-2">
       <li>
         <BaseLink
           ariaLabel="Post article to Twitter"
-          href={`https://twitter.com/intent/tweet?text=${post.frontmatter.title}&url=${url}`}
+          href={`https://twitter.com/intent/tweet?text=${post.data.title}&url=${url}`}
           className={CLS_SOCIAL_ICON}
         >
           <TwitterIcon className={CLS_TEXT_GRAY_HOVER} />

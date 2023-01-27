@@ -1,15 +1,14 @@
 import IImageLoadProps from "../../interfaces/image-load-props"
 import IPostProps from "../../interfaces/post-props"
 import cn from "../../lib/class-names"
+import { getDateFromSlug } from "../../lib/slug"
 import BaseCol from "../base-col"
 import CompactAvatars from "../person/compact-avatars"
-import HTML from "../html"
 import VCenterRow from "../v-center-row"
 import DateFormatter from "./date-formatter"
 import PostCategoryLink from "./post-category-link"
 import PostImage from "./post-image"
 import PostTitleLink from "./post-title-link"
-import { getDateFromSlug } from "../../lib/slug"
 
 interface IProps extends IPostProps, IImageLoadProps {
   imageClassName?: string
@@ -48,12 +47,11 @@ export default function PreviewPost({
           {showSection && <PostCategoryLink post={post} />}
           <PostTitleLink post={post} className={headerClassName} />
         </BaseCol>
-        {/* {showDescription && (
-          <HTML
-            html={post.excerpt}
-            className={cn("text-slate-600", contentClassName)}
-          />
-        )} */}
+        {showDescription && (
+          <p className={cn("text-slate-600", contentClassName)}>
+            {post.data.description}
+          </p>
+        )}
 
         {dateBelow ? (
           <>

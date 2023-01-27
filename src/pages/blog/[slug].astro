@@ -1,8 +1,9 @@
 ---
+import { CollectionEntry, getCollection } from "astro:content"
+import readingTime, { ReadTimeResults } from "reading-time"
 import BaseCol from "../../components/BaseCol.astro"
 import ContentDiv from "../../components/ContentDiv.astro"
 import MorePosts from "../../components/post/more-posts"
-import PostBody from "../../components/post/post-body"
 import PostDetailsHoz from "../../components/post/post-details-hoz"
 import PostHeader from "../../components/post/post-header"
 import PostSocialMedia from "../../components/post/post-social-media"
@@ -10,20 +11,9 @@ import PostSocialMediaVert from "../../components/post/post-social-media-vert"
 import PostTags from "../../components/post/post-tags"
 import ProsAndCons from "../../components/post/pros-and-cons"
 import RelatedPosts from "../../components/post/related-posts"
-import IBasePost from "../../interfaces/base-post"
 import DefaultLayout from "../../layouts/DefaultLayout.astro"
 import PostLayout from "../../layouts/PostLayout.astro"
-import { getAuthorMap } from "../../lib/api/author"
-import {
-  addAuthorsToPosts,
-  addExcerpts,
-  addHtmlToPosts,
-  getAllPosts,
-  sortPosts,
-} from "../../lib/api/post"
-import { getCanonicalSlug, getDateFromSlug } from "../../lib/slug"
-import readingTime, { ReadTimeResults } from "reading-time"
-import { CollectionEntry, getCollection, getEntryBySlug } from "astro:content"
+import { getDateFromSlug } from "../../lib/slug"
 
 export async function getStaticPaths() {
   // Get all entries from a collection. Requires the name of the collection as an argument.
@@ -51,7 +41,7 @@ export async function getStaticPaths() {
     //   // previous related posts
     //   Object.keys(categoryMap).every(category => {
     //     categoryMap[category].every((p: IPreviewPost, index: number) => {
-    //       if (p.fields.slug === post.fields.slug) {
+    //       if (p.fields.slug === post.slug) {
     //         postIndex = index
     //         return false
     //       }
@@ -70,7 +60,7 @@ export async function getStaticPaths() {
       p => post.data.related && post.data.related.includes(p.data.title)
     )
 
-    const readMorePosts: CollectionEntry<"blog">[] = [] //categoryMap[post.frontmatter.section].slice(postIndex + 1)
+    const readMorePosts: CollectionEntry<"blog">[] = [] //categoryMap[post.data.section].slice(postIndex + 1)
 
     paths.push({
       params: { slug: post.slug },
@@ -102,14 +92,14 @@ const morePosts: any[] = []
 ---
 
 <DefaultLayout title={post.data.title} tab="Blog" headerMode="dark">
-  <link href="/themes/prism.css" rel="stylesheet" slot="head" />
+  <!-- <link href="/themes/prism.css" rel="stylesheet" slot="head" /> -->
 
   <div slot="main">
     <PostHeader post={post} client:visible />
 
     <ContentDiv className="my-40">
       <BaseCol className="gap-y-4 lg:gap-y-8" slot="main">
-        <PostDetailsHoz post={post} date={date} stats={stats} />
+        <PostDetailsHoz post={post} date={date} stats={stats} client:visible />
 
         <PostSocialMedia post={post} className="lg:hidden" />
 
@@ -155,5 +145,5 @@ const morePosts: any[] = []
     }
   </div>
 
-  <script src="/themes/prism.js" is:inline slot="end"></script>
+  <!-- <script src="/themes/prism.js" is:inline slot="end"></script> -->
 </DefaultLayout>

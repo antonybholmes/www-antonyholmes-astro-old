@@ -103,6 +103,7 @@ module.exports = {
         "2/3": "66.666667%",
       },
       screens: {
+        "2lg": "1152px",
         "2xl": "1440px",
         "3xl": "1600px",
         "4xl": "1800px",
@@ -141,6 +142,7 @@ module.exports = {
       boxShadow: {
         box: "0 0 16px 4px rgba(0, 0, 0, 0.1)",
         box2: "0 0 16px 4px rgba(0, 0, 0, 0.15)",
+        header: "0 4px 16px 0 rgba(0, 0, 0, 0.1)",
       },
       borderWidth: {
         3: "3px",
@@ -167,6 +169,7 @@ module.exports = {
       },
       transitionProperty: {
         filter: "filter",
+        placeholder: "opacity, filter, transform",
       },
       margin: {
         18: "4.5rem",
@@ -175,13 +178,18 @@ module.exports = {
         toggle: "8px",
       },
       keyframes: {
-        "header-link": {
-          "0%": { opacity: 0 },
-          "100%": { opacity: 1, width: "calc(100% - 2rem)" },
+        "header-links-show": {
+          "0%": { opacity: 0, display: "block" },
+          "100%": { opacity: 1 },
+        },
+        "header-links-hide": {
+          "0%": { opacity: 1 },
+          "100%": { opacity: 0, display: "none" },
         },
       },
       animation: {
-        "header-link": "header-link 200ms ease-in-out 200ms forwards",
+        "header-links-show": "header-links-show 300ms ease-out forwards",
+        "header-links-hide": "header-links-hide 300ms ease-out forwards",
       },
       opacity: {
         98: ".98",
