@@ -29,7 +29,7 @@ import htmlBeautifier from "astro-html-beautifier";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://www.antonyholmes.com",
+  site: "https://antonyholmes.com",
   integrations: [
     //svelte(),
     preact(),

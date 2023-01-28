@@ -9,16 +9,16 @@ import PostImage from "./post-image"
 import PostTitleLink from "./post-title-link"
 import CondComp from "../component"
 import { getDateFromSlug } from "../../lib/slug"
+import IImageLoadProps from "../../interfaces/image-load-props"
 
-interface IProps extends IPostProps {
-  showDescription?: boolean
+interface IProps extends IPostProps, IImageLoadProps {
   showAvatar?: boolean
 }
 
 export default function HeroPostSmall({
   post,
-  showDescription = true,
   showAvatar = true,
+  loading = "lazy",
   className,
 }: IProps) {
   return (
@@ -29,7 +29,11 @@ export default function HeroPostSmall({
       )}
     >
       <div className="col-span-1">
-        <PostImage post={post} className="h-48 w-full md:h-32" />
+        <PostImage
+          post={post}
+          className="h-48 w-full md:h-32"
+          loading={loading}
+        />
       </div>
       <BaseCol className="col-span-3 gap-y-1 lg:col-span-3 xl:col-span-2 ">
         <BaseCol>
