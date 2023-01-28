@@ -3,7 +3,21 @@ import HCenterCol from "../h-center-col"
 import SecondaryButton from "../link/secondary-button"
 import VCenterRow from "../v-center-row"
 
-function Bar({ x, y, height, width, isColored, isHighlighted }) {
+function Bar({
+  x,
+  y,
+  height,
+  width,
+  isColored,
+  isHighlighted,
+}: {
+  x: number
+  y: number
+  height: number
+  width: number
+  isColored: boolean
+  isHighlighted: boolean
+}) {
   return (
     <rect
       fill={
@@ -17,7 +31,19 @@ function Bar({ x, y, height, width, isColored, isHighlighted }) {
   )
 }
 
-function YearSelector({ x, y, r = 8, onMouseUp, onMouseDown }) {
+function YearSelector({
+  x,
+  y,
+  r = 8,
+  onMouseUp,
+  onMouseDown,
+}: {
+  x: number
+  y: number
+  r?: number
+  onMouseUp: any
+  onMouseDown: any
+}) {
   return (
     <circle
       cx={x}
@@ -42,6 +68,18 @@ export default function PubRangeSlider({
   setYear1,
   r2,
   setYear2,
+}: {
+  data: any[]
+  barWidth: number
+  barMargin: number
+  height: number
+  sliderHeight: number
+  xMargin: number
+  yMax: number
+  r1: number
+  setYear1: any
+  r2: number
+  setYear2: any
 }) {
   const ref = useRef(null)
   const refHint = useRef(null)
