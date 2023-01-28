@@ -41,7 +41,7 @@ export default function ToggleSwitch({
             r="7"
             className={cn("trans-300 fill-white transition-transform", [
               isSelected,
-              "translate-x-toggle",
+              "translate-x-[8px]",
             ])}
           />
         </svg>
