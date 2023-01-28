@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "start": "astro dev",
+    "start": "astro preview",
     "build": "astro build",
     "preview": "astro preview",
     "rss": "node scripts/rss.mjs",
-    "format": "prettier --write \"src/**/*.{ts,tsx,js,svelte,astro}\"",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,mjs,svelte,astro}\"",
     "update-version": "node scripts/update-version.mjs",
     "image-optimize": "node scripts/image-optimize.mjs"
   },
@@ -18,8 +18,11 @@
     "@astrojs/prefetch": "^0.1.1",
     "@astrojs/rss": "^2.1.0",
     "@fontsource/plus-jakarta-sans": "^4.5.11",
-    "astro": "^2.0.2",
+    "astro": "^2.0.0",
+    "astro-compress": "^1.1.28",
     "astro-html-beautifier": "^1.0.4",
+    "astro-html-minifier": "^0.4.0",
+    "astro-purgecss": "^2.0.0",
     "autoprefixer": "^10.4.13",
     "axios": "^1.2.5",
     "cssnano": "^5.1.14",
@@ -28,8 +31,7 @@
     "gray-matter": "4.0.3",
     "gsap": "^3.11.4",
     "lodash-es": "^4.17.21",
-    "preact": "^10.11.3",
-    "prismjs": "^1.29.0"
+    "preact": "^10.11.3"
   },
   "devDependencies": {
     "@astrojs/sitemap": "^1.0.0",
