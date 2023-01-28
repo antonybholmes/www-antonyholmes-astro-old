@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "prebuild": "yarn rss",
     "build": "astro build",
     "preview": "astro preview",
     "rss": "node scripts/rss.mjs",
