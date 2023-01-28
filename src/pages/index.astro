@@ -1,28 +1,19 @@
 ---
-import BaseCol from "../components/BaseCol.astro"
+import { getCollection } from "astro:content"
+import HCenterCol from "../components/HCenterCol.astro"
 import BaseLink from "../components/link/base-link"
 import BlueButtonArrowLink from "../components/link/blue-button-arrow-link"
 import BlueLink from "../components/link/blue-link"
 import PostsPage from "../components/pages/PostsPage.astro"
 import AvatarImageLarge from "../components/person/avatar-image-large"
-import VCenterRow from "../components/VCenterRow.astro"
 import VCenterCol from "../components/VCenterCol.astro"
-import HCenterCol from "../components/HCenterCol.astro"
-import { EMAIL, GITHUB_URL } from "../constants"
-import EnvelopeIcon from "../icons/envelope"
-import GitHubIcon from "../icons/github"
+import VCenterRow from "../components/VCenterRow.astro"
 import ContentLayout from "../layouts/ContentLayout.astro"
 import { getAuthorMap } from "../lib/api/author"
-import {
-  addAuthorsToPosts,
-  addExcerpts,
-  getAllPosts,
-  sortPosts,
-} from "../lib/api/post"
+import { sortPosts } from "../lib/api/post"
 import { getPageItems } from "../lib/paginate"
 import { getUrlFriendlyTag } from "../lib/tags"
 import { getAuthorBaseUrl } from "../lib/urls"
-import { getCollection } from "astro:content"
 
 const people = await getCollection("people")
 

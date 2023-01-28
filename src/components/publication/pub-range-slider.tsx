@@ -70,12 +70,12 @@ export default function PubRangeSlider({
   setYear2,
 }: {
   data: any[]
-  barWidth: number
-  barMargin: number
-  height: number
-  sliderHeight: number
-  xMargin: number
-  yMax: number
+  barWidth?: number
+  barMargin?: number
+  height?: number
+  sliderHeight?: number
+  xMargin?: number
+  yMax?: number
   r1: number
   setYear1: any
   r2: number
