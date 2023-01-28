@@ -5,6 +5,10 @@ import ThreeQuarterLayout from "./ThreeQuarterLayout.astro"
 const { content } = Astro.props
 ---
 
-<ThreeQuarterLayout title={content.title} subTitle={content.subtitle}>
+<ThreeQuarterLayout
+  title={content.title}
+  subTitle={content.subtitle}
+  showTitle={true}
+>
   <MarkdownDiv slot="main" className="mt-8"><slot /></MarkdownDiv>
 </ThreeQuarterLayout>

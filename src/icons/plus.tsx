@@ -19,10 +19,11 @@ export default function PlusIcon({ isPlus = true, className, style }: IProps) {
       <path d="M 4,8 L 12,8" />
 
       <path
-        d="M 4,8 L 12,8"
+        d="M 8,4 L 8,12"
         className={cn("trans-300 origin-center transition-transform", [
           isPlus,
-          "-rotate-90",
+          "scale-y-100",
+          "scale-y-0",
         ])}
       />
     </svg>

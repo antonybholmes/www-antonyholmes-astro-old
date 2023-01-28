@@ -16,13 +16,13 @@ import preact from "@astrojs/preact"
 // https://astro.build/config
 import prefetch from "@astrojs/prefetch"
 import partytown from "@astrojs/partytown"
-//import htmlBeautifier from "astro-html-beautifier";
+import htmlBeautifier from "astro-html-beautifier";
 
 // https://astro.build/config
-import purgecss from "astro-purgecss"
+//import purgecss from "astro-purgecss"
 
 // https://astro.build/config
-import htmlMinifier from "astro-html-minifier"
+//import htmlMinifier from "astro-html-minifier"
 
 // https://astro.build/config
 //import compress from "astro-compress";
@@ -40,8 +40,9 @@ export default defineConfig({
     }),
     prefetch(),
     partytown(),
+    htmlBeautifier(),
     //purgecss(),
-    htmlMinifier(),
+    //htmlMinifier(),
     //compress()
   ],
   markdown: {
