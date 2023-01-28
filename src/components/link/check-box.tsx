@@ -28,7 +28,7 @@ export default function CheckBox({
         <svg
           viewBox="0 0 16 16"
           xmlns="http://www.w3.org/2000/svg"
-          class="w-5"
+          className="w-5"
           style={{
             strokeLinecap: "round",
             strokeLinejoin: "round",
@@ -41,14 +41,14 @@ export default function CheckBox({
             width="14"
             height="14"
             rx="3"
-            class={cn("trans-300 transition-color", [
+            className={cn("trans-300 transition-color", [
               isSelected,
               "fill-blue-600 stroke-blue-600",
               "fill-white stroke-slate-300 group-hover:stroke-slate-400",
             ])}
           />
           {isSelected && (
-            <path d="M 4,8 L 7,11 L 12,5" class="stroke-white stroke-2" />
+            <path d="M 4,8 L 7,11 L 12,5" className="stroke-white stroke-2" />
           )}
         </svg>
       </BaseCheckBoxButton>

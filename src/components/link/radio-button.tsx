@@ -60,14 +60,14 @@ export default function RadioButton({
             cx="8"
             cy="8"
             r="7"
-            class={cn("trans-300 transition-color fill-white", [
+            className={cn("trans-300 transition-color fill-white", [
               selected,
               "stroke-blue-600",
               "stroke-slate-300 group-hover:stroke-slate-500",
             ])}
           />
 
-          {selected && <circle cx="8" cy="8" r="4" class="fill-blue-600" />}
+          {selected && <circle cx="8" cy="8" r="4" className="fill-blue-600" />}
         </svg>
       </BaseButton>
       <span className="grow">{children}</span>

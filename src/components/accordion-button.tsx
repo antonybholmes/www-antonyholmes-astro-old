@@ -37,7 +37,7 @@ export default function AccordionButton({
       ariaLabel={ariaLabel}
     >
       <div>{children}</div>
-      <ExpandTabArrow expanded={isExpanded} hover={hover} />
+      <ExpandTabArrow isExpanded={isExpanded} hover={hover} />
     </AnchorButton>
   )
 }

@@ -36,7 +36,7 @@ export default function ExpandTabButton({
       onMouseLeave={onMouseLeave}
     >
       <div>{children}</div>
-      <ExpandTabArrow expanded={isExpanded} hover={hover} />
+      <ExpandTabArrow isExpanded={isExpanded} hover={hover} />
     </AnchorButton>
   )
 }
