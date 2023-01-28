@@ -24,7 +24,7 @@ interface IProps extends IChildrenProps {
   pageBreak?: number
 }
 
-function Publications({
+export default function Publications({
   publications,
   showAbstract,
   showCount,
@@ -47,7 +47,7 @@ function Publications({
         </HCenterRow>
       )} */}
 
-      {publications.length > 0 && (
+      {publications.length > 0 ? (
         <BasePublicationList
           publications={publications}
           showAbstract={showAbstract}
@@ -56,9 +56,11 @@ function Publications({
           pageBreak={pageBreak}
           className={className}
         />
+      ) : (
+        <></>
       )}
 
-      {showMoreButton && (
+      {showMoreButton ? (
         <HCenterRow className="mt-8">
           <div>
             <BluePillButton
@@ -70,9 +72,9 @@ function Publications({
             </BluePillButton>
           </div>
         </HCenterRow>
+      ) : (
+        <></>
       )}
     </>
   )
 }
-
-export default Publications

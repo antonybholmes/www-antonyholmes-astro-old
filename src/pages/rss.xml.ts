@@ -7,11 +7,11 @@ import { getPostBaseUrl } from "../lib/urls"
 export async function get(context: { site: any }) {
   const allPosts = await getCollection("blog")
 
-  rss({
+  return rss({
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
     site: context.site,
-    items: allPosts.map((post: any) => ({
+    items: allPosts.map(post => ({
       title: post.data.title,
       description: post.data.description,
       pubDate: new Date(getDateFromSlug(post.slug)),

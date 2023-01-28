@@ -1,14 +1,14 @@
-import IFocusProps from "../../interfaces/focus-props"
+import cn from "../../lib/class-names"
 import ILinkProps from "../../interfaces/link-props"
 import IMouseProps from "../../interfaces/mouse-props"
-import cn from "../../lib/class-names"
 import ExtLink from "./ext-link"
+import IFocusProps from "../../interfaces/focus-props"
 
 interface IProps extends ILinkProps, IMouseProps, IFocusProps {
   underline?: boolean
 }
 
-const BaseLink = ({
+export default function BaseLink({
   href,
   target = "_blank",
   ariaLabel,
@@ -22,7 +22,7 @@ const BaseLink = ({
   onFocus,
   onBlur,
   children,
-}: IProps) => {
+}: IProps) {
   if (!ariaLabel) {
     ariaLabel = `Click to visit ${href}`
   }
@@ -54,7 +54,7 @@ const BaseLink = ({
       <a
         href={href}
         aria-label={ariaLabel}
-        className={cn("m-0 p-0", [underline, `hover:underline`], className)}
+        className={cn([underline, `hover:underline`], className)}
         onClick={onClick}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
@@ -68,5 +68,3 @@ const BaseLink = ({
     )
   }
 }
-
-export default BaseLink

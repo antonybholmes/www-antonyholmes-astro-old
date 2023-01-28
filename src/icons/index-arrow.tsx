@@ -1,10 +1,6 @@
-import type IIconProps from "../interfaces/icon-props"
+import IClassProps from "../interfaces/class-props"
 
-interface IProps extends IIconProps {
-  selected?: boolean
-}
-
-export default function IndexArrow({ selected = false, className }: IProps) {
+export default function IndexArrow({ className }: IClassProps) {
   //const lineRef = useRef(null)
   //const arrowRef = useRef(null)
 

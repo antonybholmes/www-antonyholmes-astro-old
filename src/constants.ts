@@ -16,6 +16,7 @@ export const GENERIC_IMAGES = config.GENERIC_IMAGES
 export const IMAGEKIT_URL = config.IMAGEKIT_URL
 export const GITHUB_URL = config.GITHUB_URL
 export const CLS_TEXT_GRAY_HOVER = config.CLS_TEXT_GRAY_HOVER
+export const ANIMATION_DURATION_S = config.ANIMATION_DURATION_S
 
 export const DEFAULT_SECTION = config.DEFAULT_SECTION
 

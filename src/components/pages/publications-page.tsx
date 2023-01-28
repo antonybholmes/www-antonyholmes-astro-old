@@ -1,8 +1,7 @@
 import { useEffect, useState } from "preact/hooks"
 
 import getBooleanSearch from "../../lib/boolean-search"
-import getJournalPublications from "../../lib/pub/journal-publications"
-import sortPublications from "../../lib/pub/sort-publications"
+
 import getTopAuthors from "../../lib/top-authors"
 import getTopJournals from "../../lib/top-journals"
 import SearchBar from "../search/searchbar"
@@ -17,20 +16,28 @@ import BaseRow from "../base-row"
 
 import VCenterRow from "../v-center-row"
 
-import getAuthorPublications from "../../lib/pub/author-publications"
 import HCenterRow from "../h-center-row"
 import Pagination from "../pagination"
 import AuthorFilter from "../publication/author-filter"
 
-import { RECORDS_PER_PAGE, TEXT_SHOW_MORE } from "../../constants"
+import { SEARCH_RECORDS_PER_PAGE, TEXT_SHOW_MORE } from "../../constants"
 import SortIcon from "../../icons/sort"
 import ThreeQuarterLayout from "../../layouts/three-quarter-layout"
+
+import { CollectionEntry } from "astro:content"
+import getAuthorPublications from "../../lib/pub/author-publications"
+import getJournalPublications from "../../lib/pub/journal-publications"
 import pubYearCount from "../../lib/pub/pub-year-count"
+import sortPublications from "../../lib/pub/sort-publications"
 import { getShortName } from "../../lib/text"
+import Accordion from "../accordion"
 import BaseCol from "../base-col"
+import HCenterCol from "../h-center-col"
+import BaseButton from "../link/base-button"
 import BlueRoundedButton from "../link/blue-rounded-button"
 import ToggleSwitch from "../link/toggle-switch"
 import PubRangeSlider from "../publication/pub-range-slider"
+import PubMedLink from "../publication/pubmed-link"
 
 const EMPTY_QUERY = ""
 
@@ -204,10 +211,11 @@ function results(search: string, page: number, filteredPublications: any[]) {
 }
 
 interface IProps {
+  person: CollectionEntry<"people">
   publications: any[]
 }
 
-export default function PublicationsPage({ publications }: IProps) {
+export default function Page({ person, publications }: IProps) {
   //const [publications, setPublications] = useState<any[]>([])
 
   const [journals, setJournals] = useState<any[]>([])
@@ -251,7 +259,7 @@ export default function PublicationsPage({ publications }: IProps) {
   const [year1, setYear1] = useState(-1)
   const [year2, setYear2] = useState(-1)
 
-  const [recordsPerPage, setRecordsPerPage] = useState(RECORDS_PER_PAGE)
+  const [recordsPerPage, setRecordsPerPage] = useState(SEARCH_RECORDS_PER_PAGE)
 
   const [showAll, setShowAll] = useState(false)
 
@@ -476,18 +484,17 @@ export default function PublicationsPage({ publications }: IProps) {
           onSearch={onSearch}
           placeholder="Search publications..."
           text={query}
-          className="w-full xl:w-3/4"
+          className="w-full"
         />
       }
-      crumbs={[["Publications", "/publications"]]}
-      className="mb-32 gap-x-16"
+      className="gap-x-16"
     >
       <div>
         <SearchBar
           onSearch={onSearch}
           placeholder="Search publications..."
           text={query}
-          className="mb-8 lg:hidden"
+          className="mb-8 md:hidden"
         />
 
         <VCenterRow className="justify-between">
@@ -535,9 +542,14 @@ export default function PublicationsPage({ publications }: IProps) {
             />
           </HCenterRow>
         )}
+
+        <HCenterCol className="mt-32 items-center gap-y-2">
+          <span>See more on</span>
+          <PubMedLink person={person} />
+        </HCenterCol>
       </div>
 
-      <BaseCol className="gap-y-6 text-sm">
+      <BaseCol className="text-sm">
         {/* <ToggleSwitch
                 isSelected={showAbstract}
                 onClick={onShowAbstractsChange}
@@ -546,31 +558,32 @@ export default function PublicationsPage({ publications }: IProps) {
               </ToggleSwitch> */}
 
         {yearData.length > 0 && (
-          <PubRangeSlider
-            data={yearData}
-            r1={year1}
-            setYear1={setYear1}
-            r2={year2}
-            setYear2={setYear2}
-          />
+          <Accordion title="Years" isExpanded={true}>
+            <PubRangeSlider
+              data={yearData}
+              r1={year1}
+              setYear1={setYear1}
+              r2={year2}
+              setYear2={setYear2}
+            />
+          </Accordion>
         )}
 
-        <div>
+        <Accordion title="Sort">
           <VCenterRow className="justify-between">
-            <h2>Sort</h2>
             <BaseRow className="overflow-hidden">
-              <button
-                aria-label="Sort ascending"
+              <BaseButton
+                ariaLabel="Sort ascending"
                 onClick={() => setDescending(!descending)}
-                className="flex h-6 w-6 flex-row items-center justify-center  transition-colors "
+                className="flex h-5 w-5 flex-row items-center justify-center  transition-colors "
               >
                 <SortIcon className="w-4" descending={descending} />
-              </button>
+              </BaseButton>
             </BaseRow>
           </VCenterRow>
 
           <SortOrder onChange={onSortChange} selected={sortOrder} />
-        </div>
+        </Accordion>
 
         <JournalFilter
           journals={journals}
@@ -589,19 +602,3 @@ export default function PublicationsPage({ publications }: IProps) {
     </ThreeQuarterLayout>
   )
 }
-
-// export async function getStaticProps() {
-//   const file = join(PUBLICATIONS_DIR, `lab.json`)
-
-//   let allPublications = []
-
-//   if (existsSync(file)) {
-//     allPublications = readJsonSync(file)
-//   }
-
-//   return {
-//     props: {
-//       allPublications,
-//     },
-//   }
-// }

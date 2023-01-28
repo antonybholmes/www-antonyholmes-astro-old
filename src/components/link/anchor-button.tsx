@@ -1,4 +1,3 @@
-import { MouseEvent } from "preact/hooks"
 import useMouseUpListener from "../../hooks/use-mouseup-listener"
 import type IAriaProps from "../../interfaces/aria-props"
 import type IChildrenProps from "../../interfaces/children-props"

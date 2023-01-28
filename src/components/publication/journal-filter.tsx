@@ -1,5 +1,6 @@
 import { useState } from "preact/hooks"
 import { getShortName } from "../../lib/text"
+import Accordion from "../accordion"
 import ExpandTab from "../expand-tab"
 import CheckBox from "../link/check-box"
 import ToggleSwitch from "../link/toggle-switch"
@@ -46,7 +47,7 @@ function JournalFilter({
   onClick,
   max = 10,
 }: JournalFilterProps) {
-  const [isExpanded, setIsExpanded] = useState(true)
+  const [isExpanded, setIsExpanded] = useState(false)
   const [showAll, setShowAll] = useState(false)
 
   journals = journals.slice(
@@ -63,7 +64,7 @@ function JournalFilter({
       >
         Journals
       </ToggleSwitch> */}
-      <ExpandTab
+      <Accordion
         title="Journals"
         isExpanded={isExpanded}
         onClick={() => setIsExpanded(!isExpanded)}
@@ -88,11 +89,11 @@ function JournalFilter({
             )
           })}
         </ul>
-      </ExpandTab>
+      </Accordion>
       {/* <Button
         onClick={onShowAll}
         ariaLabel="Show more items"
-        className={cn(BASE_BUTTON_CLS, "trans-300 transition-transform w-full", [
+        className={cn(BASE_BUTTON_CLS, "trans-ani-300 transition-transform w-full", [
           showAll,
           "rotate-180",
         ])}

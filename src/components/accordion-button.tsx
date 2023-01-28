@@ -9,7 +9,7 @@ interface IProps extends IChildrenProps {
   onClick?: (e: MouseEvent) => void
 }
 
-export default function ExpandTabButton({
+export default function AccordionButton({
   isExpanded = false,
   onClick,
   className,
@@ -29,7 +29,7 @@ export default function ExpandTabButton({
     <AnchorButton
       onClick={onClick}
       className={cn(
-        "trans-ani-300 transition-color -mx-3 flex cursor-pointer flex-row items-center justify-between gap-x-2 rounded-md py-1 px-3 font-semibold hover:bg-slate-100",
+        "trans-ani-300 transition-color flex cursor-pointer flex-row items-center justify-between gap-x-2 rounded-md px-4 py-2 font-semibold hover:bg-slate-100",
         className
       )}
       onMouseEnter={onMouseEnter}

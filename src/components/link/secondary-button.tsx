@@ -1,4 +1,3 @@
-import { useState } from "preact/hooks"
 import cn from "../../lib/class-names"
 import type { IButtonProps } from "./base-button"
 import OutlineRoundedButton from "./outline-rounded-button"
@@ -11,23 +10,18 @@ export default function SecondaryButton({
   style,
   children,
 }: IButtonProps) {
-  const [hover, setHover] = useState(false)
-  const [down, setDown] = useState(false)
+  //const [hover, setHover] = useState(false)
+  //const [down, setDown] = useState(false)
 
   return (
     <OutlineRoundedButton
       onClick={onClick}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      onMouseDown={() => setDown(true)}
-      onMouseUp={() => setDown(false)}
+      // onMouseEnter={() => setHover(true)}
+      // onMouseLeave={() => setHover(false)}
+      // onMouseDown={() => setDown(true)}
+      // onMouseUp={() => setDown(false)}
       ariaLabel={ariaLabel}
-      className={cn(
-        SECONDARY_BUTTON_CLS,
-        [down, "bg-slate-100"],
-        [hover || down, "border-slate-400"],
-        className
-      )}
+      className={cn(SECONDARY_BUTTON_CLS, className)}
       style={style}
     >
       {children}

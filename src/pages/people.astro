@@ -9,7 +9,7 @@ const people = await getCollection("people")
 <ContentLayout title="People" showTitle={false}>
   <ul slot="main">
     {
-      people.map((person: CollectionEntry<"people">, index: number) => {
+      people.map(person => {
         return (
           <li>
             <CompactAvatars people={[person.data.name]} />

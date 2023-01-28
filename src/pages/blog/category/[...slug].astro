@@ -1,14 +1,8 @@
 ---
+import { getCollection } from "astro:content"
 import PostsPage from "../../../components/pages/PostsPage.astro"
 import ContentLayout from "../../../layouts/ContentLayout.astro"
-import { getAuthorMap } from "../../../lib/api/author"
-import {
-  addAuthorsToPosts,
-  addExcerpts,
-  getAllPosts,
-  getCategoryPostMap,
-  sortPosts,
-} from "../../../lib/api/post"
+import { getCategoryPostMap } from "../../../lib/api/post"
 import { paginate } from "../../../lib/paginate"
 import { getUrlFriendlyTag } from "../../../lib/tags"
 import {
@@ -20,10 +14,7 @@ import {
 export async function getStaticPaths() {
   let paths: any[] = []
 
-  const allPosts = addAuthorsToPosts(
-    await Promise.all(addExcerpts(sortPosts(getAllPosts()))),
-    getAuthorMap()
-  )
+  const allPosts = await getCollection("blog")
 
   const categoryMap = getCategoryPostMap(allPosts)
 

@@ -5,8 +5,8 @@ import getCopyright from "../lib/copyright"
 import { INFO_LINKS } from "../menus"
 import ContentDiv from "./content-div"
 import HCenterRow from "./h-center-row"
+import BlackLink from "./link/black-link"
 import ExtLink from "./link/ext-link"
-import WhiteLink from "./link/white-link"
 
 export default function Footer() {
   return (
@@ -14,7 +14,7 @@ export default function Footer() {
       <ContentDiv>
         <></>
         <>
-          <ul className="flex flex-row justify-center gap-x-8 border-t border-slate-200 pt-16 text-sm  font-semibold">
+          <ul className="flex flex-row justify-center gap-x-8 border-t border-slate-200 pt-16 text-sm font-semibold">
             <li>{getCopyright()}</li>
           </ul>
         </>
@@ -42,13 +42,13 @@ export default function Footer() {
               {INFO_LINKS.map(
                 (link: { name: string; url: string }, index: number) => (
                   <li key={index}>
-                    <WhiteLink
+                    <BlackLink
                       href={link.url}
                       ariaLabel={`View ${link.name}`}
                       underline={true}
                     >
                       {link.name}
-                    </WhiteLink>
+                    </BlackLink>
                   </li>
                 )
               )}

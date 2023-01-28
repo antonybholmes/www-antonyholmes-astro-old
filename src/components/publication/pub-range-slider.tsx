@@ -151,7 +151,7 @@ export default function PubRangeSlider({
   if (r1 > -1 && r1 < data.length && r2 > -1 && r2 < data.length) {
     if (x2 - x1 > 50) {
       text1 = (
-        <text x={x1} y={y + 25} textAnchor="middle">
+        <text x={x1} y={y + 25} text-anchor="middle">
           {data[r1].name}
         </text>
       )
@@ -159,13 +159,13 @@ export default function PubRangeSlider({
       if (x1 === x2) {
         // slider for 1 year so only 1 label required
         text1 = (
-          <text x={(x1 + x2) / 2} y={y + 25} textAnchor="middle">
+          <text x={(x1 + x2) / 2} y={y + 25} text-anchor="middle">
             {`${data[r1].name} `}
           </text>
         )
       } else {
         text1 = (
-          <text x={(x1 + x2) / 2} y={y + 25} textAnchor="middle">
+          <text x={(x1 + x2) / 2} y={y + 25} text-anchor="middle">
             {`${data[r1].name}-${data[r2].name}`}
           </text>
         )
@@ -177,7 +177,7 @@ export default function PubRangeSlider({
 
   if (r2 > -1 && r2 < data.length && x2 - x1 > 50) {
     text2 = (
-      <text x={x2} y={y + 25} textAnchor="middle">
+      <text x={x2} y={y + 25} text-anchor="middle">
         {data[r2].name}
       </text>
     )
@@ -185,10 +185,12 @@ export default function PubRangeSlider({
 
   return (
     <div className="w-full">
-      <VCenterRow className="justify-between">
-        <h2>Years</h2>
-
-        <SecondaryButton onClick={onResetClick} ariaLabel="Reset year range">
+      <VCenterRow className="justify-end">
+        <SecondaryButton
+          onClick={onResetClick}
+          ariaLabel="Reset year range"
+          className="py-1 px-2"
+        >
           Reset
         </SecondaryButton>
       </VCenterRow>
@@ -237,7 +239,7 @@ export default function PubRangeSlider({
               x2={xMargin + plotWidth}
               y1={y}
               y2={y}
-              className="stroke-slate-300 stroke-2"
+              class="stroke-slate-300 stroke-2"
             />
 
             {r1 > -1 && r2 >= r1 && (
@@ -246,7 +248,7 @@ export default function PubRangeSlider({
                 x2={x2}
                 y1={y}
                 y2={y}
-                className="stroke-emerald-400 stroke-2"
+                class="stroke-emerald-400 stroke-2"
               />
             )}
 

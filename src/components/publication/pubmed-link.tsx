@@ -1,13 +1,13 @@
+import { CollectionEntry } from "astro:content"
 import { useState } from "preact/hooks"
 import PubMedIcon from "../../icons/pubmed"
-import IPostAuthor from "../../interfaces/post-author"
 import BaseLink from "../link/base-link"
 //import SecondaryButtonLink from "../link/secondary-button-link"
 
 // `https://pubmed.ncbi.nlm.nih.gov/?term=${person.lastName}+${person.firstName}%5BAuthor%5D&sort=pubdate`
 
-function getLink(person: IPostAuthor): string {
-  const tokens = person.frontmatter.name.split(" ")
+function getLink(person: CollectionEntry<"people">): string {
+  const tokens = person.data.name.split(" ")
   const f = tokens[0]
   const l = tokens[tokens.length - 1]
 
@@ -15,7 +15,7 @@ function getLink(person: IPostAuthor): string {
 }
 
 interface IPubMedLinkProps {
-  person: IPostAuthor
+  person: CollectionEntry<"people">
 }
 
 export default function PubMedLink({ person }: IPubMedLinkProps) {
@@ -27,8 +27,8 @@ export default function PubMedLink({ person }: IPubMedLinkProps) {
 
   let url: string
 
-  if (person.frontmatter.pubmed) {
-    url = person.frontmatter.pubmed
+  if (person.data.pubmed) {
+    url = person.data.pubmed
   } else {
     url = getLink(person)
   }
@@ -36,7 +36,7 @@ export default function PubMedLink({ person }: IPubMedLinkProps) {
   return (
     <BaseLink
       href={url}
-      className="trans-300 flex flex-row items-center gap-x-3 opacity-80 transition-opacity hover:opacity-100"
+      className="trans-ani-300 flex flex-row items-center gap-x-3 opacity-80 transition-opacity hover:opacity-100"
       ariaLabel="View PubMed article"
       onHover={onHover}
     >

@@ -3,7 +3,7 @@ import cn from "../../lib/class-names"
 import OutlineRoundedButtonLink from "./outline-rounded-button-link"
 
 export const SECONDARY_BUTTON_CLS =
-  "px-3 py-1.5 text-xs font-medium border-slate-200"
+  "border-slate-200 hover:border-slate-400 active:border-slate-400 active:bg-slate-100"
 
 export default function SecondaryButtonLink({
   href,
