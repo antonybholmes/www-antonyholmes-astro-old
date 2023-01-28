@@ -147,11 +147,11 @@ function BasePublication({
 
         <AnchorButton
           ariaLabel="Show abstract"
-          className="trans-ani-300 transition-color rounded border border-slate-200 stroke-slate-400 hover:border-slate-400 hover:stroke-slate-900"
+          className="trans-300 transition-color rounded border border-slate-200 stroke-slate-400 hover:border-slate-400 hover:stroke-slate-900"
           onClick={() => setExpanded(!isExpanded)}
         >
           {/* <ChevronRightIcon
-            className={cn("trans-ani-300 w-3 stroke-2  transition-transform", [
+            className={cn("trans-300 w-3 stroke-2  transition-transform", [
               isExpanded,
               "rotate-90",
             ])}
@@ -199,7 +199,7 @@ function BasePublication({
             >
               <ChevronRightIcon
                 className={cn(
-                  "trans-ani-300 w-3 stroke-2  transition-transform",
+                  "trans-300 w-3 stroke-2  transition-transform",
                   [isExpanded, "rotate-90"]
                 )}
               />

@@ -17,6 +17,7 @@ export default function BlueButtonLink({
     <ButtonLink
       href={href}
       ariaLabel={ariaLabel}
+      underline={underline}
       className={cn(BLUE_BUTTON_CLS, className)}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}

@@ -47,7 +47,7 @@ export default function ArrowLink({
     >
       {children}
 
-      <IndexArrow selected={hover} className="w-4 stroke-2" />
+      <IndexArrow className="w-4 stroke-2" />
     </BaseLink>
   )
 }

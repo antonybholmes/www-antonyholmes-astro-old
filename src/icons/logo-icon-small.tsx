@@ -24,7 +24,7 @@ export default function SmallLogoIcon({
       <rect
         width="40"
         height="40"
-        class={cn("trans-ani-300 transition-color ", [
+        class={cn("trans-300 transition-color ", [
           headerMode === "dark",
           "fill-transparent",
           "fill-blue-600 text-white group-hover:fill-blue-500",

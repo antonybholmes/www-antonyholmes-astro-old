@@ -21,7 +21,7 @@ const authorMap = getAuthorMap(people)
 
 const posts = getPageItems(sortPosts(await getCollection("blog")), 0, 10)
 
-const person = authorMap[getUrlFriendlyTag("Antony Holmes")]
+//const person = authorMap[getUrlFriendlyTag("Antony Holmes")]
 ---
 
 <ContentLayout title="Home" showCrumbs={false}>
@@ -76,13 +76,11 @@ const person = authorMap[getUrlFriendlyTag("Antony Holmes")]
           <p class="text-center">My life story probably won't be optioned.</p>
         </HCenterCol>
 
-        <VCenterRow className="justify-center font-semibold">
+        <VCenterRow className="justify-center">
           <div class="flex flex-row gap-6">
-            <BlueButtonArrowLink
-              href="/resume"
-              className="px-4 py-2"
-              text="Resume"
-            />
+            <BlueButtonArrowLink href="/resume" className="px-4 py-2">
+              Resume
+            </BlueButtonArrowLink>
 
             <BlueLink
               href="/publications"

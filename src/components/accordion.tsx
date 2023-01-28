@@ -1,19 +1,19 @@
 import { useState } from "preact/hooks"
-import IChildrenProps from "../interfaces/children-props"
-import cn from "../lib/class-names"
 import AccordionButton from "./accordion-button"
 import ExpandDetails from "./expand-details"
+import { IButtonProps } from "./link/anchor-button"
 
-interface IProps extends IChildrenProps {
+interface IProps extends IButtonProps {
   title: string
   isExpanded?: boolean
-  onClick?: (e: MouseEvent) => void
+  btnClassName?: string
 }
 
 export default function Accordion({
   title,
   isExpanded = false,
   className,
+  btnClassName = "rounded-lg",
   children,
   onClick,
 }: IProps) {
@@ -35,6 +35,7 @@ export default function Accordion({
         isExpanded={status}
         onClick={_onClick}
         ariaLabel={`${status ? "Show" : "Hide"} ${title}`}
+        className={btnClassName}
       >
         {title}
       </AccordionButton>

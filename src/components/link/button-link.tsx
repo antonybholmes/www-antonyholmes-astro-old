@@ -2,7 +2,7 @@ import type ILinkProps from "../../interfaces/link-props"
 import cn from "../../lib/class-names"
 import BaseLink from "./base-link"
 
-export const BUTTON_CLS = `flex flex-row items-center justify-center trans-ani-300 transition-colors`
+export const BUTTON_CLS = `flex flex-row items-center justify-center trans-300 transition-colors`
 
 export default function ButtonLink({
   href,
@@ -27,4 +27,4 @@ export default function ButtonLink({
   )
 }
 
-//font-bold bg-blue-600 hover:bg-blue-600 text-white shadow-md rounded px-5 py-3 trans-ani"
+//font-bold bg-blue-600 hover:bg-blue-600 text-white shadow-md rounded px-5 py-3 trans"

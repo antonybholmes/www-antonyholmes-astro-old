@@ -1,4 +1,8 @@
 import IClassProps from "../interfaces/class-props"
+import cn from "../lib/class-names"
+
+const W = 12
+const Y = 6
 
 export default function IndexArrow({ className }: IClassProps) {
   //const lineRef = useRef(null)
@@ -29,20 +33,20 @@ export default function IndexArrow({ className }: IClassProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 16 16"
-      className={className}
+      viewBox={`0 0 ${W} ${W}`}
+      class={cn(className)}
       style={{ strokeLinecap: "round", strokeLinejoin: "round", fill: "none" }}
     >
       <line
         x1="4"
-        y1="9"
-        x2="11"
-        y2="9"
-        className="trans-300 opacity-0 transition-opacity group-hover:opacity-100"
+        y1={Y}
+        x2="9"
+        y2={Y}
+        class="trans-300 opacity-0 transition-opacity group-hover:opacity-100"
       />
       <path
-        d="M 6,5 L 10,9 L 6,13"
-        className="trans-300 transition-transform group-hover:translate-x-0.5"
+        d={`M 6,3 L 9,${Y} L 6,9`}
+        class="trans-300 transition-transform group-hover:translate-x-[2px]"
       />
     </svg>
   )

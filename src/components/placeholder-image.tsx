@@ -101,7 +101,7 @@ export default memo(function PlaceholderImage({
           width={size[0]}
           height={size[1]}
           className={cn(
-            "trans-ani-700 absolute z-0 h-full w-full object-cover transition-placeholder",
+            "trans-700 absolute z-0 h-full w-full object-cover transition-placeholder",
             className,
             imgClassName
           )}

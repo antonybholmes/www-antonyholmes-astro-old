@@ -48,7 +48,7 @@ export default function ArrowButtonLink({
     >
       <span>{children}</span>
 
-      <IndexArrow selected={hover} className="w-4 stroke-2" />
+      <IndexArrow className="w-4 stroke-2" />
     </PillButtonLink>
   )
 }

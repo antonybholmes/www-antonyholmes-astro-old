@@ -113,10 +113,11 @@ export default function MenuOverlay({
     >
       <div
         //ref={sideMenuRef}
-        className={cn(
-          "trans-ani-300 transition-translation h-full w-72 bg-white",
-          [showMenu, "ml-0", "-ml-8"]
-        )}
+        className={cn("trans-300 transition-translation h-full w-72 bg-white", [
+          showMenu,
+          "ml-0",
+          "-ml-8",
+        ])}
       >
         <VCenterRow className="gap-x-2 px-5 py-3">
           <MenuOpenButton showMenu={showMenu} onClick={onClick} />

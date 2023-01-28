@@ -10,13 +10,13 @@ const PostHeader = ({ post }: IPostProps) => (
       <></>
       <>
         <div className="flex flex-col gap-y-2 md:w-70/100">
-          {/* <Breadcrumb  /> */}
           <PostCategoryLink post={post} showSections={true} />
 
           <PageTitle
             title={post.data.title}
             subTitle={post.data.description}
-            className="text-slate-50"
+            className="text-slate-100"
+            subClassName="text-slate-400"
           />
         </div>
         {/* <PostDetails post={post} className="block lg:hidden mb-8" /> */}

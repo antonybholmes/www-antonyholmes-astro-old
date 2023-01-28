@@ -1,15 +1,15 @@
 import BaseLink from "../link/base-link"
 //import Search from '../search/search'
+import { useState } from "preact/hooks"
+import useWindowResize from "../../hooks/use-window-resize"
 import LogoIconSmall from "../../icons/logo-icon-small"
+import cn from "../../lib/class-names"
 import ContentDiv from "../content-div"
 import VCenterRow from "../v-center-row"
 import HeaderLinks from "./header-links"
 import IHeaderProps from "./header-props"
 import MenuOpenButton from "./menu-button-open"
 import { IMenuOverlayProps } from "./menu-overlay"
-import useWindowResize from "../../hooks/use-window-resize"
-import { useEffect, useRef, useState } from "preact/hooks"
-import cn from "../../lib/class-names"
 
 interface IProps extends IHeaderProps, IMenuOverlayProps {
   scrollY: number
@@ -26,14 +26,8 @@ export default function LargeHeader({
 }: IProps) {
   const [showLinks, setShowLinks] = useState(false)
 
-  const firstRender = useRef(true)
-
   useWindowResize(({ width, height }) => {
     setShowLinks(width > 768)
-
-    if (firstRender.current) {
-      //firstRender.current = false
-    }
   })
 
   return (
@@ -63,11 +57,12 @@ export default function LargeHeader({
             tab={tab}
             headerMode={headerMode}
             scrollY={scrollY}
-            className={cn([
-              showLinks,
-              [[!firstRender.current, "overlay-show"], "visible opacity-100"],
-              [[!firstRender.current, "overlay-hide"], "invisible opacity-0"],
-            ])}
+            // className={cn([
+            //   showLinks,
+            //   "overlay-show visible opacity-100",
+            //   "overlay-hide invisible opacity-0",
+            // ])}
+            className="invisible md:visible"
           />
         </VCenterRow>
         <div className="hidden md:block">{children && children}</div>
