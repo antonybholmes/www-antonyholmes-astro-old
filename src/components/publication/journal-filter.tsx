@@ -1,7 +1,6 @@
 import { useState } from "preact/hooks"
 import { getShortName } from "../../lib/text"
 import Accordion from "../accordion"
-import ExpandTab from "../expand-tab"
 import CheckBox from "../link/check-box"
 import ToggleSwitch from "../link/toggle-switch"
 import VCenterRow from "../v-center-row"
@@ -21,6 +20,7 @@ export function Journal({ index, journal, isSelected, onClick }: JournalProps) {
         onClick={() => onClick(journal[0], !isSelected)}
         isSelected={isSelected}
         className="w-full"
+        ariaLabel={`Show ${journal[1]} articles`}
       >
         <VCenterRow className="w-full justify-between">
           <span className="3xl:hidden">{getShortName(journal[0])}</span>
@@ -73,6 +73,7 @@ function JournalFilter({
           className="mt-2 w-full"
           onClick={() => setShowAll(!showAll)}
           isSelected={showAll}
+          ariaLabel="Show all journals"
         >
           Show All
         </ToggleSwitch>

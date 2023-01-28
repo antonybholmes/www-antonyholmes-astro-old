@@ -42,6 +42,7 @@ function AuthorFilter({
           className="mt-2 w-full"
           onClick={() => setShowAll(!showAll)}
           isSelected={showAll}
+          ariaLabel="Show all authors"
         >
           Show All
         </ToggleSwitch>

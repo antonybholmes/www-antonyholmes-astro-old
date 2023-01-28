@@ -176,3 +176,8 @@ td {
 .placeholder-hide {
   transition: opacity 700ms ease-out, visibility 0s ease-out 700ms;
 }
+
+// Add some padding around code blocks in markdown
+.astro-code {
+  @apply p-4;
+}

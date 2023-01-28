@@ -7,6 +7,7 @@ export default function ToggleSwitch({
   index = -1,
   isSelected,
   onClick,
+  ariaLabel,
   className,
   children,
 }: ICheckBoxProps) {
@@ -17,6 +18,7 @@ export default function ToggleSwitch({
         isSelected={isSelected}
         onClick={() => onClick(index, !isSelected)}
         className="group cursor-pointer"
+        ariaLabel={ariaLabel}
       >
         <svg
           viewBox="0 0 24 16"

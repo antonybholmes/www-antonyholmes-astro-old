@@ -1,28 +1,18 @@
 ---
+import { CollectionEntry, getCollection } from "astro:content"
 import BaseRow from "../../components/BaseRow.astro"
 import HCenterRow from "../../components/HCenterRow.astro"
 import PageTitle from "../../components/page-title"
 import PostsPage from "../../components/pages/PostsPage.astro"
 import AvatarImageLarge from "../../components/person/avatar-image-large"
 import PostBody from "../../components/post/post-body"
+import { PEOPLE_SLUG } from "../../constants"
 import ContentLayout from "../../layouts/ContentLayout.astro"
-import {
-  addAuthorHtml,
-  getAllAuthors,
-  getAuthorMap,
-} from "../../lib/api/author"
-import {
-  addAuthorsToPosts,
-  addExcerpts,
-  getAllPosts,
-  getAuthorPostMap,
-  sortPosts,
-} from "../../lib/api/post"
+import { getAuthorMap } from "../../lib/api/author"
+import { getAuthorPostMap, sortPosts } from "../../lib/api/post"
 import { paginate } from "../../lib/paginate"
 import { getUrlFriendlyTag } from "../../lib/tags"
 import { getAuthorBaseUrl } from "../../lib/urls"
-import { PEOPLE_SLUG } from "../../constants"
-import { CollectionEntry, getCollection } from "astro:content"
 
 export async function getStaticPaths() {
   const paths: any[] = []
@@ -67,7 +57,11 @@ const { Content, headings } = await person.render()
       <div class="w-full">
         <HCenterRow className="mb-8 lg:hidden">
           <div>
-            <AvatarImageLarge person={person.data.name} className="w-56" />
+            <AvatarImageLarge
+              person={person.data.name}
+              className="w-64 h-64"
+              client:visible
+            />
           </div>
         </HCenterRow>
         <PageTitle
@@ -79,7 +73,11 @@ const { Content, headings } = await person.render()
         <PostBody className="mt-8"><Content /></PostBody>
       </div>
       <div class="hidden lg:block">
-        <AvatarImageLarge person={person.data.name} className="w-64" />
+        <AvatarImageLarge
+          person={person.data.name}
+          className="w-64 h-64"
+          client:visible
+        />
       </div>
     </BaseRow>
 

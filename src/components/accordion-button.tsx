@@ -2,16 +2,16 @@ import { useState } from "preact/hooks"
 import IChildrenProps from "../interfaces/children-props"
 import cn from "../lib/class-names"
 import ExpandTabArrow from "./expand-tab-arrow"
-import AnchorButton from "./link/anchor-button"
+import AnchorButton, { IButtonProps } from "./link/anchor-button"
 
-interface IProps extends IChildrenProps {
+interface IProps extends IButtonProps {
   isExpanded?: boolean
-  onClick?: (e: MouseEvent) => void
 }
 
 export default function AccordionButton({
   isExpanded = false,
   onClick,
+  ariaLabel,
   className,
   children,
 }: IProps) {
@@ -34,6 +34,7 @@ export default function AccordionButton({
       )}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      ariaLabel={ariaLabel}
     >
       <div>{children}</div>
       <ExpandTabArrow expanded={isExpanded} hover={hover} />

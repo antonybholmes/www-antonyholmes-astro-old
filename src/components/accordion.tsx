@@ -31,7 +31,11 @@ export default function Accordion({
 
   return (
     <div className={className}>
-      <AccordionButton isExpanded={status} onClick={_onClick}>
+      <AccordionButton
+        isExpanded={status}
+        onClick={_onClick}
+        ariaLabel={`${status ? "Show" : "Hide"} ${title}`}
+      >
         {title}
       </AccordionButton>
 

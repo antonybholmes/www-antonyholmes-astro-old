@@ -5,6 +5,7 @@ interface RadioButtonGroupProps {
   items: string[]
   selected?: string
   onClick: (index: number) => void
+  prefix?: string
   className?: string
 }
 
@@ -12,6 +13,7 @@ export default function RadioButtonGroup({
   items,
   selected = "",
   onClick,
+  prefix = "Sort",
   className,
 }: RadioButtonGroupProps) {
   const [index, setIndex] = useState(selected)
@@ -32,6 +34,7 @@ export default function RadioButtonGroup({
               index={index}
               selected={item === selected}
               onClick={_onClick}
+              ariaLabel={`${prefix} by ${item}`}
             >
               {item}
             </RadioButton>

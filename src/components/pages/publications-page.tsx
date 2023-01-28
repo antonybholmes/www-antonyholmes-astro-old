@@ -505,6 +505,7 @@ export default function Page({ person, publications }: IProps) {
             onClick={() => setShowAbstract(!showAbstract)}
             isSelected={showAbstract}
             className="text-sm"
+            ariaLabel="Show Abstracts"
           >
             Show Abstracts
           </ToggleSwitch>
