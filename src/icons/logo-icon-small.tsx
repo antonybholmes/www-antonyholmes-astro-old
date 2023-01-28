@@ -15,7 +15,7 @@ export default function SmallLogoIcon({
       viewBox="0 0 40 40"
       xmlns="http://www.w3.org/2000/svg"
       class={cn(
-        "group h-10 font-bold rounded border",
+        "group h-10 rounded border font-bold",
         [headerMode === "dark", "border-white/20", "border-transparent"],
         className
       )}

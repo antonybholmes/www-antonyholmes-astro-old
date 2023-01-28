@@ -39,20 +39,20 @@ export default function LargeHeader({
   return (
     <ContentDiv className="py-3">
       <></>
-      <nav className="h-full items-center gap-x-1 grid grid-cols-2 2lg:grid-cols-3">
+      <nav className="grid h-full grid-cols-2 items-center gap-x-1 2lg:grid-cols-3">
         <VCenterRow className="gap-x-4">
           <VCenterRow className="gap-x-2">
             <MenuOpenButton
               onClick={onClick}
               showMenu={showMenu}
               headerMode={headerMode}
-              className="transition-opacity opacity-100 md:opacity-0 visible md:invisible"
+              className="visible opacity-100 transition-opacity md:invisible md:opacity-0"
             />
             {/* <span className="border-l border-slate-300 h-10 md:hidden" style={{width: "1px"}}/> */}
             <BaseLink href="/" ariaLabel="Goto Homepage">
               <LogoIconSmall
                 headerMode={headerMode}
-                className="transition-all ml-0 md:-ml-9"
+                className="ml-0 transition-all md:-ml-9"
               />
               {/* <LogoIcon headerMode={headerMode} className="hidden 3xl:block" /> */}
             </BaseLink>
@@ -65,8 +65,8 @@ export default function LargeHeader({
             scrollY={scrollY}
             className={cn([
               showLinks,
-              [[!firstRender.current, "overlay-show"], "opacity-100 visible"],
-              [[!firstRender.current, "overlay-hide"], "opacity-0 invisible"],
+              [[!firstRender.current, "overlay-show"], "visible opacity-100"],
+              [[!firstRender.current, "overlay-hide"], "invisible opacity-0"],
             ])}
           />
         </VCenterRow>

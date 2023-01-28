@@ -103,18 +103,18 @@ export default function MenuOverlay({
     <div
       //ref={overlayRef}
       className={cn(
-        "fixed left-0 top-0 z-100 flex h-screen w-full flex-row bg-black/70 backdrop-blur-sm overflow-hidden",
+        "fixed left-0 top-0 z-100 flex h-screen w-full flex-row overflow-hidden bg-black/70 backdrop-blur-sm",
         [
           showMenu,
-          "overlay-show opacity-100 visible",
-          "overlay-hide opacity-0 invisible",
+          "overlay-show visible opacity-100",
+          "overlay-hide invisible opacity-0",
         ]
       )}
     >
       <div
         //ref={sideMenuRef}
         className={cn(
-          "h-full w-72 bg-white trans-ani-300 transition-translation",
+          "trans-ani-300 transition-translation h-full w-72 bg-white",
           [showMenu, "ml-0", "-ml-8"]
         )}
       >
