@@ -36,15 +36,6 @@ export default function ExpandDetails({
         },
         0
       )
-      // .to(
-      //   containerRef.current,
-      //   {
-      //     duration: OPACITY_ANIMATION_S,
-      //     opacity: isExpanded ? 1 : 0,
-      //     ease: Power3.easeOut,
-      //   },
-      //   0
-      // )
       .to(
         innerRef.current,
         {
@@ -59,16 +50,6 @@ export default function ExpandDetails({
         },
         0
       )
-
-    // .to(
-    //   ref.current,
-    //   {
-    //     duration: OPACITY_ANIMATION_S,
-    //     opacity: isExpanded ? 1 : 0,
-    //     ease: Power3.easeOut,
-    //   },
-    //   0
-    // )
 
     didMount.current = true
   }, [isExpanded])

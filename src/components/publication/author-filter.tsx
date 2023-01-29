@@ -20,9 +20,9 @@ function AuthorFilter({
   const [isExpanded, setIsExpanded] = useState(false)
   const [showAll, setShowAll] = useState(false)
 
-  if (max > -1 && !showAll) {
-    authors = authors.slice(0, max)
-  }
+  // if (max > -1 && !showAll) {
+  //  authors = authors.slice(0, max)
+  // }
 
   return (
     <div className="text-sm">
@@ -38,14 +38,14 @@ function AuthorFilter({
         isExpanded={isExpanded}
         onClick={() => setIsExpanded(!isExpanded)}
       >
-        <ToggleSwitch
+        {/* <ToggleSwitch
           className="mt-2 w-full"
           onClick={() => setShowAll(!showAll)}
           isSelected={showAll}
           ariaLabel="Show all authors"
         >
           Show All
-        </ToggleSwitch>
+        </ToggleSwitch> */}
         <ul className="mt-2 flex flex-col gap-y-1">
           {authors.map((journal: any, index: number) => {
             return (

@@ -50,10 +50,10 @@ function JournalFilter({
   const [isExpanded, setIsExpanded] = useState(false)
   const [showAll, setShowAll] = useState(false)
 
-  journals = journals.slice(
-    0,
-    isExpanded ? (showAll ? journals.length : max) : 0
-  )
+  // journals = journals.slice(
+  //   0,
+  //   isExpanded ? (showAll ? journals.length : max) : 0
+  // )
 
   return (
     <div className="text-sm">
@@ -69,14 +69,14 @@ function JournalFilter({
         isExpanded={isExpanded}
         onClick={() => setIsExpanded(!isExpanded)}
       >
-        <ToggleSwitch
+        {/* <ToggleSwitch
           className="mt-2 w-full"
           onClick={() => setShowAll(!showAll)}
           isSelected={showAll}
           ariaLabel="Show all journals"
         >
           Show All
-        </ToggleSwitch>
+        </ToggleSwitch> */}
         <ul className="mt-2 flex flex-col gap-y-1">
           {journals.map((journal: any, index: number) => {
             return (

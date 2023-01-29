@@ -497,7 +497,7 @@ export default function Page({ person, publications }: IProps) {
           className="mb-8 md:hidden"
         />
 
-        <VCenterRow className="justify-between">
+        <VCenterRow className="justify-between pt-2">
           <span className="text-sm text-slate-500">
             {results(query, pageStart, yearFilteredPublications)}
           </span>

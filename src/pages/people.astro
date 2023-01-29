@@ -12,7 +12,7 @@ const people = await getCollection("people")
       people.map(person => {
         return (
           <li>
-            <CompactAvatars people={[person.data.name]} />
+            <CompactAvatars people={[person.data.name]} client:visible />
           </li>
         )
       })
