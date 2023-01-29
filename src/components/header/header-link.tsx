@@ -147,8 +147,8 @@ export default function HeaderLink({
           [headerMode === "dark", "text-slate-50", "text-blue-600"],
           [
             headerMode === "dark",
-            "text-white/60 hover:bg-slate-600 hover:bg-white/10 hover:text-white active:bg-white/20",
-            "text-slate-500 hover:bg-slate-100 hover:text-slate-900 active:border-blue-500 active:bg-slate-200",
+            "text-white/60 hover:border-white/20 hover:text-white active:bg-white/20",
+            "text-slate-500 hover:border-slate-300 hover:text-slate-900 active:border-blue-500 active:bg-slate-200",
           ],
         ])}
       >

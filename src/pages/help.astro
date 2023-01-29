@@ -12,17 +12,15 @@ const CLS = "block rounded-lg px-4 py-2 bg-blue-100 font-bold"
 
 <ContentLayout title="Help">
   <div slot="main">
-    <BaseCol
-      className="gap-y-4 rounded-xl bg-apple-gray p-6 text-sm w-full lg:w-1/2"
-    >
+    <BaseCol className="gap-y-4 rounded-xl bg-apple-gray p-6 w-full lg:w-1/2">
       <BaseRow><LogoIcon /></BaseRow>
 
-      <div>
+      <div class="text-sm">
         <p>{`Version ${VERSION}`}</p>
         <p>{`Updated ${UPDATED}`}</p>
       </div>
 
-      <p>
+      <p class="text-sm">
         &copy; {YEAR}
         {SITE_NAME}. All rights reserved.
       </p>
