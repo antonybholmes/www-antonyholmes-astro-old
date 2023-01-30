@@ -39,7 +39,12 @@ export default defineConfig({
       host: "antonyholmes.com",
     }),
     prefetch(),
-    partytown(),
+    partytown({
+      // Adds dataLayer.push as a forwarding-event.
+      config: {
+        forward: ["dataLayer.push"],
+      },
+    }),
     htmlBeautifier(),
     //purgecss(),
     //htmlMinifier(),
