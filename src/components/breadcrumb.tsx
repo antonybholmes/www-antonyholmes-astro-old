@@ -24,7 +24,7 @@ export default function Breadcrumb({
   ret.push(
     <li key="home">
       <BaseLink href="/" ariaLabel="Home">
-        <HomeIcon className="trans-300 transition-color w-4 fill-blue-600 hover:fill-slate-900 dark:fill-slate-600 dark:hover:fill-white" />
+        <HomeIcon className="trans-300 transition-color w-4 fill-blue-600 hover:fill-slate-900 dark:fill-slate-400 dark:hover:fill-white" />
       </BaseLink>
       {/* <ToBlueLink href="/" ariaLabel="Home">
         Home
@@ -39,11 +39,11 @@ export default function Breadcrumb({
 
     ret.push(
       <li key={`divider-${i}`} className="group flex flex-row gap-x-2">
-        <BreadcrumbChevronIcon className="trans-300 transition-color w-4 stroke-slate-400 group-hover:translate-x-0.5 group-hover:stroke-slate-900 dark:stroke-slate-600 dark:group-hover:stroke-white" />
+        <BreadcrumbChevronIcon className="trans-300 transition-color w-4 stroke-slate-400 group-hover:translate-x-0.5 group-hover:stroke-slate-900 dark:group-hover:stroke-white" />
         <BaseLink
           href={crumb[1]}
           ariaLabel={`Visit ${crumb[0]}`}
-          className="trans-300 transition-color text-blue-600 group-hover:text-slate-900 dark:text-slate-600 dark:group-hover:text-white"
+          className="trans-300 transition-color text-blue-600 group-hover:text-slate-900 dark:text-slate-400 dark:group-hover:text-white"
         >
           {crumb[0]}
         </BaseLink>
