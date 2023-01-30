@@ -1,6 +1,7 @@
 import { useEffect, useState } from "preact/hooks"
 import MoonIcon from "../icons/moon"
 import SunIcon from "../icons/sun"
+import BaseButton from "./link/base-button"
 
 export default function ThemeToggle() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") ?? "light")
@@ -30,12 +31,16 @@ export default function ThemeToggle() {
   }
 
   return (
-    <button onClick={onClick} className="fill-slate-500 dark:fill-slate-100">
+    <BaseButton
+      onClick={onClick}
+      className="fill-slate-500 dark:fill-slate-100"
+      ariaLabel={`Toggle ${theme === "dark" ? "light" : "dark"} mode`}
+    >
       {theme === "dark" ? (
         <MoonIcon className="w-3" />
       ) : (
         <SunIcon className="w-4" />
       )}
-    </button>
+    </BaseButton>
   )
 }

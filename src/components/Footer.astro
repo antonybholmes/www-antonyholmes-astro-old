@@ -5,8 +5,7 @@ import RssIcon from "../icons/rss"
 import getCopyright from "../lib/copyright"
 import { INFO_LINKS } from "../menus"
 import ContentDiv from "./ContentDiv.astro"
-import HCenterRow from "./h-center-row"
-import BlackLink from "./link/black-link"
+import BaseLink from "./link/base-link"
 import ExtLink from "./link/ext-link"
 import ThemeToggle from "./theme-toggle"
 ---
@@ -28,7 +27,7 @@ import ThemeToggle from "./theme-toggle"
     >
       <li>
         <ExtLink href={GITHUB_URL} ariaLabel="View my GitHub profile">
-          <GitHubIcon className="w-5" />
+          <GitHubIcon className="w-5 dark:fill-white" />
         </ExtLink>
       </li><li>
         <ExtLink href="/rss.xml" ariaLabel="View RSS feed">
@@ -46,13 +45,13 @@ import ThemeToggle from "./theme-toggle"
       {
         INFO_LINKS.map((link: { name: string; url: string }, index: number) => (
           <li>
-            <BlackLink
+            <BaseLink
               href={link.url}
               ariaLabel={`View ${link.name}`}
               underline={true}
             >
               {link.name}
-            </BlackLink>
+            </BaseLink>
           </li>
         ))
       }

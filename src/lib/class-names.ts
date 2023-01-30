@@ -1,6 +1,8 @@
 export function clean(cn: string) {
   // replace multi spaces globally and ignore new lines
-  return cn.replace(/(\s+|\r\n|\n|\r)/gm, " ").trim()
+  const ret = cn.replace(/(\s+|\r\n|\n|\r)/gm, " ").trim()
+
+  return ret !== "" ? ret : undefined
 }
 
 type CSSClass =
@@ -46,7 +48,7 @@ function _cn(args: CSSClass | CSSClass[], classes: string[]) {
  * @param args string or array of strings of classnames. Also supports condition c
  * @returns a space separated string of class names.
  */
-export default function cn(...args: CSSClass[]): string {
+export default function cn(...args: CSSClass[]): string | undefined {
   const used = new Set<string>()
   const classes: string[] = []
 

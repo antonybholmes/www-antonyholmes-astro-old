@@ -9,7 +9,10 @@ interface IProps {
 const DateFormatter = ({ date, className }: IProps) => {
   const d = parseISO(date)
   return (
-    <time dateTime={date} className={cn("text-sm text-slate-500", className)}>
+    <time
+      dateTime={date}
+      className={cn("text-sm text-slate-500 dark:text-slate-400", className)}
+    >
       {/* {format(d, 'eee LLL d, yyyy')} */}
       {format(d, "LLLL d, yyyy")}
     </time>
