@@ -43,11 +43,9 @@ export default function ExpandTabArrow({ isExpanded, hover = false }: IProps) {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 16 16"
-      className={cn("trans-300 w-4 shrink-0 stroke-2 transition-opacity", [
-        hover,
-        "stroke-slate-900",
-        "stroke-slate-400",
-      ])}
+      className={cn(
+        "trans-300 w-4 shrink-0 stroke-slate-400  stroke-2 group-hover:stroke-slate-900 dark:group-hover:stroke-white"
+      )}
       style={{ strokeLinecap: "round", strokeLinejoin: "round", fill: "none" }}
     >
       {/* <path d="M 0,8 L 16,8" /> */}

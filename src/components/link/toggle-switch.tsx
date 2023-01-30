@@ -32,7 +32,7 @@ export default function ToggleSwitch({
             className={cn("trans-300 transition-colors", [
               isSelected,
               "fill-blue-600 group-hover:fill-blue-500",
-              "fill-slate-200 group-hover:fill-slate-300",
+              "fill-slate-200 group-hover:fill-slate-300 dark:fill-slate-400 dark:group-hover:fill-slate-500",
             ])}
           />
           <circle

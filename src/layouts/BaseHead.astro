@@ -72,8 +72,9 @@ const permalink = new URL(Astro.url.pathname, Astro.site).href
   is:inline
   async
   src="https://www.googletagmanager.com/gtag/js?id=G-X21MCY4FP3"
+  type="text/partytown"
 ></script>
-<script is:inline>
+<script is:inline type="text/partytown">
   window.dataLayer = window.dataLayer || []
   function gtag() {
     dataLayer.push(arguments)
@@ -81,6 +82,25 @@ const permalink = new URL(Astro.url.pathname, Astro.site).href
   gtag("js", new Date())
 
   gtag("config", "G-X21MCY4FP3")
+</script>
+
+<script is:inline>
+  const theme = (() => {
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      return localStorage.getItem("theme")
+    }
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return "dark"
+    }
+    return "light"
+  })()
+
+  if (theme === "dark") {
+    document.documentElement.classList.add("dark")
+  } else {
+    document.documentElement.classList.add("light")
+  }
+  window.localStorage.setItem("theme", theme)
 </script>
 
 {

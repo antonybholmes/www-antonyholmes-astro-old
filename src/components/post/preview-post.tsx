@@ -48,7 +48,12 @@ export default function PreviewPost({
           <PostTitleLink post={post} className={headerClassName} />
         </BaseCol>
         {showDescription && (
-          <p className={cn("text-slate-600", contentClassName)}>
+          <p
+            className={cn(
+              "text-slate-600 dark:text-slate-400",
+              contentClassName
+            )}
+          >
             {post.data.description}
           </p>
         )}

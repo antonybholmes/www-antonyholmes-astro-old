@@ -147,7 +147,7 @@ function BasePublication({
 
         <AnchorButton
           ariaLabel="Show abstract"
-          className="trans-300 transition-color rounded border border-slate-200 stroke-slate-400 hover:border-slate-400 hover:stroke-slate-900"
+          className="trans-300 transition-color rounded border border-slate-400 stroke-slate-400 "
           onClick={() => setExpanded(!isExpanded)}
         >
           {/* <ChevronRightIcon

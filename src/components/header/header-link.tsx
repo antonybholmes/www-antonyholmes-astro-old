@@ -21,6 +21,20 @@ export const LINK_CLS = cn(
   "border-transparent"
 )
 
+export const LIGHT_CLS = cn(
+  "text-slate-500",
+  "hover:bg-white",
+  "hover:border-slate-300",
+  "hover:text-slate-900",
+  "active:border-blue-500",
+  "active:bg-slate-200",
+  "dark:text-white/60",
+  "dark:hover:border-white/20",
+  "dark:hover:bg-transparent",
+  "dark:hover:text-white",
+  "dark:active:bg-white/20"
+)
+
 type IProps = {
   link: ILink
   selected: boolean
@@ -144,11 +158,15 @@ export default function HeaderLink({
       <VCenterCol
         className={cn(LINK_CLS, [
           selected,
-          [headerMode === "dark", "text-slate-50", "text-blue-600"],
+          [
+            headerMode === "dark",
+            "text-slate-50",
+            "text-blue-600 dark:text-white",
+          ],
           [
             headerMode === "dark",
             "text-white/60 hover:border-white/20 hover:text-white active:bg-white/20",
-            "text-slate-500 hover:border-slate-300 hover:text-slate-900 active:border-blue-500 active:bg-slate-200",
+            LIGHT_CLS,
           ],
         ])}
       >

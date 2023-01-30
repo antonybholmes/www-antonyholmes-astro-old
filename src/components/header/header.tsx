@@ -45,16 +45,12 @@ export default function Header({
       <header
         className={cn(
           "trans-700 fixed top-0 z-50 block w-full backdrop-blur-lg transition-all",
-          [headerMode === "light", "bg-white/90", "bg-slate-800/95"],
           [
-            scrollY > 10,
-            [
-              headerMode === "light",
-              "border-slate-200 shadow-header",
-              "border-white/20",
-            ],
-            "border-transparent",
+            headerMode === "light",
+            "bg-white/90 dark:bg-slate-800/90",
+            "bg-slate-800/90",
           ],
+          [scrollY > 10, [headerMode === "light", "shadow-header"]],
           className
         )}
         style={{ marginTop: "-1px" }}

@@ -1,6 +1,10 @@
 import type IIconProps from "../interfaces/icon-props"
 import cn from "../lib/class-names"
 
+const FILL_OFF_CLS = "fill-slate-300 dark:fill-white/20"
+
+const FILL_CLS = "fill-slate-900 dark:fill-white"
+
 interface IProps extends IIconProps {
   descending?: boolean
 }
@@ -16,11 +20,11 @@ export default function SortIcon({ descending = true, className }: IProps) {
       {/* <path d="M 0,8 L 16,8" /> */}
       <path
         d="M 3,8 L 10,1 L 17,8 Z"
-        className={cn([descending, "fill-slate-300", "fill-slate-900"])}
+        className={cn([descending, FILL_OFF_CLS, FILL_CLS])}
       />
       <path
         d="M 3,12 L 10,19 L 17,12 Z"
-        className={cn([descending, "fill-slate-900", "fill-slate-300"])}
+        className={cn([descending, FILL_CLS, FILL_OFF_CLS])}
       />
     </svg>
   )

@@ -22,7 +22,7 @@ export default function ProsAndCons({ post }: IPostProps) {
         </VCenterRow>
       </VCenterRow>
 
-      <BaseCol className="rounded-lg border border-slate-200">
+      <BaseCol className="rounded-lg border border-slate-200 dark:border-white/20">
         <Accordion
           title="Pros & Cons"
           isExpanded={true}

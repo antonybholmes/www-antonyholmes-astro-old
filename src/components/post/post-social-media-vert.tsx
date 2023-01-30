@@ -9,7 +9,7 @@ import { getPostUrl } from "../../lib/urls"
 const PostSocialMediaVert = ({ post }: IPostProps) => {
   const url = getPostUrl(post.slug)
   return (
-    <ul className="flex flex-col gap-y-2">
+    <ul className="flex flex-col gap-y-4">
       <li>
         <BaseLink
           ariaLabel="Post article to Twitter"

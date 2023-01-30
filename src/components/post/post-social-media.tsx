@@ -8,13 +8,21 @@ import { getPostUrl } from "../../lib/urls"
 
 export const CLS_TEXT_GRAY_HOVER = "w-6"
 
-export const CLS_SOCIAL_ICON =
-  "fill-slate-300 hover:fill-blue-400 trans-300 transition-color border border-slate-200 rounded-full flex flex-row items-center justify-center w-10 h-10"
+export const CLS_SOCIAL_ICON = cn(
+  "fill-slate-300",
+  "hover:fill-blue-400",
+  "trans-300",
+  "transition-color",
+  "flex",
+  "flex-row",
+  "items-center",
+  "justify-center"
+)
 
 const PostSocialMedia = ({ post, className }: IPostProps) => {
   const url = getPostUrl(post.slug)
   return (
-    <ul className={cn("flex flex-row items-center gap-x-2", className)}>
+    <ul className={cn("flex flex-row items-center gap-x-4", className)}>
       <li>
         <BaseLink
           ariaLabel="Post article to Twitter"

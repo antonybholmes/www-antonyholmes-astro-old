@@ -21,7 +21,10 @@ export default function HeroPosts({ posts }: IPostsProps) {
             <li key={index}>
               <HeroPostSmall
                 post={post}
-                className={cn([index > 0, "border-t border-slate-200 pt-6"])}
+                className={cn([
+                  index > 0,
+                  "border-t border-slate-200  pt-6 dark:border-white/10",
+                ])}
                 loading="eager"
               />
             </li>

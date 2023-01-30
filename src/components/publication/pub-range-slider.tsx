@@ -134,7 +134,7 @@ export default function PubRangeSlider({
     window.removeEventListener("mouseup", onMouseUpYear2)
   }
 
-  const onMouseEnter = (e: any) => {
+  function onMouseEnter(e: any) {
     // @ts-ignore
     refHint.current.style.visibility = "visible"
   }

@@ -1,5 +1,4 @@
 import { useState } from "preact/hooks"
-import IChildrenProps from "../interfaces/children-props"
 import cn from "../lib/class-names"
 import ExpandTabArrow from "./expand-tab-arrow"
 import AnchorButton, { IButtonProps } from "./link/anchor-button"
@@ -29,7 +28,7 @@ export default function AccordionButton({
     <AnchorButton
       onClick={onClick}
       className={cn(
-        "trans-300 transition-color group flex cursor-pointer flex-row items-center justify-between gap-x-2 px-4 py-2 font-semibold hover:bg-slate-100",
+        "trans-300 transition-color group flex cursor-pointer flex-row items-center justify-between gap-x-2 px-4 py-2 font-semibold hover:bg-slate-100 dark:hover:bg-white/20",
         className
       )}
       onMouseEnter={onMouseEnter}

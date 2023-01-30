@@ -2,7 +2,7 @@ import cn from "../../lib/class-names"
 import ILinkProps from "../../interfaces/link-props"
 import BaseLink from "./base-link"
 
-export const BLUE_TEXT = "text-blue-600"
+export const BLUE_TEXT = "text-blue-600 dark:text-slate-400"
 
 export default function BlueLink({
   href,

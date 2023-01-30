@@ -576,7 +576,7 @@ export default function Page({ person, publications }: IProps) {
               <BaseButton
                 ariaLabel="Sort ascending"
                 onClick={() => setDescending(!descending)}
-                className="flex h-5 w-5 flex-row items-center justify-center  transition-colors "
+                className="flex h-5 w-5 flex-row items-center justify-center transition-colors "
               >
                 <SortIcon className="w-4" descending={descending} />
               </BaseButton>

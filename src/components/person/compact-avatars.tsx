@@ -28,10 +28,7 @@ export default function CompactAvatars({
               <BaseLink
                 href={getAuthorBaseUrl(person)}
                 ariaLabel={`Click to read more about ${person}`}
-                className={cn(
-                  "absolute block rounded-full border border-white",
-                  `ml-${index * 2}`
-                )}
+                className={cn("absolute block rounded-full", `ml-${index * 2}`)}
               >
                 <AvatarImage person={person} className="h-12 w-12" />
               </BaseLink>

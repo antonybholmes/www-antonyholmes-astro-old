@@ -9,15 +9,9 @@ import AvatarImageLarge from "../components/person/avatar-image-large"
 import VCenterCol from "../components/VCenterCol.astro"
 import VCenterRow from "../components/VCenterRow.astro"
 import ContentLayout from "../layouts/ContentLayout.astro"
-import { getAuthorMap } from "../lib/api/author"
 import { sortPosts } from "../lib/api/post"
 import { getPageItems } from "../lib/paginate"
-import { getUrlFriendlyTag } from "../lib/tags"
 import { getAuthorBaseUrl } from "../lib/urls"
-
-const people = await getCollection("people")
-
-const authorMap = getAuthorMap(people)
 
 const posts = getPageItems(sortPosts(await getCollection("blog")), 0, 10)
 

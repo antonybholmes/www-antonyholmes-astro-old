@@ -123,7 +123,7 @@ export default function MenuOverlay({
           <MenuOpenButton showMenu={showMenu} onClick={onClick} />
           <div>
             <BaseLink href="/">
-              <SmallLogoIcon className="shrink-0" />
+              <SmallLogoIcon className="shrink-0" headerMode="light-only" />
             </BaseLink>
           </div>
         </VCenterRow>

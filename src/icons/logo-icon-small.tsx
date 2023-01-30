@@ -20,10 +20,10 @@ export default function SmallLogoIcon({
       <rect
         width="40"
         height="40"
-        class={cn("trans-300 transition-color ", [
+        class={cn("trans-300 transition-color text-white", [
           headerMode === "dark",
           "fill-white/20",
-          "fill-blue-600 text-white group-hover:fill-blue-500",
+          ["fill-blue-600", [headerMode === "light", "dark:fill-white/20"]],
         ])}
       />
       <text
