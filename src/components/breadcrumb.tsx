@@ -24,7 +24,7 @@ export default function Breadcrumb({
   ret.push(
     <li key="home">
       <BaseLink href="/" ariaLabel="Home">
-        <HomeIcon className="trans-300 transition-color w-4 fill-blue-600 hover:fill-slate-900 dark:fill-slate-500 dark:hover:fill-white" />
+        <HomeIcon className="trans-300 transition-color w-4 fill-blue-600 hover:fill-slate-900 dark:fill-slate-600 dark:hover:fill-white" />
       </BaseLink>
       {/* <ToBlueLink href="/" ariaLabel="Home">
         Home
