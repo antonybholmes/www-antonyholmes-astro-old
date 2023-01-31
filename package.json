@@ -14,11 +14,11 @@
   },
   "dependencies": {
     "@astrojs/partytown": "^1.0.3",
-    "@astrojs/preact": "^2.0.0",
-    "@astrojs/prefetch": "^0.1.1",
+    "@astrojs/preact": "^2.0.1",
+    "@astrojs/prefetch": "^0.1.2",
     "@astrojs/rss": "^2.1.0",
     "@fontsource/plus-jakarta-sans": "^4.5.11",
-    "astro": "^2.0.2",
+    "astro": "^2.0.4",
     "astro-compress": "^1.1.28",
     "astro-html-beautifier": "^1.0.4",
     "astro-html-minifier": "^0.4.0",
@@ -34,8 +34,8 @@
     "preact": "^10.11.3"
   },
   "devDependencies": {
-    "@astrojs/sitemap": "^1.0.0",
-    "@astrojs/tailwind": "^3.0.0",
+    "@astrojs/sitemap": "^1.0.1",
+    "@astrojs/tailwind": "^3.0.1",
     "@types/fs-extra": "^11.0.1",
     "@types/lodash-es": "^4.17.6",
     "@types/node": "^18.11.18",
