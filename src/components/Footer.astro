@@ -1,5 +1,5 @@
 ---
-import { GITHUB_URL } from "../constants"
+import { GITHUB_URL, SITE_NAME } from "../constants"
 import GitHubIcon from "../icons/github"
 import RssIcon from "../icons/rss"
 import getCopyright from "../lib/copyright"
@@ -16,7 +16,12 @@ import ThemeToggle from "./theme-toggle"
       class="flex flex-row justify-center gap-x-8 border-t border-slate-200 pt-16 text-sm font-semibold dark:border-white/20"
       slot="main"
     >
-      <li>{getCopyright()}</li>
+      <li>
+        &copy; <script type="text/javascript">
+          document.write(new Date().getFullYear())
+        </script>
+        {SITE_NAME}
+      </li>
     </ul>
   </ContentDiv>
 
