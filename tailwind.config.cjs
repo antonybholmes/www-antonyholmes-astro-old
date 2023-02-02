@@ -160,7 +160,7 @@ module.exports = {
       gridColumn: {
         "span-13": "span 13 / span 13",
         "span-14": "span 14 / span 14",
-        "span-15": "span 14 / span 15",
+        "span-15": "span 15 / span 15",
         "span-18": "span 18 / span 18",
       },
       strokeWidth: {

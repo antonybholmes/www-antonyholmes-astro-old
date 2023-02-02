@@ -6,17 +6,13 @@ import TwitterIcon from "../../icons/twitter"
 import BaseLink from "../link/base-link"
 import { getPostUrl } from "../../lib/urls"
 
-export const CLS_TEXT_GRAY_HOVER = "w-6"
+export const CLS_TEXT_GRAY_HOVER = "w-7"
 
 export const CLS_SOCIAL_ICON = cn(
   "fill-slate-300",
   "hover:fill-blue-400",
   "trans-300",
-  "transition-color",
-  "flex",
-  "flex-row",
-  "items-center",
-  "justify-center"
+  "transition-color"
 )
 
 const PostSocialMedia = ({ post, className }: IPostProps) => {

@@ -6,7 +6,7 @@ import BaseLink from "../link/base-link"
 import { CLS_SOCIAL_ICON, CLS_TEXT_GRAY_HOVER } from "./post-social-media"
 import { getPostUrl } from "../../lib/urls"
 
-const PostSocialMediaVert = ({ post }: IPostProps) => {
+export default function PostSocialMediaVert({ post }: IPostProps) {
   const url = getPostUrl(post.slug)
   return (
     <ul className="flex flex-col gap-y-4">
@@ -40,5 +40,3 @@ const PostSocialMediaVert = ({ post }: IPostProps) => {
     </ul>
   )
 }
-
-export default PostSocialMediaVert
