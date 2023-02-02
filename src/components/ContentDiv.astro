@@ -1,11 +1,17 @@
 ---
+import IClassProps from "../interfaces/class-props"
 import cn from "../lib/class-names"
+
+interface Props extends IClassProps {}
 
 let { className, style } = Astro.props
 ---
 
-<div class={cn("flex flex-row justify-center px-5", className)} style={style}>
-  <div><slot name="left" /></div>
-  <div class="w-full lg:w-90/100 3xl:w-80/100"><slot name="main" /></div>
-  <div><slot name="right" /></div>
+<div
+  class={cn("grid grid-cols-1 lg:grid-cols-10 px-5 lg:px-0", className)}
+  style={style}
+>
+  <div class="col-span-1"><slot name="left" /></div>
+  <div class="col-span-1 lg:col-span-8"><slot name="main" /></div>
+  <div class="col-span-1"><slot name="right" /></div>
 </div>

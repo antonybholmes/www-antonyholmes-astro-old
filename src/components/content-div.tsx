@@ -8,10 +8,13 @@ export default function ContentDiv({
   children,
 }: IChildProps) {
   return (
-    <HCenterRow className={cn("px-5", className)} style={style}>
-      <div>{children[0]}</div>
-      <div className="w-full lg:w-90/100 3xl:w-80/100">{children[1]}</div>
-      <div>{children[2]}</div>
+    <HCenterRow
+      className={cn("grid grid-cols-1 lg:grid-cols-10 px-5 lg:px-0", className)}
+      style={style}
+    >
+      <div className="col-span-1">{children[0]}</div>
+      <div className="col-span-1 lg:col-span-8">{children[1]}</div>
+      <div className="col-span-1">{children[2]}</div>
     </HCenterRow>
   )
 }

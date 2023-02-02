@@ -43,11 +43,11 @@ import ThemeToggle from "./theme-toggle"
 
   <ContentDiv className="pt-8">
     <ul
-      class="flex flex-row items-center justify-center gap-y-4 gap-x-4 text-xs"
+      class="flex flex-row items-center justify-center gap-y-4 gap-x-8 text-xs"
       slot="main"
     >
       {
-        INFO_LINKS.map((link: { name: string; url: string }, index: number) => (
+        INFO_LINKS.map((link: { name: string; url: string }) => (
           <li>
             <BaseLink
               href={link.url}
@@ -59,6 +59,14 @@ import ThemeToggle from "./theme-toggle"
           </li>
         ))
       }
+    </ul>
+  </ContentDiv>
+
+  <ContentDiv className="pt-8">
+    <ul
+      class="flex flex-row items-center justify-center gap-y-4 gap-x-8 w-full"
+      slot="main"
+    >
       <li><ThemeToggle client:load /></li>
     </ul>
   </ContentDiv>
