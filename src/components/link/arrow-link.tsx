@@ -14,34 +14,10 @@ export default function ArrowLink({
   className,
   children,
 }: IUnderlineLinkProps) {
-  const [hover, setHover] = useState(false)
-
-  // const iconEl
-
-  // useEffect(() => {
-  //   gsap
-  //     .timeline()
-  //     .to(
-  //       iconEl.current,
-  //       { x: hover ? "0.15rem" : 0, ease: "power3.out", duration: 0.2 },
-  //       0
-  //     )
-  // }, [hover])
-
-  function onMouseEnter() {
-    setHover(true)
-  }
-
-  function onMouseLeave() {
-    setHover(false)
-  }
-
   return (
     <BaseLink
       href={href}
       ariaLabel={ariaLabel}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
       underline={underline}
       className={cn(BUTTON_CLS, ARROW_CLS, className)}
     >

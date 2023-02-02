@@ -1,5 +1,5 @@
 ---
-import HCenterRow from "../components/h-center-row"
+import HCenterRow from "../components/HCenterRow.astro"
 import BlueIndexLink from "../components/link/blue-index-link"
 import PageTitle from "../components/page-title"
 import ContentLayout from "../layouts/ContentLayout.astro"
@@ -15,9 +15,10 @@ import ContentLayout from "../layouts/ContentLayout.astro"
         href="/sitemap"
         ariaLabel="Click to view site map"
         className="mt-16"
-        text="See our site map"
-        client:idle
-      />
+        client:visible
+      >
+        See our site map
+      </BlueIndexLink>
     </HCenterRow>
   </div>
 </ContentLayout>
