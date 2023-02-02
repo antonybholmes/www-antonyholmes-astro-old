@@ -23,13 +23,13 @@ export default function ToggleSwitch({
         <svg
           viewBox="0 0 24 16"
           xmlns="http://www.w3.org/2000/svg"
-          className="w-9 shrink-0"
+          class="w-9 shrink-0"
         >
           <rect
             width="24"
             height="16"
             rx="8"
-            className={cn("trans-300 transition-colors", [
+            class={cn("trans-300 transition-colors", [
               isSelected,
               "fill-blue-600 group-hover:fill-blue-500",
               "fill-slate-200 group-hover:fill-slate-300 dark:fill-slate-400 dark:group-hover:fill-slate-500",
@@ -39,7 +39,7 @@ export default function ToggleSwitch({
             cx="8"
             cy="8"
             r="7"
-            className={cn("trans-300 fill-white transition-transform", [
+            class={cn("trans-300 fill-white transition-transform", [
               isSelected,
               "translate-x-[8px]",
             ])}
