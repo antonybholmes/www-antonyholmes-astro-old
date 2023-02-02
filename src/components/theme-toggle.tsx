@@ -34,7 +34,7 @@ export default function ThemeToggle() {
     <BaseButton
       onClick={onClick}
       className="fill-slate-500 dark:fill-slate-100"
-      ariaLabel={`Toggle ${theme === "dark" ? "light" : "dark"} mode`}
+      ariaLabel={`Toggle ${theme === "dark" ? "light" : "dark"} theme`}
     >
       {theme === "dark" ? (
         <MoonIcon className="w-3" />

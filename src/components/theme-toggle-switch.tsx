@@ -28,10 +28,10 @@ export default function ThemeToggleSwitch() {
     <ToggleSwitch
       onClick={onClick}
       className="fill-slate-500 dark:fill-slate-100"
-      ariaLabel={`Toggle ${theme === "dark" ? "light" : "dark"} mode`}
+      ariaLabel={`Toggle ${theme === "dark" ? "light" : "dark"} theme`}
       isSelected={theme === "dark"}
     >
-      {theme === "dark" ? "Use light theme" : "Use dark theme"}
+      {theme === "dark" ? "Light theme" : "Dark theme"}
     </ToggleSwitch>
   )
 }
