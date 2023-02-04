@@ -1,3 +1,4 @@
+import BaseCol from "../components/base-col"
 import Breadcrumb from "../components/breadcrumb"
 import PageTitle from "../components/page-title"
 import type ICrumbProps from "../interfaces/crumb-props"
@@ -14,17 +15,12 @@ export default function LayoutTitles({
   crumbs,
 }: IProps) {
   return (
-    <>
-      {showCrumbs && <Breadcrumb crumbs={crumbs} className="mb-8" />}
+    <BaseCol className="gap-y-4 mb-8">
+      {showCrumbs && <Breadcrumb crumbs={crumbs} />}
 
       {showTitle && (
-        <PageTitle
-          title={title}
-          subTitle={subTitle}
-          superTitle={superTitle}
-          className="mb-8"
-        />
+        <PageTitle title={title} subTitle={subTitle} superTitle={superTitle} />
       )}
-    </>
+    </BaseCol>
   )
 }

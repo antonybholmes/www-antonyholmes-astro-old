@@ -9,7 +9,7 @@ const PostHeader = ({ post }: IPostProps) => (
     <ContentDiv className="pt-24">
       <></>
       <>
-        <div className="flex flex-col gap-y-2 md:w-70/100">
+        <div className="flex flex-col gap-y-2 md:w-1/2">
           <PostCategoryLink post={post} showSections={true} />
 
           <PageTitle

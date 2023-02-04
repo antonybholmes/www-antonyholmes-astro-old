@@ -13,10 +13,10 @@ const PageTitle = ({
   className,
   subClassName,
 }: IProps) => (
-  <header className={cn("flex flex-col gap-y-4", className)}>
+  <header className={cn("flex flex-col gap-y-1", className)}>
     {superTitle && <h3 className="text-lg font-normal">{superTitle}</h3>}
 
-    <h1 className="text-4xl font-extrabold capitalize lg:text-5xl">{title}</h1>
+    <h1 className="text-4xl font-bold capitalize">{title}</h1>
 
     {subTitle && (
       <h2 className={cn("text-lg font-normal", subClassName)}>{subTitle}</h2>

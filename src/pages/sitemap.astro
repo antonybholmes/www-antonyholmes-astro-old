@@ -4,11 +4,11 @@ import ContentLayout from "../layouts/ContentLayout.astro"
 import { HEADER_LINKS } from "../menus"
 ---
 
-<ContentLayout title="Site Map">
+<ContentLayout title="Site Map" showTitle={true}>
   <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-4" slot="main">
     <section>
       <h3 class="mt-4 font-bold">Learn More</h3>
-      <ul class="mt-4 flex flex-col gap-y-2">
+      <ul class="mt-4 flex flex-col gap-y-3">
         {
           HEADER_LINKS.map((link: any, i: number) => {
             return (
@@ -25,7 +25,7 @@ import { HEADER_LINKS } from "../menus"
 
     <section>
       <h3 class="mt-4 font-bold">Help</h3>
-      <ul class="mt-4 flex flex-col gap-y-2">
+      <ul class="mt-4 flex flex-col gap-y-3">
         <li>
           <BlueLink href="/about" ariaLabel="View help information">
             About
