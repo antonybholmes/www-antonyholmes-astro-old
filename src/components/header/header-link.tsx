@@ -4,38 +4,32 @@ import BaseLink from "../link/base-link"
 import VCenterCol from "../v-center-col"
 
 //const DURATION = 0.5
-//const BAR_WIDTH = "3px"
+const BAR_WIDTH = "3px"
 
 export const LINK_CLS = cn(
+  "relative",
   "font-semibold",
   "text-sm",
-  "px-2",
-  "h-10",
+  "h-11",
   "justify-center",
   "whitespace-nowrap",
   "trans-300",
   "transition-colors",
-  "whitespace-nowrap",
-  "rounded-lg",
-  "border-2",
-  "border-transparent"
+  "whitespace-nowrap"
 )
 
 export const LIGHT_CLS = cn(
   "text-slate-500",
   "hover:bg-white",
-  "hover:border-slate-300",
   "hover:text-slate-900",
-  "active:border-blue-500",
-  "active:bg-slate-200",
+  "active:text-blue-500",
   "dark:text-white/60",
-  "dark:hover:border-white/20",
   "dark:hover:bg-transparent",
   "dark:hover:text-white",
   "dark:active:bg-white/20"
 )
 
-type IProps = {
+interface IProps {
   link: ILink
   selected: boolean
   scrollY: number
@@ -172,23 +166,17 @@ export default function HeaderLink({
       >
         {link.name}
 
-        {/* <div
-          ref={ref}
+        <div
           className={cn(
-            "trans-300 absolute bottom-0 transition-opacity",
-            [headerMode === "light", "bg-blue-600", "bg-white"],
+            "trans-300 absolute bottom-0 w-full",
+
             [
               selected,
-              [
-                "w-full",
-                [headerMode === "light", "bg-blue-600", "bg-white"],
-                [scrollY > 10, "opacity-100", "opacity-0"],
-              ],
-              ["w-0", [headerMode === "light", "bg-slate-900", "bg-white"]],
+              [headerMode === "light", "bg-blue-600", "bg-transparent"],
             ]
           )}
           style={{ height: BAR_WIDTH }}
-        /> */}
+        />
       </VCenterCol>
     </BaseLink>
   )

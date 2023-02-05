@@ -44,16 +44,10 @@ export default function Header({
 
       <header
         className={cn(
-          "trans-700 fixed top-0 z-50 block w-full backdrop-blur-lg transition-all",
-          [
-            headerMode === "light",
-            "bg-white/90 dark:bg-slate-800/90",
-            "bg-slate-800/90",
-          ],
-          [scrollY > 10, [headerMode === "light", "shadow-header"]],
+          "w-full pb-2",
+          [headerMode === "dark", "bg-slate-800"],
           className
         )}
-        style={{ marginTop: "-1px" }}
       >
         {/* <SmallHeader
           title={title}

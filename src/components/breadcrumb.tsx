@@ -1,20 +1,32 @@
+import { useState } from "preact/hooks"
+import useScrollListener from "../hooks/use-scroll-listener"
 import BreadcrumbChevronIcon from "../icons/breadcrumb-chevron"
 import HomeIcon from "../icons/home"
 import type IClassProps from "../interfaces/class-props"
 import type ICrumbProps from "../interfaces/crumb-props"
 import cn from "../lib/class-names"
+import ContentDiv from "./content-div"
 import BaseLink from "./link/base-link"
-import ToBlackLink from "./link/to-black-link"
-import VCenterRow from "./v-center-row"
 
 const EXCLUDE = ["Tag", "Section", "Page"]
 
-interface BreadcrumbProps extends IClassProps, ICrumbProps {}
+interface BreadcrumbProps extends IClassProps, ICrumbProps {
+  headerMode?: string
+}
 
 export default function Breadcrumb({
   crumbs,
+  headerMode = "light",
   className = "",
 }: BreadcrumbProps) {
+  const [scrollY, setScrollY] = useState(0)
+
+  const handleScroll = () => {
+    setScrollY(window.scrollY)
+  }
+
+  useScrollListener(handleScroll)
+
   if (!crumbs) {
     return <></>
   }
@@ -52,7 +64,17 @@ export default function Breadcrumb({
   }
 
   return (
-    <VCenterRow>
+    <ContentDiv
+      className={cn(
+        "sticky top-0 z-50 bg-white/70 backdrop-blur py-4 border-b trans-300 transition-color",
+        [
+          scrollY > 10,
+          [headerMode === "light", "border-slate-300"],
+          "border-transparent",
+        ]
+      )}
+    >
+      <></>
       <ul
         className={cn(
           "flex flex-row flex-nowrap items-center gap-x-2 text-sm font-semibold",
@@ -61,6 +83,7 @@ export default function Breadcrumb({
       >
         {ret}
       </ul>
-    </VCenterRow>
+      <></>
+    </ContentDiv>
   )
 }

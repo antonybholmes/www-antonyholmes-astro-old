@@ -1,10 +1,11 @@
 ---
+import Breadcrumb from "../components/breadcrumb"
 import ContentDiv from "../components/ContentDiv.astro"
+import PageTitle from "../components/page-title"
 import type ICrumbProps from "../interfaces/crumb-props"
 import type ILayoutProps from "../interfaces/layout-props"
 import createCrumbs from "../lib/create-crumbs"
 import DefaultLayout from "./DefaultLayout.astro"
-import LayoutTitles from "./layout-titles"
 
 export interface Props extends ILayoutProps, ICrumbProps {}
 
@@ -14,6 +15,7 @@ let {
   showCrumbs = true,
   superTitle,
   subTitle,
+  headerMode = "light",
   tab,
   crumbs,
 } = Astro.props
@@ -23,19 +25,32 @@ if (!crumbs) {
 }
 ---
 
-<DefaultLayout title={title} tab={tab}>
-  <ContentDiv slot="main" className="mt-24">
-    <div slot="main">
-      <LayoutTitles
-        title={title}
-        superTitle={superTitle}
-        subTitle={subTitle}
-        crumbs={crumbs}
-        showTitle={showTitle}
-        showCrumbs={showCrumbs}
-      />
-
+<DefaultLayout title={title} tab={tab} headerMode={headerMode}>
+  <div slot="main">
+    {
+      showCrumbs && (
+        <Breadcrumb
+          crumbs={crumbs}
+          slot="main"
+          headerMode={headerMode}
+          client:visible
+        />
+      )
+    }
+    {
+      showTitle && (
+        <ContentDiv className="py-2">
+          <PageTitle
+            title={title}
+            subTitle={subTitle}
+            superTitle={superTitle}
+            slot="main"
+          />
+        </ContentDiv>
+      )
+    }
+    <ContentDiv className="pt-4">
       <slot name="main" slot="main" />
-    </div>
-  </ContentDiv>
+    </ContentDiv>
+  </div>
 </DefaultLayout>

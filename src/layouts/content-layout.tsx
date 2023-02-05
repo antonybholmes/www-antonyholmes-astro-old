@@ -33,7 +33,7 @@ export default function ContentLayout({
     >
       <ContentDiv className={headerClassName}>
         <></>
-        <div className="mt-28">
+        <div className="pt-4">
           {crumbs && <Breadcrumb crumbs={crumbs} className="mb-8" />}
 
           {showTitle && title !== "" && (

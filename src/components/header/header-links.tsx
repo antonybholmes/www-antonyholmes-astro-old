@@ -8,13 +8,13 @@ interface IProps extends IHeaderProps {
   scrollY: number
 }
 
-const HeaderLinks = ({
+export default function HeaderLinks({
   title,
   tab = "",
   headerMode = "light",
   scrollY,
   className,
-}: IProps) => {
+}: IProps) {
   if (!tab) {
     tab = title
   }
@@ -24,7 +24,7 @@ const HeaderLinks = ({
   return (
     <ul
       className={cn(
-        "flex flex-row flex-nowrap items-center gap-x-2",
+        "flex flex-row flex-nowrap items-center gap-x-6 h-full",
         className
       )}
     >
@@ -45,5 +45,3 @@ const HeaderLinks = ({
     </ul>
   )
 }
-
-export default HeaderLinks

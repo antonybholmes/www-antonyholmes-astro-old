@@ -6,7 +6,7 @@ import PostCategoryLink from "./post-category-link"
 
 const PostHeader = ({ post }: IPostProps) => (
   <section className="bg-slate-800">
-    <ContentDiv className="pt-24">
+    <ContentDiv className="pt-8">
       <></>
       <>
         <div className="flex flex-col gap-y-2 md:w-1/2">

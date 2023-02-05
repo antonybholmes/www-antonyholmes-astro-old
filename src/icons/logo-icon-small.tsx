@@ -14,7 +14,7 @@ export default function SmallLogoIcon({
     <svg
       viewBox="0 0 40 40"
       xmlns="http://www.w3.org/2000/svg"
-      class={cn("group h-10 font-bold", className)}
+      class={cn("group w-12 h-12 font-semibold", className)}
       style={style}
     >
       <rect

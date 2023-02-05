@@ -236,7 +236,7 @@ export default function MenuButtonOpen({
     <BaseButton
       onClick={onClick}
       className={cn(
-        "trans-300 transition-color relative -ml-3 flex shrink-0 grow-0 flex-row items-center justify-center p-3",
+        "trans-300 transition-color relative -ml-4 flex shrink-0 grow-0 flex-row items-center justify-center p-4",
         [
           headerMode === "dark",
           "stroke-white",
