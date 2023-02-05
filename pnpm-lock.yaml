@@ -10,7 +10,7 @@ specifiers:
   '@fontsource/plus-jakarta-sans': ^4.5.11
   '@types/fs-extra': ^11.0.1
   '@types/lodash-es': ^4.17.6
-  '@types/node': ^18.11.18
+  '@types/node': ^18.11.19
   '@types/remark-prism': ^1.3.4
   astro: ^2.0.6
   astro-compress: ^1.1.29
@@ -47,7 +47,7 @@ dependencies:
   '@astrojs/prefetch': 0.1.2
   '@astrojs/rss': 2.1.0
   '@fontsource/plus-jakarta-sans': 4.5.11
-  astro: 2.0.6_f5vcjb3akvjdur4ffzogu2hewu
+  astro: 2.0.6_w4o4wsgkler5i3zieyqxrswv2u
   astro-compress: 1.1.29
   astro-html-beautifier: 1.0.4
   astro-html-minifier: 0.4.1
@@ -67,7 +67,7 @@ devDependencies:
   '@astrojs/tailwind': 3.0.1_jiulpwjund37q6yckwlgwo54mu
   '@types/fs-extra': 11.0.1
   '@types/lodash-es': 4.17.6
-  '@types/node': 18.11.18
+  '@types/node': 18.11.19
   '@types/remark-prism': 1.3.4
   astro-robots-txt: 0.3.11
   feed: 4.2.2
@@ -122,7 +122,7 @@ packages:
       astro: ^2.0.2
     dependencies:
       '@astrojs/prism': 2.0.0
-      astro: 2.0.6_f5vcjb3akvjdur4ffzogu2hewu
+      astro: 2.0.6_w4o4wsgkler5i3zieyqxrswv2u
       github-slugger: 1.5.0
       import-meta-resolve: 2.2.1
       rehype-raw: 6.1.1
@@ -194,7 +194,7 @@ packages:
       tailwindcss: ^3.0.24
     dependencies:
       '@proload/core': 0.3.3
-      astro: 2.0.6_f5vcjb3akvjdur4ffzogu2hewu
+      astro: 2.0.6_w4o4wsgkler5i3zieyqxrswv2u
       autoprefixer: 10.4.13_postcss@8.4.21
       postcss: 8.4.21
       postcss-load-config: 4.0.1_postcss@8.4.21
@@ -778,7 +778,7 @@ packages:
     resolution: {integrity: sha512-MxObHvNl4A69ofaTRU8DFqvgzzv8s9yRtaPPm5gud9HDNvpB3GPQFvNuTWAI59B9huVGV5jXYJwbCsmBsOGYWA==}
     dependencies:
       '@types/jsonfile': 6.1.1
-      '@types/node': 18.11.18
+      '@types/node': 18.11.19
     dev: true
 
   /@types/hast/2.3.4:
@@ -796,7 +796,7 @@ packages:
   /@types/jsonfile/6.1.1:
     resolution: {integrity: sha512-GSgiRCVeapDN+3pqA35IkQwasaCh/0YFH5dEF6S88iDvEn901DjOeH3/QPY+XYP1DFzDZPvIvfeEgk+7br5png==}
     dependencies:
-      '@types/node': 18.11.18
+      '@types/node': 18.11.19
     dev: true
 
   /@types/lodash-es/4.17.6:
@@ -826,8 +826,8 @@ packages:
     resolution: {integrity: sha512-w+tIMs3rq2afQdsPJlODhoUEKzFP1ayaoyl1CcnwtIlsVe7K7bA1NGm4s3PraqTLlXnbIN84zuBlxBWo1u9BLw==}
     dev: true
 
-  /@types/node/18.11.18:
-    resolution: {integrity: sha512-DHQpWGjyQKSHj3ebjFI/wRKcqQcdR+MoFBygntYOZytCqNfkd2ZC4ARDJ2DQqhjH5p85Nnd3jhUJIXrszFX/JA==}
+  /@types/node/18.11.19:
+    resolution: {integrity: sha512-YUgMWAQBWLObABqrvx8qKO1enAvBUdjZOAWQ5grBAkp5LQv45jBvYKZ3oFS9iKRCQyFjqw6iuEa1vmFqtxYLZw==}
 
   /@types/parse5/6.0.3:
     resolution: {integrity: sha512-SuT16Q1K51EAVPz1K29DJ/sXjhSQ0zjvsypYJ6tlwVsRV9jwW5Adq2ch8Dq8kDBCkYnELS7N7VNCSB5nC56t/g==}
@@ -852,13 +852,13 @@ packages:
   /@types/sax/1.2.4:
     resolution: {integrity: sha512-pSAff4IAxJjfAXUG6tFkO7dsSbTmf8CtUpfhhZ5VhkRpC4628tJhh3+V6H1E+/Gs9piSzYKT5yzHO5M4GG9jkw==}
     dependencies:
-      '@types/node': 18.11.18
+      '@types/node': 18.11.19
     dev: true
 
   /@types/sharp/0.31.1:
     resolution: {integrity: sha512-5nWwamN9ZFHXaYEincMSuza8nNfOof8nmO+mcI+Agx1uMUk4/pQnNIcix+9rLPXzKrm1pS34+6WRDbDV0Jn7ag==}
     dependencies:
-      '@types/node': 18.11.18
+      '@types/node': 18.11.19
     dev: false
 
   /@types/unist/2.0.6:
@@ -986,7 +986,7 @@ packages:
     peerDependencies:
       astro: ^2.0.0
     dependencies:
-      astro: 2.0.6_f5vcjb3akvjdur4ffzogu2hewu
+      astro: 2.0.6_w4o4wsgkler5i3zieyqxrswv2u
       purgecss: 5.0.0
     dev: false
 
@@ -998,7 +998,7 @@ packages:
       zod: 3.20.2
     dev: true
 
-  /astro/2.0.6_f5vcjb3akvjdur4ffzogu2hewu:
+  /astro/2.0.6_w4o4wsgkler5i3zieyqxrswv2u:
     resolution: {integrity: sha512-aI8Ijy2EpMyP5SpjmDJpEUdNL6CUAxnja6IeaBC1BokD/mNAnijtmMnTyWVI3UeEZ727wYLISQMyqCfEUq8VNA==}
     engines: {node: '>=16.12.0', npm: '>=6.14.0'}
     hasBin: true
@@ -1051,7 +1051,7 @@ packages:
       typescript: 4.9.5
       unist-util-visit: 4.1.2
       vfile: 5.3.6
-      vite: 4.0.4_f5vcjb3akvjdur4ffzogu2hewu
+      vite: 4.0.4_w4o4wsgkler5i3zieyqxrswv2u
       vitefu: 0.2.4_vite@4.0.4
       yargs-parser: 21.1.1
       zod: 3.20.2
@@ -3571,7 +3571,7 @@ packages:
     dependencies:
       '@types/hast': 2.3.4
       '@types/mdast': 3.0.10
-      '@types/node': 18.11.18
+      '@types/node': 18.11.19
       '@types/prismjs': 1.26.0
       '@types/unist': 2.0.6
       hastscript: 7.2.0
@@ -4285,7 +4285,7 @@ packages:
       unist-util-stringify-position: 3.0.3
       vfile-message: 3.1.3
 
-  /vite/4.0.4_f5vcjb3akvjdur4ffzogu2hewu:
+  /vite/4.0.4_w4o4wsgkler5i3zieyqxrswv2u:
     resolution: {integrity: sha512-xevPU7M8FU0i/80DMR+YhgrzR5KS2ORy1B4xcX/cXLsvnUWvfHuqMmVU6N0YiJ4JWGRJJsLCgjEzKjG9/GKoSw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -4310,7 +4310,7 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 18.11.18
+      '@types/node': 18.11.19
       esbuild: 0.16.17
       postcss: 8.4.21
       resolve: 1.22.1
@@ -4327,7 +4327,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 4.0.4_f5vcjb3akvjdur4ffzogu2hewu
+      vite: 4.0.4_w4o4wsgkler5i3zieyqxrswv2u
 
   /vscode-css-languageservice/6.2.3:
     resolution: {integrity: sha512-EAyhyIVHpEaf+GjtI+tVe7SekdoANfG0aubnspsQwak3Qkimn/97FpAufNyXk636ngW05pjNKAR9zyTCzo6avQ==}

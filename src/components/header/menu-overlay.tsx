@@ -119,7 +119,7 @@ export default function MenuOverlay({
           "-ml-8",
         ])}
       >
-        <VCenterRow className="gap-x-2 px-5 ">
+        <VCenterRow className="px-5 py-2">
           <MenuOpenButton showMenu={showMenu} onClick={onClick} />
           <div>
             <BaseLink href="/">

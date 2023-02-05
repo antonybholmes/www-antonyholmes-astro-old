@@ -44,7 +44,7 @@ export default function Header({
 
       <header
         className={cn(
-          "w-full pb-2",
+          "w-full py-2",
           [headerMode === "dark", "bg-slate-800"],
           className
         )}

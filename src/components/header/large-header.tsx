@@ -34,7 +34,7 @@ export default function LargeHeader({
       <></>
       <nav className="grid h-full grid-cols-2 items-center gap-x-1 2lg:grid-cols-3">
         <VCenterRow className="gap-x-8 h-full">
-          <VCenterRow className="gap-x-2 h-full">
+          <VCenterRow className="h-full">
             <MenuOpenButton
               onClick={onClick}
               showMenu={showMenu}
@@ -45,7 +45,7 @@ export default function LargeHeader({
             <BaseLink href="/" ariaLabel="Goto Homepage">
               <LogoIconSmall
                 headerMode={headerMode}
-                className="ml-0 transition-all md:-ml-10"
+                className="ml-0 transition-all md:-ml-8"
               />
               {/* <LogoIcon headerMode={headerMode} className="hidden 3xl:block" /> */}
             </BaseLink>
