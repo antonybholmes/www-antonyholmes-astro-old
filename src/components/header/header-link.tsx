@@ -20,13 +20,10 @@ export const LINK_CLS = cn(
 
 export const LIGHT_CLS = cn(
   "text-slate-500",
-  "hover:bg-white",
   "hover:text-slate-900",
   "active:text-blue-500",
   "dark:text-white/60",
-  "dark:hover:bg-transparent",
-  "dark:hover:text-white",
-  "dark:active:bg-white/20"
+  "dark:hover:text-white"
 )
 
 interface IProps {
@@ -159,7 +156,7 @@ export default function HeaderLink({
           ],
           [
             headerMode === "dark",
-            "text-white/60 hover:border-white/20 hover:text-white active:bg-white/20",
+            "text-white/60 hover:border-white/20 hover:text-white",
             LIGHT_CLS,
           ],
         ])}
