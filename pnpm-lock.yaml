@@ -27,7 +27,7 @@ specifiers:
   gray-matter: 4.0.3
   gsap: ^3.11.4
   lodash-es: ^4.17.21
-  preact: ^10.11.3
+  preact: ^10.12.0
   prettier: ^2.8.3
   prettier-plugin-astro: ^0.8.0
   prettier-plugin-tailwindcss: ^0.2.2
@@ -43,7 +43,7 @@ specifiers:
 
 dependencies:
   '@astrojs/partytown': 1.0.3
-  '@astrojs/preact': 2.0.2_preact@10.11.3
+  '@astrojs/preact': 2.0.2_preact@10.12.0
   '@astrojs/prefetch': 0.1.2
   '@astrojs/rss': 2.1.0
   '@fontsource/plus-jakarta-sans': 4.5.11
@@ -60,7 +60,7 @@ dependencies:
   gray-matter: 4.0.3
   gsap: 3.11.4
   lodash-es: 4.17.21
-  preact: 10.11.3
+  preact: 10.12.0
 
 devDependencies:
   '@astrojs/sitemap': 1.0.1
@@ -145,7 +145,7 @@ packages:
       mrmime: 1.0.1
     dev: false
 
-  /@astrojs/preact/2.0.2_preact@10.11.3:
+  /@astrojs/preact/2.0.2_preact@10.12.0:
     resolution: {integrity: sha512-lXmVaftxVwCj2a4R2OI4NeT7SHTKOOk68K9ZGi0/s4bYjR1nGUAMeaAP0akK8t4ij6dDjPxeHQZnJyfMP6oBWg==}
     engines: {node: '>=16.12.0'}
     peerDependencies:
@@ -153,10 +153,10 @@ packages:
     dependencies:
       '@babel/core': 7.20.12
       '@babel/plugin-transform-react-jsx': 7.20.13_@babel+core@7.20.12
-      '@preact/signals': 1.1.3_preact@10.11.3
+      '@preact/signals': 1.1.3_preact@10.12.0
       babel-plugin-module-resolver: 5.0.0
-      preact: 10.11.3
-      preact-render-to-string: 5.2.6_preact@10.11.3
+      preact: 10.12.0
+      preact-render-to-string: 5.2.6_preact@10.12.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -710,13 +710,13 @@ packages:
     resolution: {integrity: sha512-Kui4p7PMcEQevBgsTO0JBo3gyQ88Q3qzEvsVCuSp11t0JcN4DmGCTJcGRVSCq7Bn7lGxJBO+57jNSzDoDJ+QmA==}
     dev: false
 
-  /@preact/signals/1.1.3_preact@10.11.3:
+  /@preact/signals/1.1.3_preact@10.12.0:
     resolution: {integrity: sha512-N09DuAVvc90bBZVRwD+aFhtGyHAmJLhS3IFoawO/bYJRcil4k83nBOchpCEoS0s5+BXBpahgp0Mjf+IOqP57Og==}
     peerDependencies:
       preact: 10.x
     dependencies:
       '@preact/signals-core': 1.2.3
-      preact: 10.11.3
+      preact: 10.12.0
     dev: false
 
   /@proload/core/0.3.3:
@@ -3352,17 +3352,17 @@ packages:
       picocolors: 1.0.0
       source-map-js: 1.0.2
 
-  /preact-render-to-string/5.2.6_preact@10.11.3:
+  /preact-render-to-string/5.2.6_preact@10.12.0:
     resolution: {integrity: sha512-JyhErpYOvBV1hEPwIxc/fHWXPfnEGdRKxc8gFdAZ7XV4tlzyzG847XAyEZqoDnynP88akM4eaHcSOzNcLWFguw==}
     peerDependencies:
       preact: '>=10'
     dependencies:
-      preact: 10.11.3
+      preact: 10.12.0
       pretty-format: 3.8.0
     dev: false
 
-  /preact/10.11.3:
-    resolution: {integrity: sha512-eY93IVpod/zG3uMF22Unl8h9KkrcKIRs2EGar8hwLZZDU1lkjph303V9HZBwufh2s736U6VXuhD109LYqPoffg==}
+  /preact/10.12.0:
+    resolution: {integrity: sha512-+w8ix+huD8CNZemheC53IPjMUFk921i02o30u0K6h53spMX41y/QhVDnG/nU2k42/69tvqWmVsgNLIiwRAcmxg==}
     dev: false
 
   /prebuild-install/7.1.1:

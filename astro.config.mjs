@@ -16,7 +16,7 @@ import preact from "@astrojs/preact"
 // https://astro.build/config
 import prefetch from "@astrojs/prefetch"
 import partytown from "@astrojs/partytown"
-import htmlBeautifier from "astro-html-beautifier";
+import htmlBeautifier from "astro-html-beautifier"
 
 // https://astro.build/config
 //import purgecss from "astro-purgecss"
@@ -63,4 +63,5 @@ export default defineConfig({
       wrap: true,
     },
   },
+  output: "static",
 })
