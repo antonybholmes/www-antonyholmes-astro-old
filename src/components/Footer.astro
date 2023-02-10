@@ -4,16 +4,18 @@ import GitHubIcon from "../icons/github"
 import RssIcon from "../icons/rss"
 import { INFO_LINKS } from "../menus"
 import BaseCol from "./BaseCol.astro"
+import BaseRow from "./BaseRow.astro"
 import ContentDiv from "./ContentDiv.astro"
 import BaseLink from "./link/base-link"
 import ExtLink from "./link/ext-link"
 import ThemeToggle from "./theme-toggle"
+import ThemeToggleSwitch from "./theme-toggle-switch"
 ---
 
 <footer class="pt-32 pb-16 flex flex-col gap-y-16">
   <ContentDiv>
     <div
-      class="flex flex-col md:flex-row md:justify-center gap-y-12 gap-x-32 text-xs border-t border-slate-200 pt-16"
+      class="flex flex-col md:flex-row gap-y-12 gap-x-32 text-xs border-t border-slate-200 pt-16"
       slot="main"
     >
       <BaseCol className="gap-y-4">
@@ -49,14 +51,21 @@ import ThemeToggle from "./theme-toggle"
           <ExtLink href={GITHUB_URL} ariaLabel="View my GitHub profile">
             <GitHubIcon className="w-5 dark:fill-white" />
           </ExtLink>
-        </li><li>
+        </li>
+        <li>
           <ExtLink href="/rss.xml" ariaLabel="View RSS feed">
             <RssIcon className="w-5 fill-orange-500" />
           </ExtLink>
         </li>
-        <li><ThemeToggle client:load /></li>
+        <!-- <li><ThemeToggle client:load /></li> -->
       </ul>
     </div>
+  </ContentDiv>
+
+  <ContentDiv>
+    <BaseRow slot="main" className="text-sm">
+      <ThemeToggleSwitch className="w-36" client:visible />
+    </BaseRow>
   </ContentDiv>
 
   <!-- <ContentDiv>

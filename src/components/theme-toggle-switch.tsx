@@ -1,7 +1,9 @@
 import { useEffect, useState } from "preact/hooks"
+import IClassProps from "../interfaces/class-props"
+import cn from "../lib/class-names"
 import ToggleSwitch from "./link/toggle-switch"
 
-export default function ThemeToggleSwitch() {
+export default function ThemeToggleSwitch({ className }: IClassProps) {
   const [theme, setTheme] = useState(localStorage.getItem("theme") ?? "light")
   const [isMounted, setIsMounted] = useState(false)
 
@@ -27,7 +29,7 @@ export default function ThemeToggleSwitch() {
   return (
     <ToggleSwitch
       onClick={onClick}
-      className="fill-slate-500 dark:fill-slate-100"
+      className={cn("fill-slate-500 dark:fill-slate-100", className)}
       ariaLabel={`Toggle ${theme === "dark" ? "light" : "dark"} theme`}
       isSelected={theme === "dark"}
     >
