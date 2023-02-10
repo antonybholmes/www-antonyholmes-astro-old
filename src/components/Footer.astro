@@ -3,45 +3,63 @@ import { GITHUB_URL, SITE_NAME } from "../constants"
 import GitHubIcon from "../icons/github"
 import RssIcon from "../icons/rss"
 import { INFO_LINKS } from "../menus"
+import BaseCol from "./BaseCol.astro"
 import ContentDiv from "./ContentDiv.astro"
 import BaseLink from "./link/base-link"
 import ExtLink from "./link/ext-link"
 import ThemeToggle from "./theme-toggle"
 ---
 
-<footer class="pt-32 pb-16 flex flex-col gap-y-8">
+<footer class="pt-32 pb-16 flex flex-col gap-y-16">
   <ContentDiv>
     <ul
-      class="flex flex-row justify-center gap-x-8 border-t border-slate-200 pt-16 text-sm font-semibold dark:border-white/20"
+      class="flex flex-col md:flex-row md:justify-center gap-y-12 gap-x-32 text-xs border-t border-slate-200 pt-16"
       slot="main"
     >
-      <li>
-        &copy; <script type="text/javascript">
-          document.write(new Date().getFullYear())
-        </script>
-        {SITE_NAME}
-      </li>
+      <BaseCol className="gap-y-4">
+        <ul
+          class="flex flex-row gap-x-8 text-sm font-semibold dark:border-white/20"
+        >
+          <li>
+            &copy; <script type="text/javascript">
+              document.write(new Date().getFullYear())
+            </script>
+            {SITE_NAME}
+          </li>
+        </ul>
+      </BaseCol>
+      <ul class="flex flex-col gap-y-4 text-sm">
+        {
+          INFO_LINKS.map((link: { name: string; url: string }) => (
+            <li>
+              <BaseLink
+                href={link.url}
+                ariaLabel={`View ${link.name}`}
+                underline={true}
+              >
+                {link.name}
+              </BaseLink>
+            </li>
+          ))
+        }
+      </ul>
+
+      <ul class="flex flex-row gap-y-4 gap-x-4 text-sm" slot="main">
+        <li>
+          <ExtLink href={GITHUB_URL} ariaLabel="View my GitHub profile">
+            <GitHubIcon className="w-5 dark:fill-white" />
+          </ExtLink>
+        </li><li>
+          <ExtLink href="/rss.xml" ariaLabel="View RSS feed">
+            <RssIcon className="w-5 fill-orange-500" />
+          </ExtLink>
+        </li>
+        <li><ThemeToggle client:load /></li>
+      </ul>
     </ul>
   </ContentDiv>
 
-  <ContentDiv>
-    <ul
-      class="flex flex-row items-center justify-center gap-y-4 gap-x-4 text-xs"
-      slot="main"
-    >
-      <li>
-        <ExtLink href={GITHUB_URL} ariaLabel="View my GitHub profile">
-          <GitHubIcon className="w-5 dark:fill-white" />
-        </ExtLink>
-      </li><li>
-        <ExtLink href="/rss.xml" ariaLabel="View RSS feed">
-          <RssIcon className="w-5 fill-orange-500" />
-        </ExtLink>
-      </li>
-    </ul>
-  </ContentDiv>
-
-  <ContentDiv>
+  <!-- <ContentDiv>
     <ul
       class="flex flex-row items-center justify-center gap-y-4 gap-x-8 text-xs"
       slot="main"
@@ -60,14 +78,5 @@ import ThemeToggle from "./theme-toggle"
         ))
       }
     </ul>
-  </ContentDiv>
-
-  <ContentDiv>
-    <ul
-      class="flex flex-row items-center justify-center gap-y-4 gap-x-8 w-full"
-      slot="main"
-    >
-      <li><ThemeToggle client:load /></li>
-    </ul>
-  </ContentDiv>
+  </ContentDiv> -->
 </footer>

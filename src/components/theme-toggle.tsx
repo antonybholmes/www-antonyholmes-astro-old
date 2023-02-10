@@ -37,9 +37,9 @@ export default function ThemeToggle() {
       ariaLabel={`Toggle ${theme === "dark" ? "light" : "dark"} theme`}
     >
       {theme === "dark" ? (
-        <MoonIcon className="w-3" />
+        <MoonIcon className="w-4" />
       ) : (
-        <SunIcon className="w-4" />
+        <SunIcon className="w-5" />
       )}
     </BaseButton>
   )
